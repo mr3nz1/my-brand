@@ -49,6 +49,9 @@ body {
   font-family: "Comfortaa";
 }
 
+body {
+  overflow-x: hidden;
+}
 /* text_colors */
 
 .text-white {
@@ -199,7 +202,6 @@ body {
   transform: scale(2);
 } */
 
-
 /* nav */
 nav ul {
   display: flex;
@@ -209,15 +211,18 @@ nav ul {
 }
 
 nav ul li a {
-  position: relative;
   text-decoration: none;
   color: var(--gray-700);
   font-weight: bold;
+}
+
+.underline_on_hover {
+  position: relative;
   transition: 0.5s ease;
   padding-bottom: 0.3em;
 }
 
-nav ul li a::after {
+.underline_on_hover::after {
   position: absolute;
   content: " ";
   bottom: 0;
@@ -228,20 +233,20 @@ nav ul li a::after {
   transition: 0.5s ease;
 }
 
-nav ul li a:hover::after {
+.underline_on_hover:hover::after {
   width: 100%;
 }
 
-nav ul li a:hover {
+.underline_on_hover:hover {
   color: var(--gray-900);
 }
 
-nav ul li a:focus::after {
+.underline_on_hover:focus::after {
   width: 100%;
   outline: none;
 }
 
-nav ul li a:focus {
+.underline_on_hover:focus {
   color: var(--gray-900);
   outline: none;
 }
@@ -268,22 +273,26 @@ nav ul li a:focus {
   gap: 1.5em;
 }
 
-.hero_section_row_2 {
-  width: 1200px;
-}
-
-.hero_section_row_2 img {
-  width: 100%;
+.hero_section_img_container img {
   box-shadow: var(--shadow-large);
   transition: 0.5s ease;
 }
 
-.hero_section_row_2 img:hover {
-  box-shadow: var(--shadow-normal);
+.landing_page_hero_img {
+  width: 17em;
+}
+
+.blog_hero_img {
+  box-shadow: none !important;
+  width: 30em;
+}
+
+.hero_section_img_container img:hover {
+  box-shadow: var(--shadow-normal) !important;
 }
 
 /* buttons */
-.button {
+.button { 
   background-color: var(--gray-900);
   text-decoration: none;
   color: white;
@@ -350,10 +359,17 @@ nav ul li a:focus {
 }
 
 .what_I_do_blob {
-  width: 550px;
+  width: 35em;
   position: absolute;
-  top: -65%;
-  left: -40%;
+  top: -20em;
+  left: -30em;
+}
+
+.what_I_do_blob_2 {
+  width: 35em;
+  position: absolute;
+  bottom: -20em;
+  right: -30em;
 }
 
 .underline {
@@ -381,7 +397,7 @@ nav ul li a:focus {
 
 .projects_main_container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
   /* margin-top: 1em; */
 }
@@ -427,12 +443,85 @@ nav ul li a:focus {
   font-weight: bold;
 }
 
-/* most read articles */
-.most_read_articles {
+/* articles_group */
+.articles_group {
   display: flex;
   flex-direction: column;
   gap: 2em;
 }
+
+/* IF ON BLOG */
+.articles_group_col {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5em;
+}
+
+.articles_container_blog {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 3em;
+}
+
+.contacts_spacing {
+  content: " ";
+  height: 100px;
+}
+
+.list_of_contacts_blog {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 1em;
+  transition: margin-top 0.5s ease-in-out;
+}
+
+.horizontal_separator_blog {
+  content: " ";
+  width: 15em;
+  height: 1px;
+  background-color: var(--gray-500);
+  justify-self: center;
+}
+
+.list_of_contacts_blog > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 1em;
+  font-size: small;
+}
+
+.list_of_contacts_blog > div > img {
+  width: 50px;
+}
+
+.contacts_section_top_spacing {
+  height: 150px;
+  background-color: lightgray;
+  width: 100px;
+}
+
+.contacts_container_blog {
+  /* make the thing sticky   */
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 2em;
+}
+
+/* IF ON BLOG */
 
 .likes_description {
   display: flex;
@@ -447,7 +536,7 @@ nav ul li a:focus {
 
 .articles_container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Three equal columns */
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 3em;
 }
 
@@ -470,7 +559,13 @@ nav ul li a:focus {
 .article_info_container > h3 {
   font-size: medium;
   text-transform: capitalize;
+  text-decoration: none;
   color: var(--gray-900);
+}
+
+.article_info_container > h3 > a {
+  color: var(--gray-900);
+  text-decoration: none;
 }
 
 .article_meta_data {
