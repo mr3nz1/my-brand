@@ -427,6 +427,14 @@ nav ul li a {
   font-size: small;
 }
 
+.most_read_articles {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 2em;
+}
+
 /* skills */
 .skills {
   display: flex;
