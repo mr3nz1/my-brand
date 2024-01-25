@@ -1,0 +1,43 @@
+[33mcommit 4d9852b85ddda73137e500855af0104952e9d49e[m[33m ([m[1;36mHEAD -> [m[1;32mgh-pages[m[33m, [m[1;31morigin/gh-pages[m[33m, [m[1;32mft-landing-page[m[33m)[m
+Author: Murenzi Paterne <murenzi419@gmail.com>
+Date:   Mon Jan 22 15:16:26 2024 +0200
+
+    blog page
+
+[33mcommit b61b5b7419a14950225b1c850fc875c014687063[m
+Author: Murenzi Paterne <murenzi419@gmail.com>
+Date:   Sun Jan 21 23:36:09 2024 +0200
+
+    Initial template design commit
+
+[33mcommit 58b0344634cee054dfdbcca422307f3eaabcae41[m
+Author: Murenzi Paterne <murenzi419@gmail.com>
+Date:   Sun Jan 21 23:12:41 2024 +0200
+
+    Revert "Template design initial commit"
+    
+    This reverts commit ef23726ffde3ced2df965f0041f64181718b76aa.
+
+[33mcommit ef23726ffde3ced2df965f0041f64181718b76aa[m
+Author: Murenzi Paterne <murenzi419@gmail.com>
+Date:   Sun Jan 21 23:04:11 2024 +0200
+
+    Template design initial commit
+
+[33mcommit e5c76f94c5b8b6b63bf76c48f883c72fa419a000[m
+Author: mr3nz1 <88678347+mr3nz1@users.noreply.github.com>
+Date:   Thu Jan 18 20:15:48 2024 +0200
+
+    Update README.md
+
+[33mcommit 0caf691c479498e35b9004ac28e235f5c8eef66d[m
+Author: mr3nz1 <88678347+mr3nz1@users.noreply.github.com>
+Date:   Thu Jan 18 20:14:57 2024 +0200
+
+    Update README.md
+
+[33mcommit 7c40e30670b49890e6d84de4bdb7715a384c3b79[m
+Author: mr3nz1 <88678347+mr3nz1@users.noreply.github.com>
+Date:   Wed Jan 17 18:31:14 2024 +0200
+
+    Initial commit
