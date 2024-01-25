@@ -1,24 +1,461 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+
   <head>
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Blog - Murenzi Paterne</title>
-      <link rel="stylesheet" href="../style.css" />
-      <script src="../script.js" defer></script>
-    </head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction To React - Blog</title>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
   </head>
-  <body>
-    <!-- nav -->
-    <nav class="px-large my-small">
-      <ul>
-        <li><a class="underline_on_hover" href="../index.html"> Home </a></li>
-        <li><a class="underline_on_hover" href="#"> About </a></li>
-        <li><a class="underline_on_hover" href="#"> Projects </a></li>
-        <li><a class="underline_on_hover" href="#"> Contacts </a></li>
-        <li><a class="underline_on_hover" href="#"> Blog </a></li>
-      </ul>
-    </nav>
-  </body>
+</head>
+
+<body>
+  <!-- cursor -->
+  <div class="animated_cursor"></div>
+
+  <!-- nav_icon -->
+  <img class="menu_icon" src="../assets/icons/icon-menu.svg" alt="">
+
+  <!-- nav -->
+  <nav class="px-large my-small">
+    <ul>
+      <li><a class="underline_on_hover" href="../index.html"> Home </a></li>
+      <li><a class="underline_on_hover" href="#"> About </a></li>
+      <li><a class="underline_on_hover" href="#"> Projects </a></li>
+      <li><a class="underline_on_hover" href="#"> Contacts </a></li>
+      <li><a class="underline_on_hover" href="./blog.html"> Blog </a></li>
+    </ul>
+  </nav>
+
+  <!-- space_top_div -->
+  <div class="articles_page_space_div my-medium"></div>
+
+  <!-- Article title information -->
+  <div class="article_title_container mx-large px-large">
+    <h1 class="faster-one">Introduction to React</h1>
+    <h3>Dive into ReactJS effortlessly with this quick step-by-step guide. Start by setting up your environment using
+      Node.js and npm, followed by exploring the project structure. </h3>
+  </div>
+
+  <div class="image_banner_and_content_container mx-large px-large my-small">
+    <!-- Article banner image -->
+    <div class="article_banner_image_container">
+      <img src="..//assets/images/article_banner_image.jpg" alt="article banner image">
+    </div>
+
+    <!-- Article meta data information -->
+    <div class="article_meta_data">
+      <p>Jan 2, 2024</p>
+      <span class="dot_separator"></span>
+      <p>14 min read</p>
+      <span class="dot_separator"></span>
+      <div class="likes_description underline_on_hover">
+        <img src="../assets/icons/heart.png" alt="" />
+        <p>83 likes</p>
+      </div>
+    </div>
+
+    <!-- Article content -->
+    <div class="article_text_content">
+      <div class="article_paragraph">
+        <p>In the ever-evolving landscape of web development, React has emerged as a powerhouse for building dynamic
+          and
+          responsive user interfaces. This comprehensive guide is your go-to resource for mastering React, the
+          JavaScript library developed by Facebook. Whether you're a seasoned developer looking to enhance your skills
+          or a newcomer eager to dive into the world of modern web development, this article will provide you with the
+          knowledge and tools to become proficient in React.</p>
+      </div>
+
+      <div class="article_paragraph">
+        <h3>Understanding the Fundamentals</h3>
+        <p> Begin your React journey by delving into the fundamentals. Learn about React components, JSX syntax, and the
+          virtual DOM, which form the building blocks of React applications. Explore the declarative nature of React
+          that
+          simplifies the process of UI development.
+        </p>
+      </div>
+
+      <div class="article_paragraph">
+        <h3>State and Props</h3>
+        <p>Unravel the concepts of state and props, crucial aspects of React that enable dynamic and interactive user
+          interfaces. Understand how to manage component state efficiently and pass data between components using
+          props,
+          laying the foundation for creating dynamic web applications.
+        </p>
+      </div>
+
+      <div class="article_paragraph">
+        <h3>Component Lifecycle</h3>
+        <p>Dive into the lifecycle methods of React components, gaining insights into when each method is invoked
+          during
+          the rendering process. Explore how lifecycle methods empower you to control the behavior of your components
+          at
+          different stages, enhancing the overall functionality of your applications.
+        </p>
+      </div>
+
+      <div class="article_paragraph">
+        <h3>Handling Forms and Events</h3>
+        <p>Learn the best practices for handling user input through forms and events in React. Discover how controlled
+          components and event handling contribute to creating responsive and interactive user interfaces, ensuring a
+          seamless user experience.</p>
+      </div>
+
+      <div class="article_paragraph">
+        <h3>Routing with React Router</h3>
+        <p>Navigate the complexities of building single-page applications with React Router. Understand how to
+          implement
+          client-side routing to create a smooth and dynamic navigation experience for users while maintaining a clean
+          and organized code structure.</p>
+      </div>
+
+      <div class="article_paragraph">
+        <h3>State Management with Redux</h3>
+        <p>Delve into state management using Redux, a predictable state container for JavaScript applications. Learn
+          how
+          Redux simplifies the management of application state, making it easier to maintain and scale your React
+          applications as they grow in complexity.</p>
+      </div>
+
+      <div class="article_paragraph">
+        <h3>Conclusion</h3>
+        <p>As you conclude your journey through this guide, you'll have gained a solid understanding of React and its
+          core concepts. Armed with the knowledge of React fundamentals, state management, and routing, you'll be
+          well-equipped to build robust and efficient web applications. Whether you're developing a personal project
+          or
+          contributing to a team, mastering React opens up a world of possibilities in the dynamic field of web
+          development. Start your React adventure today and elevate your skills to new heights!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="article_comments_container py-medium">
+    <div class="article_comments_title_div mx-large px-large">
+      <h2 class="faster-one">COMMENTS</h2>
+    </div>
+
+    <div class="article_comments py-small my-small px-medium">
+      <div class="add_comment_container mx-medium">
+        <div class="message_user_image">
+          <img src="../assets/images/my_picture.jpg" alt="">
+        </div>
+        <form action="">
+          <input class="default_input_field" type="text" name="fullName" placeholder="Your Full name" required />
+          <button class="button" type="submit">Message</button>
+        </form>
+      </div>
+
+      <div class="list_of_comments my-small px-medium">
+        <div class="comment">
+          <div class="comment_content_container">
+            <div class="message_user_image">
+              <img src="../assets/images/sandra.jpg" alt="">
+            </div>
+
+            <div class="single_comment_text_container">
+              <div class="single_comment_title_and_date">
+                <h4>Sandra Bauman</h4>
+                <p>Jan 2, 2024</p>
+              </div>
+
+              <p>
+                Hey there! Once again, your consistently impressive insights never fail to leave a lasting impact. Your
+                ability to consistently exceed expectations is truly remarkable.
+              </p>
+
+              <div class="single_message_actions">
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/reply.png" alt="">
+                  <span>Reply</span>
+                </div>
+
+                <span class="dot_separator"></span>
+
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/like.png" alt="">
+                  <span>40 likes</span>
+                </div>
+
+                <span class="dot_separator"></span>
+
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/dislike.png" alt="">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div  class="comment">
+          <div class="comment_content_container">
+            <div class="message_user_image">
+              <img src="../assets/images/my_picture.jpg" alt="">
+            </div>
+
+            <div class="single_comment_text_container">
+              <div class="single_comment_title_and_date">
+                <h4>Murenzi Paterne</h4>
+                <p>Jan 2, 2024</p>
+              </div>
+
+              <p>
+                Hey there! Once again, your consistently impressive insights never fail to leave a lasting impact. Your
+                ability to consistently exceed expectations is truly remarkable.
+              </p>
+
+              <div class="single_message_actions">
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/reply.png" alt="">
+                  <span>Reply</span>
+                </div>
+
+                <span class="dot_separator"></span>
+
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/like.png" alt="">
+                  <span>40 likes</span>
+                </div>
+
+                <span class="dot_separator"></span>
+
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/dislike.png" alt="">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="comment">
+          <div class="comment_content_container">
+            <div class="message_user_image">
+              <img src="../assets/images/sandra.jpg" alt="">
+            </div>
+
+            <div class="single_comment_text_container">
+              <div class="single_comment_title_and_date">
+                <h4>Sandra Bauman</h4>
+                <p>Jan 2, 2024</p>
+              </div>
+
+              <p>
+                Hey there! Once again, your consistently impressive insights never fail to leave a lasting impact. Your
+                ability to consistently exceed expectations is truly remarkable.
+              </p>
+
+              <div class="single_message_actions">
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/reply.png" alt="">
+                  <span>Reply</span>
+                </div>
+
+                <span class="dot_separator"></span>
+
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/like.png" alt="">
+                  <span>40 likes</span>
+                </div>
+
+                <span class="dot_separator"></span>
+
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/dislike.png" alt="">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div  class="comment">
+          <div class="comment_content_container">
+            <div class="message_user_image">
+              <img src="../assets/images/my_picture.jpg" alt="">
+            </div>
+
+            <div class="single_comment_text_container">
+              <div class="single_comment_title_and_date">
+                <h4>Murenzi Paterne</h4>
+                <p>Jan 2, 2024</p>
+              </div>
+
+              <p>
+                Hey there! Once again, your consistently impressive insights never fail to leave a lasting impact. Your
+                ability to consistently exceed expectations is truly remarkable.
+              </p>
+
+              <div class="single_message_actions">
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/reply.png" alt="">
+                  <span>Reply</span>
+                </div>
+
+                <span class="dot_separator"></span>
+
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/like.png" alt="">
+                  <span>40 likes</span>
+                </div>
+
+                <span class="dot_separator"></span>
+
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/dislike.png" alt="">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="comment">
+          <div class="comment_content_container">
+            <div class="message_user_image">
+              <img src="../assets/images/mr3nz1Svg.svg" alt="">
+            </div>
+
+            <div class="single_comment_text_container">
+              <div class="single_comment_title_and_date">
+                <h4>mr3nz1</h4>
+                <p>Feb 4, 2024</p>
+              </div>
+
+              <p>
+                Hey there! Once again, your consistently impressive insights never fail to leave a lasting impact. Your
+                ability to consistently exceed expectations is truly remarkable.
+              </p>
+
+              <div class="single_message_actions">
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/reply.png" alt="">
+                  <span>Reply</span>
+                </div>
+
+                <span class="dot_separator"></span>
+
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/like.png" alt="">
+                  <span>40 likes</span>
+                </div>
+
+                <span class="dot_separator"></span>
+
+                <div class="underline_on_hover">
+                  <img src="../assets/icons/dislike.png" alt="">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="articles_group px-large mx-large articles_page_more_articles">
+    <h2 class="faster-one">MORE ARTICLES</h2>
+
+    <div class="articles_group">
+      <div class="article_container">
+        <div class="article_info_container">
+          <h3 class=""><a class="underline_on_hover" href="./article.html">Introduction To ReactJS </a></h3>
+          <p>
+            Dive into ReactJS effortlessly with this quick step-by-step guide.
+            Start by setting up your environment using Node.js and npm,
+            followed by exploring the project structure.
+          </p>
+          <div class="article_meta_data">
+            <p>Jan 2, 2024</p>
+            <span class="dot_separator"></span>
+            <p>14 min read</p>
+            <span class="dot_separator"></span>
+            <div class="likes_description">
+              <img src="../assets/icons/heart.png" alt="" />
+              <p>83 likes</p>
+            </div>
+          </div>
+        </div>
+        <img class="article_img" src="../assets/images/react_picture.png" alt="" />
+      </div>
+
+      <div class="article_container">
+        <div class="article_info_container">
+          <h3 class=""><a class="underline_on_hover" href="./article.html">Learn MYSQL</a></h3>
+          <p>
+            Learn MYSQL in no time. A better way to write queries. An
+            introduction to SQL databases.. Read this article read by
+            hundreds.
+          </p>
+          <div class="article_meta_data">
+            <p>Jan 2, 2024</p>
+            <span class="dot_separator"></span>
+            <p>14 min read</p>
+            <span class="dot_separator"></span>
+            <div class="likes_description">
+              <img src="../assets/icons/heart.png" alt="" />
+              <p>83 likes</p>
+            </div>
+          </div>
+        </div>
+        <img class="article_img" src="../assets/images/mysql_picture.png" alt="" />
+      </div>
+
+      <div class="article_container">
+        <div class="article_info_container">
+          <h3 class=""><a class="underline_on_hover" href="./article.html"> Introduction To Web Development </a></h3>
+          <p>
+            Dive into ReactJS effortlessly with this quick step-by-step guide.
+            Start by setting up your environment using Node.js and npm,
+            followed by exploring the project structure.
+          </p>
+          <div class="article_meta_data">
+            <p>Jan 2, 2024</p>
+            <span class="dot_separator"></span>
+            <p>14 min read</p>
+            <span class="dot_separator"></span>
+            <div class="likes_description">
+              <img src="../assets/icons/heart.png" alt="" />
+              <p>83 likes</p>
+            </div>
+          </div>
+        </div>
+        <img class="article_img" src="../assets/images/web_picture.png" alt="" />
+      </div>
+
+      <div class="article_container">
+        <div class="article_info_container">
+          <h3 class=""><a class="underline_on_hover" href="./article.html"> Master Javascript </a></h3>
+          <p>
+            Whether you're a seasoned developer or a curious novice, join us
+            to unlock the full potential of Express.js and elevate your web
+            development skills.
+          </p>
+          <div class="article_meta_data">
+            <p>Jan 2, 2024</p>
+            <span class="dot_separator"></span>
+            <p>14 min read</p>
+            <span class="dot_separator"></span>
+            <div class="likes_description">
+              <img src="../assets/icons/heart.png" alt="" />
+              <p>83 likes</p>
+            </div>
+          </div>
+        </div>
+        <img class="article_img" src="../assets/images/javascript_picture.png" alt="" />
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>

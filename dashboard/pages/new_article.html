@@ -19,14 +19,14 @@
         <ul>
             <li>
                 <img src="../../assets/icons/dashboard.png" alt="">
-                <a class="underline_on_hover" href="#">Dashboard</a>
+                <a class="underline_on_hover" href="../index.html">Dashboard</a>
             </li>
             <li>
                 <img src="../../assets/icons/account_info.png" alt="">
                 <a class="underline_on_hover" href="#">Account Info</a>
             </li>
             <li>
-                <img src="../../assets/icons/new_article.png" alt="">
+                <img src="../../assets/icons/add_article.png" alt="">
                 <a class="underline_on_hover" href="#">Add Article</a>
             </li>
             <li>
@@ -50,50 +50,65 @@
     </nav>
 
     <main class="main_content">
-        <div>
+        <div class="new_article_header">
             <h1 class="faster-one">CREATE ARTICLE</h1>
-            <div>
-                <button>Save Content</button>
-                <button>Post Article</button>
+            <div class="btns">
+                <button class="button-outline">Save Content</button>
+                <button class="button">Post Article</button>
             </div>
+        </div>
 
-            <div class="">
-                <form action="">
-                    <input class="default_input_field" type="text" name="title" placeholder="Article Title" required />
-                    <input class="default_input_field" type="text" name="description" placeholder="Article Descriprion" required />
+        <div class="new_article_form_container">
+            <form action="">
+                <input class="default_input_field" type="text" name="title" placeholder="Article Title" required />
+                <input class="default_input_field" type="text" name="description" placeholder="Article Descriprion" required />
 
-                    <div>
-                        <img src="../../assets/icons/upload.png" alt="">
-                        <p>Upload Banner Image</p>
+                <div class="upload_banner_image">
+                    <img src="../../assets/icons/upload.png" alt="">
+                    <p>Upload Banner Image</p>
+                </div>
+
+                <div class="rich_text_editor">
+                    <div class="header">
+                        <button>
+                            <img src="../../assets/icons/bold.png" alt="">
+                        </button>
+                        <button>
+                            <img src="../../assets/icons/italic.png" alt="">
+                        </button>
+                        <button>
+                            <img src="../../assets/icons/underline.png" alt="">
+                        </button>
+                        <button>
+                            <img src="../../assets/icons/align-left.png" alt="">
+                        </button>
+                        <button>
+                            <img src="../../assets/icons/align-center.png" alt="">
+                        </button>
+                        <button>
+                            <img src="../../assets/icons/align-right.png" alt="">
+                        </button>
+                        <button>
+                            <img src="../../assets/icons/list.png" alt="">
+                        </button>
+                        <button>
+                            <img src="../../assets/icons/number-list.png" alt="">
+                        </button>
+                        <button class="text-btn">
+                            <p>A</p>
+                        </button>
+                        <button class="text-btn">
+                            <p>a</p>
+                        </button>
+                        <button>
+                            <img src="../../assets/icons/colors.png" alt="">
+                        </button>
                     </div>
+                    <div class="content">
 
-                    <div class="rich_text_editor">
-                        <div class="header">
-                            <button>
-                                <img src="../../assets/icons/bold.png" alt="">
-                            </button>
-                            <button>
-                                <img src="../../assets/icons/italic.png" alt="">
-                            </button>
-                            <button>
-                                <img src="../../assets/icons/underline.png" alt="">
-                            </button>
-                            <button>
-                                <img src="../../assets/icons/align-left.png" alt="">
-                            </button>
-                            <button>
-                                <img src="../../assets/icons/align-center.png" alt="">
-                            </button>
-                            <button>
-                                <img src="../../assets/icons/align-right.png" alt="">
-                            </button>
-                        </div>
-                        <div class="content">
-
-                        </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </main>
 </body>
