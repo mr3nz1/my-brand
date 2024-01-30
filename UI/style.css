@@ -1156,6 +1156,10 @@ nav ul li a {
   height: 100%;
 }
 
+.reply_comment {
+  margin-left: 4em;
+}
+
 @media only screen and (max-width: 1000px) {
   .login_container {
     display: flex;
