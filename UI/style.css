@@ -739,6 +739,10 @@ nav ul li a {
     width: 100%;
   }
 
+  .message {
+    /* width: 100%; */
+  }
+
   .list_of_contacts {
     width: 100%;
   }
@@ -1058,6 +1062,13 @@ nav ul li a {
 }
 
 .comment_content_container {
+  /* background-color: white;
+  box-shadow: var(--shadow-normal); */
+  /* padding: 1em; */
+  margin: 0em 0.5em;
+}
+
+.comment_content_container {
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -1186,7 +1197,7 @@ nav ul li a {
 
   .article_comments_title_div,
   .article_comments_container > .article_comments {
-    padding: 0em 2em !important;
+    padding: 0em 0em !important;
   }
 
   .articles_page_more_articles {
@@ -1204,7 +1215,7 @@ nav ul li a {
   .list_of_comments,
   .comment,
   .comment_content_container {
-    width: 100% !important;
+    /* width: 100% !important; */
   }
 
   .article_comments_container p,
