@@ -6,8 +6,9 @@ window.addEventListener("mousemove", (e) => {
 });
 
 // mobile navigation
-const openMobileNavBtn = document.querySelector(".menu_icon")
+const openMobileNavBtn = document.querySelector(".menu_icon");
+const navElement = document.querySelector("");
 
-openMobileNavBtn.addEventListener("click" => {
-  console.log("clicked")
-})
+openMobileNavBtn.addEventListener("click", () => {
+  console.log("clicked");
+});

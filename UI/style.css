@@ -544,6 +544,7 @@ nav ul li a {
 
 .menu_icon {
   display: none;
+  z-index: 100;
 }
 
 .blue_btn {
