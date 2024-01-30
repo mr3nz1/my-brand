@@ -4,3 +4,10 @@ window.addEventListener("mousemove", (e) => {
   animated_cursor.style.left = e.pageX + "px";
   animated_cursor.style.top = e.pageY + "px";
 });
+
+// mobile navigation
+const openMobileNavBtn = document.querySelector(".menu_icon")
+
+openMobileNavBtn.addEventListener("click" => {
+  console.log("clicked")
+})
