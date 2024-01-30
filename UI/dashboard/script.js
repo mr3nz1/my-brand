@@ -40,7 +40,7 @@ async function loadPage(page) {
     blog: "blog.html",
     article: "articles.html",
     tasks: "tasks.html",
-    messages: "tasks.html",
+    messages: "messages.html",
     new_article: "new_article.html",
   };
 
