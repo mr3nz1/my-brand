@@ -7,10 +7,14 @@
     <title>Login</title>
     <link rel="stylesheet" href="../style.css" />
     <script src="../script.js" defer></script>
-
+    <script src="../login.js" defer></script>
 </head>
 
 <body>
+    <!-- cursor -->
+    <div class="animated_cursor"></div>
+
+
     <!-- nav_icon -->
     <img class="menu_icon" src="../assets/icons/icon-menu.svg" alt="">
 
@@ -22,12 +26,13 @@
                     <p>Welcome Back!</p>
                     <h1 class="faster-one">SIGN IN</h1>
                 </div>
-                <form action="">
-                    <input class="default_input_field" type="email" name="fullName" placeholder="Enter Email"
+                <form id="login_form">
+                    <p id="form_error_text" class="red_btn form_error_text"></p>
+                    <input id="user_email_input" class="default_input_field" type="email" name="email"
+                        placeholder="Enter Email" required />
+                    <input id="user_password_input" class="default_input_field" type="password" name="password" placeholder="Enter password"
                         required />
-                    <input class="default_input_field" type="password" name="password" placeholder="Enter password"
-                        required />
-                    <a href="../dashboard/" class="button-outline">My LinkedIn</a>
+                    <button type="submit" href="../dashboard/" id="login_button" class="button-outline">My LinkedIn</button>
                 </form>
             </div>
 
