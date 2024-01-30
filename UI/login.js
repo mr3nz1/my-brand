@@ -22,7 +22,8 @@ loginForm.addEventListener("submit", async (e) => {
   const credentialsMatch = await checkCredentials(userEmail, userPassword)
 
   if (credentialsMatch) {
-
+    localStorage.setItem("loggedIn", "true")
+    window.location.href = "/UI/dashboard"
   } else {
     loginFormErrorElement.style.display = "block"
     loginFormErrorElement.innerHTML = "Error logging in. Incorrect email or password"
