@@ -1,161 +1,104 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="../style.css" />
-    <script src="../script.js" defer></script>
-</head>
-
-<body class="main">
-    <!-- cursor -->
-    <div class="animated_cursor"></div>
+<div>
+    <h1 class="faster-one">CREATE ARTICLE</h1>
+</div>
 
 
-    <!-- sidebar -->
-    <nav class="sidebar">
-        <ul>
-            <li>
-                <img src="../../assets/icons/dashboard.png" alt="">
-                <a class="underline_on_hover" href="../index.html">Dashboard</a>
-            </li>
-            <li>
-                <img src="../../assets/icons/account_info.png" alt="">
-                <a class="underline_on_hover" href="#">Account Info</a>
-            </li>
-            <li>
-                <img src="../../assets/icons/add_article.png" alt="">
-                <a class="underline_on_hover" href="#">Add Article</a>
-            </li>
-            <li>
-                <img src="../../assets/icons/articles.png" alt="">
-                <a class="underline_on_hover" href="#">Articles</a>
-            </li>
-            <li>
-                <img src="../../assets/icons/add_task.png" alt="">
-                <a class="underline_on_hover" href="#">Tasks</a>
-            </li>
-            <li>
-                <img src="../../assets/icons/messages.png" alt="">
-                <a class="underline_on_hover" href="#">Messages</a>
-            </li>
-            <li class="logout">
-                <img src="../../assets/images/mr3nz1Svg.svg" alt="">
-                <a class="underline_on_hover" href="#">Logout</a>
-            </li>
-        </ul>
-    </nav>
+<!-- new task -->
+<div class="new_task_container">
+    <div class="new_task_add_btn_container">
+        <button class="button">Add Task</button>
+    </div>
 
-    <main class="main_content">
-        <div>
-            <h1 class="faster-one">CREATE ARTICLE</h1>
-        </div>
+    <form action="">
+        <input class="default_input_field" type="text" name="title" placeholder="Article Title" required />
 
-
-        <!-- new task -->
-        <div class="new_task_container">
-            <div class="new_task_add_btn_container">
-                <button class="button">Add Task</button>
+        <div class="rich_text_editor">
+            <div class="header">
+                <button>
+                    <img src="../assets/icons/bold.png" alt="">
+                </button>
+                <button>
+                    <img src="../assets/icons/italic.png" alt="">
+                </button>
+                <button>
+                    <img src="../assets/icons/underline.png" alt="">
+                </button>
+                <button>
+                    <img src="../assets/icons/align-left.png" alt="">
+                </button>
+                <button>
+                    <img src="../assets/icons/align-center.png" alt="">
+                </button>
+                <button>
+                    <img src="../assets/icons/align-right.png" alt="">
+                </button>
+                <button>
+                    <img src="../assets/icons/list.png" alt="">
+                </button>
+                <button>
+                    <img src="../assets/icons/number-list.png" alt="">
+                </button>
+                <button class="text-btn">
+                    <p>A</p>
+                </button>
+                <button class="text-btn">
+                    <p>a</p>
+                </button>
+                <button>
+                    <img src="../assets/icons/colors.png" alt="">
+                </button>
             </div>
+            <div class="content">
 
-            <form action="">
-                <input class="default_input_field" type="text" name="title" placeholder="Article Title" required />
-
-                <div class="rich_text_editor">
-                    <div class="header">
-                        <button>
-                            <img src="../../assets/icons/bold.png" alt="">
-                        </button>
-                        <button>
-                            <img src="../../assets/icons/italic.png" alt="">
-                        </button>
-                        <button>
-                            <img src="../../assets/icons/underline.png" alt="">
-                        </button>
-                        <button>
-                            <img src="../../assets/icons/align-left.png" alt="">
-                        </button>
-                        <button>
-                            <img src="../../assets/icons/align-center.png" alt="">
-                        </button>
-                        <button>
-                            <img src="../../assets/icons/align-right.png" alt="">
-                        </button>
-                        <button>
-                            <img src="../../assets/icons/list.png" alt="">
-                        </button>
-                        <button>
-                            <img src="../../assets/icons/number-list.png" alt="">
-                        </button>
-                        <button class="text-btn">
-                            <p>A</p>
-                        </button>
-                        <button class="text-btn">
-                            <p>a</p>
-                        </button>
-                        <button>
-                            <img src="../../assets/icons/colors.png" alt="">
-                        </button>
-                    </div>
-                    <div class="content">
-
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <!-- tasks -->
-        <div class="tasks">
-            <div class="">
-                <h1 class="faster-one">TASKS</h1>
-            </div>
-            <div class="tasks_container">
-                <div class="task">
-                    <h3>Publishing remaing unpublished articles</h3>
-                    <ul>
-                        <li>Write better Javascript Functions</li>
-                        <li>An introduction to no-sql</li>
-                        <li>An introduction onApplication</li>
-                        <li>Programming APIs</li>
-                    </ul>
-                </div>
-
-                <div class="task">
-                    <h3>Publishing remaing unpublished articles</h3>
-                    <ul>
-                        <li>Write better Javascript Functions</li>
-                        <li>An introduction to no-sql</li>
-                        <li>An introduction onApplication</li>
-                        <li>Programming APIs</li>
-                    </ul>
-                </div>
-
-                <div class="task">
-                    <h3>Publishing remaing unpublished articles</h3>
-                    <ul>
-                        <li>Write better Javascript Functions</li>
-                        <li>An introduction to no-sql</li>
-                        <li>An introduction onApplication</li>
-                        <li>Programming APIs</li>
-                    </ul>
-                </div>
-
-                <div class="task">
-                    <h3>Publishing remaing unpublished articles</h3>
-                    <ul>
-                        <li>Write better Javascript Functions</li>
-                        <li>An introduction to no-sql</li>
-                        <li>An introduction onApplication</li>
-                        <li>Programming APIs</li>
-                    </ul>
-                </div>
             </div>
         </div>
+    </form>
+</div>
 
-    </main>
+<!-- tasks -->
+<div class="tasks">
+    <div class="">
+        <h1 class="faster-one">TASKS</h1>
+    </div>
+    <div class="tasks_container">
+        <div class="task">
+            <h3>Publishing remaing unpublished articles</h3>
+            <ul>
+                <li>Write better Javascript Functions</li>
+                <li>An introduction to no-sql</li>
+                <li>An introduction onApplication</li>
+                <li>Programming APIs</li>
+            </ul>
+        </div>
 
-</body>
+        <div class="task">
+            <h3>Publishing remaing unpublished articles</h3>
+            <ul>
+                <li>Write better Javascript Functions</li>
+                <li>An introduction to no-sql</li>
+                <li>An introduction onApplication</li>
+                <li>Programming APIs</li>
+            </ul>
+        </div>
 
-</html>
+        <div class="task">
+            <h3>Publishing remaing unpublished articles</h3>
+            <ul>
+                <li>Write better Javascript Functions</li>
+                <li>An introduction to no-sql</li>
+                <li>An introduction onApplication</li>
+                <li>Programming APIs</li>
+            </ul>
+        </div>
+
+        <div class="task">
+            <h3>Publishing remaing unpublished articles</h3>
+            <ul>
+                <li>Write better Javascript Functions</li>
+                <li>An introduction to no-sql</li>
+                <li>An introduction onApplication</li>
+                <li>Programming APIs</li>
+            </ul>
+        </div>
+    </div>
+</div>
