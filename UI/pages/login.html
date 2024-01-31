@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../style.css" />
-    <script src="../script.js" defer></script>
-    <script src="../login.js" defer></script>
+    <script type="module" src="../script.js" defer></script>
+    <script type="module" src="../scripts/login.js" defer></script>
+    <script type="module" src="../scripts/CustomLocalStorage.js" defer></script>
+
 </head>
 
 <body>
@@ -17,6 +19,18 @@
 
     <!-- nav_icon -->
     <img class="menu_icon" src="../assets/icons/icon-menu.svg" alt="">
+
+    <!-- nav -->
+    <nav class="nav" class="px-large my-small">
+        <ul>
+            <li class="underline_on_hover"><a href="#"> Home </a></li>
+            <li class="underline_on_hover"><a href="#"> About </a></li>
+            <li class="underline_on_hover"><a href="#"> Projects </a></li>
+            <li class="underline_on_hover"><a href="#"> Contacts </a></li>
+            <li class="underline_on_hover"><a href="./pages/blog.html"> Blog </a></li>
+        </ul>
+    </nav>
+
 
 
     <div class="main_login_container">
@@ -30,9 +44,10 @@
                     <p id="form_error_text" class="red_btn form_error_text"></p>
                     <input id="user_email_input" class="default_input_field" type="email" name="email"
                         placeholder="Enter Email" required />
-                    <input id="user_password_input" class="default_input_field" type="password" name="password" placeholder="Enter password"
-                        required />
-                    <button type="submit" href="../dashboard/" id="login_button" class="button-outline">My LinkedIn</button>
+                    <input id="user_password_input" class="default_input_field" type="password" name="password"
+                        placeholder="Enter password" required />
+                    <button type="submit" href="../dashboard/" id="login_button" class="button-outline">My
+                        LinkedIn</button>
                 </form>
             </div>
 

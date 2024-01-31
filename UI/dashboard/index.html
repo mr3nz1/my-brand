@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="./style.css" />
-    <script src="./script.js" defer></script>
+    <script type="module" src="./script.js" defer></script>
+    <script type="module" src="../scripts/editor.js" defer></script>
+    <script type="module" src="../scripts/CustomLocalStorage.js"></script>
 </head>
 
 <body class="main">
@@ -16,7 +18,7 @@
     <!-- sidebar -->
     <nav class="sidebar">
         <ul>
-            <li onclick="loadPage('home')">
+            <li link-to-page="home">
                 <img src="../assets/icons/dashboard.png" alt="">
                 <span class="underline_on_hover">Dashboard</span>
             </li>
@@ -24,23 +26,23 @@
                 <img src="../assets/icons/account_info.png" alt="">
                 <span class="underline_on_hover">Account Info</span>
             </li>
-            <li onclick="loadPage('new_article')">
-                <img src="../assets/icons/add_task.png" alt="">
+            <li link-to-page="new_article">
+                <img src="../assets/icons/add_article.png" alt="">
                 <span class="underline_on_hover">Add Article</span>
             </li>
-            <li onclick="loadPage('blog')">
+            <li link-to-page="blog">
                 <img src="../assets/icons/articles.png" alt="">
                 <span class="underline_on_hover">Articles</span>
             </li>
-            <li onclick="loadPage('tasks')">
+            <li link-to-page="tasks">
                 <img src="../assets/icons/add_task.png" alt="">
                 <span class="underline_on_hover">Tasks</span>
             </li>
-            <li onclick="loadPage('messages')">
+            <li link-to-page="messages">
                 <img src="../assets/icons/messages.png" alt="">
                 <span class="underline_on_hover">Messages</spa>
             </li>
-            <li class="logout" onclick="loadPage('logout')">
+            <li link-to-page="logout" class="logout">
                 <img src="../assets/images/mr3nz1Svg.svg" alt="">
                 <span class="underline_on_hover">Logout</span>
             </li>

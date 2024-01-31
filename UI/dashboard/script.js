@@ -1,3 +1,5 @@
+import customLocalStorage from "../scripts/CustomLocalStorage.js";
+
 // animating the mouse
 window.addEventListener("mousemove", (e) => {
   const animated_cursor = document.querySelector(".animated_cursor");
@@ -6,7 +8,7 @@ window.addEventListener("mousemove", (e) => {
 });
 
 function isLoggedIn() {
-  const loggedIn = localStorage.getItem("loggedIn");
+  const loggedIn = customLocalStorage.getItem("loggedIn");
 
   if (loggedIn !== "true") {
     return (location.href = "../pages/login.html");
@@ -18,8 +20,8 @@ function isLoggedIn() {
 isLoggedIn();
 
 function logout() {
-  const removed = localStorage.removeItem("loggedIn");
-  location.href = "../pages/login.html"
+  const removed = customLocalStorage.removeItem("loggedIn");
+  location.href = "../pages/login.html";
 }
 
 async function loadPage(page) {
@@ -32,7 +34,7 @@ async function loadPage(page) {
   );
 
   if (!page) {
-    page = "home"
+    page = "home";
   }
 
   const pages = {
@@ -48,17 +50,28 @@ async function loadPage(page) {
     const res = await fetch("./pages/" + pages[page]);
     const htmlContent = await res.text();
     mainContentContainerElement.innerHTML = htmlContent;
+    customLocalStorage.setItem("currentPage", page);
+    location.hash = page
   } catch (err) {
     console.log(err);
   }
 }
 
-window.addEventListener("hashchange", () => {
-  const page = location.hash.split("#")[1];
-
+// check the current page if the content happens to load
+window.addEventListener("DOMContentLoaded", () => {
+  let page = localStorage.getItem("currentPage");
   loadPage(page);
 });
 
 // load currentPage if the user just uses the hash
 const currentPage = window.location.hash.split("#")[1];
 loadPage(currentPage);
+
+const linksToPages = document.querySelectorAll(".sidebar > ul li");
+
+linksToPages.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    const pageName = link.getAttribute("link-to-page");
+    loadPage(pageName)
+  });
+});
