@@ -7,8 +7,17 @@ window.addEventListener("mousemove", (e) => {
 
 // mobile navigation
 const openMobileNavBtn = document.querySelector(".menu_icon");
-const navElement = document.querySelector("");
+const navElement = document.querySelector("nav");
+const navUlElement = document.querySelector("nav ul");
 
 openMobileNavBtn.addEventListener("click", () => {
-  console.log("clicked");
+  navElement.classList.add("navOpen");
+  openMobileNavBtn.style.display = "none";
+});
+
+navElement.addEventListener("click", (e) => {
+  if (e.target === navElement) {
+    navElement.classList.remove("navOpen");
+    openMobileNavBtn.style.display = "flex";
+  }
 });
