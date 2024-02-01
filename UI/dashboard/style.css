@@ -456,6 +456,7 @@ body {
   justify-content: start;
   align-items: start;
   gap: 2em;
+  width: 100%;
 }
 
 .articles_container {
@@ -467,6 +468,10 @@ body {
 /* if dashboard */
 /* .dashboard_articles_container {
 } */
+
+.dashboard_articles_container {
+  width: 100%;
+}
 
 .dashboard_articles_container .article_meta_data {
   font-size: x-small;
@@ -565,6 +570,21 @@ body {
   gap: 2em;
 }
 
+.default_input_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 0.2em;
+}
+
+.default_input_container > .error {
+  color: var(--red-500);
+  font-size: small;
+  /* display: none; */
+}
+
 
 .default_input_field {
   outline: none;
@@ -630,16 +650,31 @@ body {
   border-bottom: 1px solid var(--gray-500);
 }
 
-.rich_text_editor > .header > button {
+.rich_text_editor > .header > button,
+.rich_text_editor > .header > select
+{
+  outline: none;
+   font-weight: bold;
   border: none;
-  /* background-color: #9e9e9e70; */
+  background-color: #9e9e9e21;
   padding: 0.2em;
   box-shadow: var(--shadow-normal);
   transition: 0.2s ease;
 }
 
+.rich_text_editor > .header > select {
+  padding: 0.5em;
+}
+
+.rich_text_editor > .header > select:hover,
 .rich_text_editor > .header > button:hover {
   scale: 1.5;
+}
+
+.rich_text_editor > .header > select:focus,
+.rich_text_editor > .header > button:focus {
+  scale: 1.5;
+  outline: none;
 }
 
 .rich_text_editor > .header > button > p  {
@@ -654,6 +689,7 @@ body {
   border: none;
   outline: none;
   resize: vertical;
+  overflow-y: scroll;
   }
 
 
@@ -1023,3 +1059,10 @@ body {
   } 
 }
 
+
+
+/* rich text editor styles */
+.active {
+  background-color: white;
+  box-shadow: none;
+}

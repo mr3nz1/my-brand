@@ -206,6 +206,9 @@ body {
 } */
 
 /* nav */
+/* nav {
+   */
+
 nav ul {
   display: flex;
   flex-direction: row;
@@ -984,11 +987,6 @@ nav ul li a {
   }
 }
 
-nav {
-  display: none;
-  visibility: none;
-}
-
 .navOpen {
   visibility: visible;
   z-index: 1;
@@ -1022,6 +1020,11 @@ nav {
 }
 
 @media only screen and (max-width: 1210px) {
+  nav {
+    display: none;
+    visibility: none;
+  }
+
   .menu_icon {
     display: block;
     position: absolute;

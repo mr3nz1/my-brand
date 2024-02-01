@@ -20,13 +20,16 @@ function isLoggedIn() {
 isLoggedIn();
 
 function logout() {
-  const removed = customLocalStorage.removeItem("loggedIn");
+  const removed = localStorage.removeItem("loggedIn");
   location.href = "../pages/login.html";
 }
 
 async function loadPage(page) {
   if (page === "logout") {
-    return logout();
+    const wantToLogout = confirm("Are you sure you want to log out?", "");
+    if (wantToLogout) {
+      return logout();
+    }
   }
 
   const mainContentContainerElement = document.getElementById(
@@ -51,7 +54,9 @@ async function loadPage(page) {
     const htmlContent = await res.text();
     mainContentContainerElement.innerHTML = htmlContent;
     customLocalStorage.setItem("currentPage", page);
-    location.hash = page
+    location.hash = page;
+    let event = new Event("loadedPage")
+    dispatchEvent(event)
   } catch (err) {
     console.log(err);
   }
@@ -72,6 +77,8 @@ const linksToPages = document.querySelectorAll(".sidebar > ul li");
 linksToPages.forEach((link) => {
   link.addEventListener("click", (e) => {
     const pageName = link.getAttribute("link-to-page");
-    loadPage(pageName)
+    return loadPage(pageName);
   });
 });
+
+export { loadPage };
