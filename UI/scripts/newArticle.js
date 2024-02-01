@@ -46,8 +46,19 @@ function generateUniqueId() {
   return uniqueId;
 }
 
+function formatDate(date) {
+  const options = { month: "short", day: "numeric", year: "numeric" };
+  return new Date(date).toLocaleDateString("en-US", options);
+}
+
 function saveContent(article) {
   const existingArticles = JSON.parse(localStorage.getItem("articles"));
+  if (article.published) {
+    article = {
+      ...article,
+      created_at: formatDate(new Date()),
+    };
+  }
   let articles = [...existingArticles, { ...article, id: generateUniqueId() }];
 
   localStorage.setItem("articles", JSON.stringify(articles));
@@ -102,8 +113,19 @@ window.addEventListener("pageChange", () => {
           description: descriptionField.value,
           content: contentField.innerHTML,
           image: imageField.value,
+          published: true,
         });
       }
+    });
+
+    saveBtn.addEventListener("click", () => {
+      saveContent({
+        title: titleField.value,
+        description: descriptionField.value,
+        content: contentField.innerHTML,
+        image: imageField.value,
+        published: false,
+      });
     });
   }
 });
