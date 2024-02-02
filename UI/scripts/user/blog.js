@@ -14,7 +14,7 @@ function loadRecentArticles() {
     recentArticlesContent += `
     <div class="article_container" class="article_meta_data">
     <div class="article_info_container">
-      <h3 class=""><a class="underline_on_hover" href="">${article.title}</a></h3>
+      <h3 class=""><a class="underline_on_hover" href="./article.html#articleId=${article.id}">${article.title}</a></h3>
       <p>
         ${article.description}
       </p>
@@ -37,7 +37,7 @@ function loadRecentArticles() {
   articles.forEach((article) => {
     moreArticlesContent += `        <div class="article_container" class="article_meta_data">
         <div class="article_info_container">
-          <h3 class=""><a class="underline_on_hover" href="">${article.title}</a></h3>
+          <h3 class=""><a class="underline_on_hover" href="./article.html#articleId=${article.id}">${article.title}</a></h3>
           <p>
             ${article.description}
           </p>
