@@ -1,21 +1,23 @@
 import { loadPage } from "../../dashboard/script.js";
 
 const currentPage = localStorage.getItem("currentPage");
+let articles;
 
 function deleteArticle(articleId) {
   if (
     confirm("Are you sure you want to delete article with ID: " + articleId)
   ) {
-    const articles = JSON.parse(localStorage.getItem("articles"));
+    articles = JSON.parse(localStorage.getItem("articles"));
     let newArticles = articles.filter((article) => article.id !== articleId);
 
-    localStorage.setItem("articles", newArticles);
-    location.reload();
+    localStorage.setItem("articles", JSON.stringify(newArticles));
+    const event = new Event("deletedArticle");
+    return dispatchEvent(event);
   }
 }
 
-window.addEventListener("blogLoaded", (e) => {
-  const articles = JSON.parse(localStorage.getItem("articles"));
+function loadArticles() {
+  articles = JSON.parse(localStorage.getItem("articles"));
 
   const publishedArticles = articles.filter(
     (article) => article.published === true
@@ -92,7 +94,9 @@ window.addEventListener("blogLoaded", (e) => {
 
   publishedArticlesContainer.innerHTML = publishedArticlesContent;
   unPublishedArticlesContainer.innerHTML = unPublishedArticlesContent;
+}
 
+function configureDeleteAndUpdateBtns() {
   // window.addEventListener("loadedPage", () => {
   const deleteBtns = document.querySelectorAll(".article_delete_btn");
   const updateBtns = document.querySelectorAll(".article_update_btn");
@@ -102,16 +106,7 @@ window.addEventListener("blogLoaded", (e) => {
   deleteBtns.forEach((deleteBtn) => {
     deleteBtn.addEventListener("click", () => {
       const articleId = deleteBtn.getAttribute("id");
-      if (
-        confirm("Are you sure you want to delete article with ID: " + articleId)
-      ) {
-        let newArticles = articles.filter(
-          (article) => article.id !== articleId
-        );
-
-        localStorage.setItem("articles", JSON.stringify(newArticles));
-        location.reload();
-      }
+      deleteArticle(articleId);
     });
   });
 
@@ -122,6 +117,16 @@ window.addEventListener("blogLoaded", (e) => {
       loadPage({ page: "update_article", articleId });
     });
   });
+}
+
+window.addEventListener("blogLoaded", () => {
+  loadArticles();
+  configureDeleteAndUpdateBtns();
+});
+
+window.addEventListener("deletedArticle", () => {
+  loadArticles();
+  configureDeleteAndUpdateBtns();
 });
 
 export { deleteArticle };
