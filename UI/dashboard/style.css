@@ -957,6 +957,7 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1em;
+    width: 100%;
   }
 
   .mobile_message_container {

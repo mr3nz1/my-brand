@@ -1,4 +1,4 @@
-import customLocalStorage from "../scripts/CustomLocalStorage.js";
+import customLocalStorage from "../scripts/dashboard/CustomLocalStorage.js";
 
 // animating the mouse
 window.addEventListener("mousemove", (e) => {
@@ -62,7 +62,7 @@ async function loadPage({ page, articleId }) {
     if (page === "update_article") {
       event.articleId = articleId;
     }
-
+    
     dispatchEvent(event);
   } catch (err) {
     console.log(err);
