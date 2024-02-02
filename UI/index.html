@@ -7,6 +7,7 @@
   <title>Murenzi Paterne</title>
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
+  <script src="./scripts/user/home.js"></script>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
   <img class="menu_icon" src="./assets/icons/icon-menu.svg" alt="">
 
   <!-- nav -->
-  <nav class="nav" class="px-large my-small">
+  <nav class="nav px-large my-small">
     <ul>
       <li class="underline_on_hover"><a href="#"> Home </a></li>
       <li class="underline_on_hover"><a href="#"> About </a></li>
@@ -198,8 +199,8 @@
       <h2 class="faster-one">MY MOST READ BLOG POSTS</h2>
     </div>
 
-    <div class="articles_container">
-      <div class="article_container" class="article_meta_data">
+    <div id="articles_container" class="articles_container">
+      <!-- <div class="article_container" class="article_meta_data">
         <div class="article_info_container">
           <h3 class="">Introduction To ReactJS</h3>
           <p>
@@ -285,7 +286,7 @@
           </div>
         </div>
         <img class="article_img" src="./assets/images/javascript_picture.png" alt="" />
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -295,10 +296,10 @@
 
     <div class="contacts_main_content_container">
       <div class="message_form_container">
-        <form action="">
+        <form id="message_form" action="">
           <input class="default_input_field" type="text" name="fullName" placeholder="Your Full name" required />
-          <input class="default_input_field" type="email" name="fullName" placeholder="Your email" required />
-          <input class="default_input_field" type="text" name="fullName" placeholder="What You want To Convey"
+          <input class="default_input_field" type="email" name="email" placeholder="Your email" required />
+          <input class="default_input_field" type="text" name="content" placeholder="What You want To Convey"
             required />
           <button class="button" type="submit">Send Message</button>
         </form>
@@ -336,4 +337,5 @@
     </div>
   </div>
 </body>
+
 </html>

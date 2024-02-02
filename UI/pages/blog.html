@@ -7,6 +7,7 @@
   <title>Blog - Murenzi Paterne</title>
   <link rel="stylesheet" href="../style.css" />
   <script src="../script.js" defer></script>
+  <script src="../scripts/user/blog.js" defer></script>
 </head>
 
 <body>
@@ -51,10 +52,10 @@
   <div class="articles_group px-large py-medium">
     <h2 class="faster-one">RECENT ARTICLES</h2>
 
-    <div class="articles_container">
-      <div class="article_container" class="article_meta_data">
+    <div id="recent_articles_container" class="articles_container">
+      <!-- <div class="article_container" class="article_meta_data">
         <div class="article_info_container">
-          <h3 class=""><a class="underline_on_hover" href=""> Introduction To ReactJS </a></h3>
+          <h3 class=""><a class="undeline_on_hover" href=""> Introduction To ReactJS </a></h3>
           <p>
             Dive into ReactJS effortlessly with this quick step-by-step guide.
             Start by setting up your environment using Node.js and npm,
@@ -138,17 +139,17 @@
           </div>
         </div>
         <img class="article_img" src="../assets/images/javascript_picture.png" alt="" />
-      </div>
+      </div> -->
     </div>
   </div>
 
   <!-- more_articles -->
   <div class="articles_group px-large py-medium">
-    <h2 class="faster-one">RECENT ARTICLES</h2>
+    <h2 class="faster-one">MORE ARTICLES</h2>
 
     <div class="articles_group_col">
-      <div class="articles_container_blog">
-        <div class="article_container" class="article_meta_data">
+      <div id="more_articles_container" class="articles_container_blog">
+        <!-- <div class="article_container" class="article_meta_data">
           <div class="article_info_container">
             <h3 class=""><a class="underline_on_hover" href=""> Introduction To ReactJS </a></h3>
             <p>
@@ -168,249 +169,7 @@
             </div>
           </div>
           <img class="article_img" src="../assets/images//react_picture.png" alt="" />
-        </div>
-
-        <div class="article_container">
-          <div class="article_info_container">
-            <h3 class=""><a class="underline_on_hover" href=""> Learn MYSQL </a></h3>
-            <p>
-              Learn MYSQL in no time. A better way to write queries. An
-              introduction to SQL databases.. Read this article read by
-              hundreds.
-            </p>
-            <div class="article_meta_data">
-              <p>Jan 2, 2024</p>
-              <span class="dot_separator"></span>
-              <p>14 min read</p>
-              <span class="dot_separator"></span>
-              <div class="likes_description">
-                <img src="../assets/icons/heart.png" alt="" />
-                <p>83 likes</p>
-              </div>
-            </div>
-          </div>
-          <img class="article_img" src="../assets/images/mysql_picture.png" alt="" />
-        </div>
-
-        <div class="article_container">
-          <div class="article_info_container">
-            <h3 class=""><a class="underline_on_hover" href=""> Introduction To Web Development </a></h3>
-            <p>
-              Dive into ReactJS effortlessly with this quick step-by-step
-              guide. Start by setting up your environment using Node.js and
-              npm, followed by exploring the project structure.
-            </p>
-            <div class="article_meta_data">
-              <p>Jan 2, 2024</p>
-              <span class="dot_separator"></span>
-              <p>14 min read</p>
-              <span class="dot_separator"></span>
-              <div class="likes_description">
-                <img src="../assets/icons/heart.png" alt="" />
-                <p>83 likes</p>
-              </div>
-            </div>
-          </div>
-          <img class="article_img" src="../assets/images/web_picture.png" alt="" />
-        </div>
-
-        <div class="article_container">
-          <div class="article_info_container">
-            <h3 class=""><a class="underline_on_hover" href=""> Master Javascript </a></h3>
-            <p>
-              Whether you're a seasoned developer or a curious novice, join us
-              to unlock the full potential of Express.js and elevate your web
-              development skills.
-            </p>
-            <div class="article_meta_data">
-              <p>Jan 2, 2024</p>
-              <span class="dot_separator"></span>
-              <p>14 min read</p>
-              <span class="dot_separator"></span>
-              <div class="likes_description">
-                <img src="../assets/icons/heart.png" alt="" />
-                <p>83 likes</p>
-              </div>
-            </div>
-          </div>
-          <img class="article_img" src="../assets/images/javascript_picture.png" alt="" />
-        </div>
-
-        <div class="article_container" class="article_meta_data">
-          <div class="article_info_container">
-            <h3 class=""><a class="underline_on_hover" href=""> Introduction To ReactJS </a></h3>
-            <p>
-              Dive into ReactJS effortlessly with this quick step-by-step
-              guide. Start by setting up your environment using Node.js and
-              npm, followed by exploring the project structure.
-            </p>
-            <div class="article_meta_data">
-              <p>Jan 2, 2024</p>
-              <span class="dot_separator"></span>
-              <p>14 min read</p>
-              <span class="dot_separator"></span>
-              <div class="likes_description">
-                <img src="../assets/icons/heart.png" alt="" />
-                <p>83 likes</p>
-              </div>
-            </div>
-          </div>
-          <img class="article_img" src="../assets/images//react_picture.png" alt="" />
-        </div>
-
-        <div class="article_container">
-          <div class="article_info_container">
-            <h3 class=""><a class="underline_on_hover" href="">Learn MYSQL </a></h3>
-            <p>
-              Learn MYSQL in no time. A better way to write queries. An
-              introduction to SQL databases.. Read this article read by
-              hundreds.
-            </p>
-            <div class="article_meta_data">
-              <p>Jan 2, 2024</p>
-              <span class="dot_separator"></span>
-              <p>14 min read</p>
-              <span class="dot_separator"></span>
-              <div class="likes_description">
-                <img src="../assets/icons/heart.png" alt="" />
-                <p>83 likes</p>
-              </div>
-            </div>
-          </div>
-          <img class="article_img" src="../assets/images/mysql_picture.png" alt="" />
-        </div>
-
-        <div class="article_container">
-          <div class="article_info_container">
-            <h3 class=""><a class="underline_on_hover" href=""> Introduction To Web Development </a></h3>
-            <p>
-              Dive into ReactJS effortlessly with this quick step-by-step
-              guide. Start by setting up your environment using Node.js and
-              npm, followed by exploring the project structure.
-            </p>
-            <div class="article_meta_data">
-              <p>Jan 2, 2024</p>
-              <span class="dot_separator"></span>
-              <p>14 min read</p>
-              <span class="dot_separator"></span>
-              <div class="likes_description">
-                <img src="../assets/icons/heart.png" alt="" />
-                <p>83 likes</p>
-              </div>
-            </div>
-          </div>
-          <img class="article_img" src="../assets/images/web_picture.png" alt="" />
-        </div>
-
-        <div class="article_container">
-          <div class="article_info_container">
-            <h3 class=""><a class="underline_on_hover" href=""> Master Javascript </a></h3>
-            <p>
-              Whether you're a seasoned developer or a curious novice, join us
-              to unlock the full potential of Express.js and elevate your web
-              development skills.
-            </p>
-            <div class="article_meta_data">
-              <p>Jan 2, 2024</p>
-              <span class="dot_separator"></span>
-              <p>14 min read</p>
-              <span class="dot_separator"></span>
-              <div class="likes_description">
-                <img src="../assets/icons/heart.png" alt="" />
-                <p>83 likes</p>
-              </div>
-            </div>
-          </div>
-          <img class="article_img" src="../assets/images/javascript_picture.png" alt="" />
-        </div>
-
-        <div class="article_container" class="article_meta_data">
-          <div class="article_info_container">
-            <h3 class=""><a class="underline_on_hover" href=""> Introduction To ReactJS </a></h3>
-            <p>
-              Dive into ReactJS effortlessly with this quick step-by-step
-              guide. Start by setting up your environment using Node.js and
-              npm, followed by exploring the project structure.
-            </p>
-            <div class="article_meta_data">
-              <p>Jan 2, 2024</p>
-              <span class="dot_separator"></span>
-              <p>14 min read</p>
-              <span class="dot_separator"></span>
-              <div class="likes_description">
-                <img src="../assets/icons/heart.png" alt="" />
-                <p>83 likes</p>
-              </div>
-            </div>
-          </div>
-          <img class="article_img" src="../assets/images//react_picture.png" alt="" />
-        </div>
-
-        <div class="article_container">
-          <div class="article_info_container">
-            <h3 class=""><a class="underline_on_hover" href=""> Learn MYSQL </a></h3>
-            <p>
-              Learn MYSQL in no time. A better way to write queries. An
-              introduction to SQL databases.. Read this article read by
-              hundreds.
-            </p>
-            <div class="article_meta_data">
-              <p>Jan 2, 2024</p>
-              <span class="dot_separator"></span>
-              <p>14 min read</p>
-              <span class="dot_separator"></span>
-              <div class="likes_description">
-                <img src="../assets/icons/heart.png" alt="" />
-                <p>83 likes</p>
-              </div>
-            </div>
-          </div>
-          <img class="article_img" src="../assets/images/mysql_picture.png" alt="" />
-        </div>
-
-        <div class="article_container">
-          <div class="article_info_container">
-            <h3 class=""><a class="underline_on_hover" href=""> Introduction To Web Development </a></h3>
-            <p>
-              Dive into ReactJS effortlessly with this quick step-by-step
-              guide. Start by setting up your environment using Node.js and
-              npm, followed by exploring the project structure.
-            </p>
-            <div class="article_meta_data">
-              <p>Jan 2, 2024</p>
-              <span class="dot_separator"></span>
-              <p>14 min read</p>
-              <span class="dot_separator"></span>
-              <div class="likes_description">
-                <img src="../assets/icons/heart.png" alt="" />
-                <p>83 likes</p>
-              </div>
-            </div>
-          </div>
-          <img class="article_img" src="../assets/images/web_picture.png" alt="" />
-        </div>
-
-        <div class="article_container">
-          <div class="article_info_container">
-            <h3 class=""><a class="underline_on_hover" href=""> Master Javascript </a></h3>
-            <p>
-              Whether you're a seasoned developer or a curious novice, join us
-              to unlock the full potential of Express.js and elevate your web
-              development skills.
-            </p>
-            <div class="article_meta_data">
-              <p>Jan 2, 2024</p>
-              <span class="dot_separator"></span>
-              <p>14 min read</p>
-              <span class="dot_separator"></span>
-              <div class="likes_description">
-                <img src="../assets/icons/heart.png" alt="" />
-                <p>83 likes</p>
-              </div>
-            </div>
-          </div>
-          <img class="article_img" src="../assets/images/javascript_picture.png" alt="" />
-        </div>
+        </div> -->
       </div>
 
       <!-- <div class="vertical_separator"></div> -->

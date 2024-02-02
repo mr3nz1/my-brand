@@ -1,4 +1,4 @@
-import customLocalStorage from "../scripts/CustomLocalStorage.js";
+import customLocalStorage from "../scripts/dashboard/CustomLocalStorage.js";
 
 // animating the mouse
 window.addEventListener("mousemove", (e) => {
@@ -20,13 +20,17 @@ function isLoggedIn() {
 isLoggedIn();
 
 function logout() {
-  const removed = customLocalStorage.removeItem("loggedIn");
+  const removed = localStorage.removeItem("loggedIn");
+  localStorage.removeItem("currentPage");
   location.href = "../pages/login.html";
 }
 
-async function loadPage(page) {
+async function loadPage({ page, articleId }) {
   if (page === "logout") {
-    return logout();
+    const wantToLogout = confirm("Are you sure you want to log out?", "");
+    if (wantToLogout) {
+      return logout();
+    }
   }
 
   const mainContentContainerElement = document.getElementById(
@@ -44,6 +48,7 @@ async function loadPage(page) {
     tasks: "tasks.html",
     messages: "messages.html",
     new_article: "new_article.html",
+    update_article: "update_article.html",
   };
 
   try {
@@ -51,7 +56,15 @@ async function loadPage(page) {
     const htmlContent = await res.text();
     mainContentContainerElement.innerHTML = htmlContent;
     customLocalStorage.setItem("currentPage", page);
-    location.hash = page
+    location.hash = page;
+    let event = new Event(page + "Loaded");
+    event.page = page;
+
+    if (page === "update_article") {
+      event.articleId = articleId;
+    }
+    
+    dispatchEvent(event);
   } catch (err) {
     console.log(err);
   }
@@ -60,18 +73,20 @@ async function loadPage(page) {
 // check the current page if the content happens to load
 window.addEventListener("DOMContentLoaded", () => {
   let page = localStorage.getItem("currentPage");
-  loadPage(page);
+  loadPage({ page });
 });
 
 // load currentPage if the user just uses the hash
 const currentPage = window.location.hash.split("#")[1];
-loadPage(currentPage);
+loadPage({ page: currentPage });
 
 const linksToPages = document.querySelectorAll(".sidebar > ul li");
 
 linksToPages.forEach((link) => {
   link.addEventListener("click", (e) => {
     const pageName = link.getAttribute("link-to-page");
-    loadPage(pageName)
+    return loadPage({ page: pageName });
   });
 });
+
+export { loadPage };

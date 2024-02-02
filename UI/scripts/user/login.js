@@ -1,4 +1,4 @@
-import customLocalStorage from "./CustomLocalStorage.js";
+import customLocalStorage from "../dashboard/CustomLocalStorage.js";
 
 const userEmailInput = document.getElementById("user_email_input");
 const userPasswordInput = document.getElementById("user_password_input");
@@ -18,6 +18,7 @@ async function checkCredentials(email, password) {
 
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  console.log("pressed")
   const userEmail = userEmailInput.value
   const userPassword = userPasswordInput.value
 
