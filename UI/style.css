@@ -590,6 +590,7 @@ nav ul li a {
   justify-content: space-between;
   gap: 1em;
   align-items: start;
+  width: 100%;
 }
 
 .article_info_container {

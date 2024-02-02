@@ -11,6 +11,38 @@ function formatDate(date) {
   return new Date(date).toLocaleDateString("en-US", options);
 }
 
+function loadArticles() {
+  const articles = JSON.parse(localStorage.getItem("articles")).slice(0, 4);
+  const articlesContainer = document.getElementById("articles_container");
+
+  let articlesContent = "";
+
+  articles.forEach((article) => {
+    articlesContent += `
+    <div class="article_container article_meta_data">
+    <div class="article_info_container">
+      <h3 class="">${article.name}</h3>
+      <p>
+        ${article.description}
+      </p>
+      <div class="article_meta_data">
+        <p>${article.created_at}</p>
+        <span class="dot_separator"></span>
+        <p>14 min read</p>
+        <span class="dot_separator"></span>
+        <div class="likes_description">
+          <img src="./assets/icons/heart.png" alt="" />
+          <p>83 likes</p>
+        </div>
+      </div>
+    </div>
+    <img class="article_img" src="${article.image}" alt="" />
+  </div>`;
+  });
+
+  articlesContainer.innerHTML = articlesContent;
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   const messageForm = document.getElementById("message_form");
 
@@ -37,8 +69,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
     alert("Thank you for your message");
 
-    inputs.forEach(input => {
-        input.value = ""
+    inputs.forEach((input) => {
+      input.value = "";
     });
   });
+
+  loadArticles();
 });
