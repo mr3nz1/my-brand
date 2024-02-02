@@ -21,6 +21,7 @@ isLoggedIn();
 
 function logout() {
   const removed = localStorage.removeItem("loggedIn");
+  localStorage.removeItem("currentPage");
   location.href = "../pages/login.html";
 }
 
