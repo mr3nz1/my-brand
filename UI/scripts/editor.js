@@ -56,7 +56,7 @@ function selectText() {
 
 // clean the text editor for elements without text
 
-window.addEventListener("pageChange", () => {
+function initiateEditor() {
   if (currentPage === "new_article") {
     // check whether you're only editing the text area content
     const editorTextArea = document.querySelector(
@@ -102,18 +102,6 @@ window.addEventListener("pageChange", () => {
         let element = createElement(textTypeSelectElement.value);
         editorTextArea.appendChild(element);
       }
-
-      // let range = getSelectedTextRange();
-      // const parentElement = range.commonAncestorContainer;
-
-      // if (parentElement.nodeType === 1) {
-      //   // It's an elem  ent (HTML element node)
-      //   console.log(parentElement)
-
-      //   parentElement.replaceWith(element);
-      // } else {
-      //   range.surroundContents(element);
-      // }
       const event = new Event("cleanElementsWithoutText");
       dispatchEvent(event);
     });
@@ -130,12 +118,6 @@ window.addEventListener("pageChange", () => {
           }
         });
       });
-
-      document.addEventListener("click", () => {
-        // removeElement
-      });
-
-      console.log("event dispatched and listened to");
     });
 
     editorTextArea.addEventListener("mouseup", () => {
@@ -145,4 +127,6 @@ window.addEventListener("pageChange", () => {
       window.dispatchEvent(event);
     });
   }
-});
+}
+
+export { initiateEditor };

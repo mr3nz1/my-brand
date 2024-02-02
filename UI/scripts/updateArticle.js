@@ -1,81 +1,35 @@
-import customLocalStorage from "./CustomLocalStorage.js";
 import { loadPage } from "../dashboard/script.js";
 import { initiateEditor } from "./editor.js";
+import { displayErrors, errors, saveContent } from "./newArticle.js";
 
 const currentPage = localStorage.getItem("currentPage");
-let errors = {
-  title: "",
-  description: "",
-  image: "",
-  content: "",
-};
 
-function displayErrors() {
-  const errorElements = document.querySelectorAll(
-    ".default_input_container .error"
-  );
-
-  errorElements.forEach((errorElement) => {
-    const type = errorElement.getAttribute("errorType");
-    errorElement.textContent = errors[type];
-  });
-}
-
-function generateUniqueId() {
-  const timestamp = new Date().getTime();
-  const randomPart = Math.floor(Math.random() * 1000); // Example: generate a random number between 0 and 999
-  const uniqueId = `id_${timestamp}_${randomPart}`;
-
-  return uniqueId;
-}
-
-function formatDate(date) {
-  const options = { month: "short", day: "numeric", year: "numeric" };
-  return new Date(date).toLocaleDateString("en-US", options);
-}
-
-function saveContent(article) {
-  let existingArticles = JSON.parse(localStorage.getItem("articles"));
-  if (article.published) {
-    article = {
-      ...article,
-      created_at: formatDate(new Date()),
-    };
-  }
-  let articles;
-  if (article.id) {
-    existingArticles = existingArticles.filter((item) => {
-      console.log(item.id !== article.id);
-      return item.id !== article.id;
-    });
-    console.log(existingArticles.length);
-  }
-
-  articles = [
-    ...existingArticles,
-    { ...article, id: article?.id ? article.id : generateUniqueId() },
-  ];
-
-  localStorage.setItem("articles", JSON.stringify(articles));
-
-  if (article.published) {
-    alert("Successfully Published");
-  } else {
-    alert("Successfully Saved");
-  }
-  loadPage({ page: "blog" });
-}
-
-window.addEventListener("new_articleLoaded", (e) => {
-  // setup the rich text editor
+window.addEventListener("update_articleLoaded", (e) => {
+  // set up the editor
   initiateEditor();
 
+  const articleId = e.articleId;
   const saveBtn = document.querySelector(".save_content_btn");
   const publishBtn = document.querySelector(".publish_article_btn");
   const titleField = document.querySelector(".title_input_field");
   const descriptionField = document.querySelector(".description_input_field");
   const imageField = document.querySelector(".banner_image_input_field");
   const contentField = document.querySelector(".outputField");
+
+  if (!articleId) {
+    return loadPage({ page: "blog" });
+  }
+
+  const articles = JSON.parse(localStorage.getItem("articles"));
+
+  let articleToUpdate = articles.filter(
+    (article) => article.id === articleId
+  )[0];
+
+  titleField.value = articleToUpdate.title;
+  descriptionField.value = articleToUpdate.description;
+  imageField.value = articleToUpdate.image;
+  contentField.innerHTML = articleToUpdate.content;
 
   publishBtn.addEventListener("click", () => {
     if (titleField.value === "") {
@@ -116,6 +70,7 @@ window.addEventListener("new_articleLoaded", (e) => {
         content: contentField.innerHTML,
         image: imageField.value,
         published: true,
+        id: articleId,
       });
     }
   });
@@ -127,8 +82,7 @@ window.addEventListener("new_articleLoaded", (e) => {
       content: contentField.innerHTML,
       image: imageField.value,
       published: false,
+      id: articleId,
     });
   });
 });
-
-export { errors, generateUniqueId, formatDate, saveContent, displayErrors };
