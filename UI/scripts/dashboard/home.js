@@ -1,11 +1,36 @@
 import { loadPage } from "../../dashboard/script.js";
 
+let articles;
+let messages;
+
+function loadStats() {
+  const numberOfArticlesElement = document.getElementById(
+    "number_of_articles_element"
+  );
+  const numberOfMessagesElement = document.getElementById(
+    "number_of_messages_element"
+  );
+
+  if (!articles) {
+    articles = JSON.parse(localStorage.getItem("articles"));
+  }
+
+  if (!messages) {
+    messages = JSON.parse(localStorage.getItem("messages"));
+  }
+
+  numberOfArticlesElement.textContent = articles.length;
+  numberOfMessagesElement.textContent = messages.length;
+}
+
 window.addEventListener("homeLoaded", () => {
   const unPublishedArticlesContainer = document.getElementById(
     "unpublished_articles_container"
   );
 
-  const articles = JSON.parse(localStorage.getItem("articles"));
+  if (!articles) {
+    articles = JSON.parse(localStorage.getItem("articles"));
+  }
   const unPublishedArticles = articles.filter(
     (article) => article.published !== true
   );
@@ -67,4 +92,7 @@ window.addEventListener("homeLoaded", () => {
       loadPage({ page: "update_article", articleId });
     });
   });
+
+  // load stats
+  loadStats()
 });

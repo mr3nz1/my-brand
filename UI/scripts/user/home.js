@@ -19,9 +19,9 @@ function loadArticles() {
 
   articles.forEach((article) => {
     articlesContent += `
-    <div class="article_container article_meta_data">
+    <div class="article_container">
     <div class="article_info_container">
-      <h3 class="">${article.name}</h3>
+      <h3 class="">${article.title}</h3>
       <p>
         ${article.description}
       </p>
