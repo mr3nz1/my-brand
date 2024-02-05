@@ -6,51 +6,76 @@
 <!-- new task -->
 <div class="new_task_container">
     <div class="new_task_add_btn_container">
-        <button class="button">Add Task</button>
+        <button id="task_submit_button" class="button">Add Task</button>
     </div>
 
     <form action="">
-        <input class="default_input_field" type="text" name="title" placeholder="Article Title" required />
+        <div class="default_input_container">
+            <input id="task_title" class="default_input_field" type="text" name="title" placeholder="Article Title"
+                required />
+            <p class="error" errorType="title"></p>
+        </div>
 
-        <div class="rich_text_editor">
-            <div class="header">
-                <button>
-                    <img src="../assets/icons/bold.png" alt="">
-                </button>
-                <button>
-                    <img src="../assets/icons/italic.png" alt="">
-                </button>
-                <button>
-                    <img src="../assets/icons/underline.png" alt="">
-                </button>
-                <button>
-                    <img src="../assets/icons/align-left.png" alt="">
-                </button>
-                <button>
-                    <img src="../assets/icons/align-center.png" alt="">
-                </button>
-                <button>
-                    <img src="../assets/icons/align-right.png" alt="">
-                </button>
-                <button>
-                    <img src="../assets/icons/list.png" alt="">
-                </button>
-                <button>
-                    <img src="../assets/icons/number-list.png" alt="">
-                </button>
-                <button class="text-btn">
-                    <p>A</p>
-                </button>
-                <button class="text-btn">
-                    <p>a</p>
-                </button>
-                <button>
-                    <img src="../assets/icons/colors.png" alt="">
-                </button>
+        <div class="default_input_container">
+            <div class="rich_text_editor">
+                <div class="header">
+                    <select class="text-type" name="text-type">
+                        <option value=" "></option>
+                        <option value="p">p</option>
+                        <option value="h1">h1</option>
+                        <option value="h2">h2</option>
+                        <option value="h3">h3</option>
+                        <option value="h4">h4</option>
+                        <option value="h5">h5</option>
+                        <option value="h6">h6</option>
+                    </select>
+                    <button btn-command="bold" class="otherBtns">
+                        <img src="../assets/icons/bold.png" alt="">
+                    </button>
+                    <button btn-command="italic" class="otherBtns">
+                        <img src="../assets/icons/italic.png" alt="">
+                    </button>
+                    <button btn-command="underline" class="otherBtns">
+                        <img src="../assets/icons/underline.png" alt="">
+                    </button>
+                    <button btn-command="justifyLeft" class="justifyBtns">
+                        <img src="../assets/icons/align-left.png" alt="">
+                    </button>
+                    <button btn-command="justifyCenter" class="justifyBtns">
+                        <img src="../assets/icons/align-center.png" alt="">
+                    </button>
+                    <button btn-command="justifyRight" class="justifyBtns">
+                        <img src="../assets/icons/align-right.png" alt="">
+                    </button>
+                    <button btn-command="unorderedList" class="listBtns">
+                        <img src="../assets/icons/list.png" alt="">
+                    </button btn-command="ordered-list">
+                    <button btn-command="ordered-list" class="listBtns">
+                        <img src="../assets/icons/number-list.png" alt="">
+                    </button>
+                    <button class="text-btn" btn-command="uppercase" class="caseBtns">
+                        <p>A</p>
+                    </button>
+                    <button class="text-btn" btn-command="lower-case" class="caseBtns">
+                        <p>a</p>
+                    </button>
+                    <button btn-command="changeColor" class="otherBtns">
+                        <img src="../assets/icons/colors.png" alt="">
+                    </button>
+                    <button btn-command="addImage" class="otherBtns">
+                        <img src="../assets/icons/upload.png" alt="">
+                    </button>
+                    <button btn-command="createLink" class="otherBtns">
+                        <img src="../assets/icons/link.png" alt="">
+                    </button>
+                    <button btn-command="showCode">
+                        <img src="../assets/icons/code.png" alt="">
+                    </button>
+                </div>
+                <div contenteditable="true" spellcheck="false" class="outputField" placeholder="Article Content">
+                </div>
             </div>
-            <div class="content">
-
-            </div>
+            <p class="error" errorType="content"></p>
         </div>
     </form>
 </div>
@@ -61,7 +86,7 @@
         <h1 class="faster-one">TASKS</h1>
     </div>
     <div class="tasks_container">
-        <div class="task">
+        <!-- <div class="task">
             <h3>Publishing remaing unpublished articles</h3>
             <ul>
                 <li>Write better Javascript Functions</li>
@@ -69,36 +94,6 @@
                 <li>An introduction onApplication</li>
                 <li>Programming APIs</li>
             </ul>
-        </div>
-
-        <div class="task">
-            <h3>Publishing remaing unpublished articles</h3>
-            <ul>
-                <li>Write better Javascript Functions</li>
-                <li>An introduction to no-sql</li>
-                <li>An introduction onApplication</li>
-                <li>Programming APIs</li>
-            </ul>
-        </div>
-
-        <div class="task">
-            <h3>Publishing remaing unpublished articles</h3>
-            <ul>
-                <li>Write better Javascript Functions</li>
-                <li>An introduction to no-sql</li>
-                <li>An introduction onApplication</li>
-                <li>Programming APIs</li>
-            </ul>
-        </div>
-
-        <div class="task">
-            <h3>Publishing remaing unpublished articles</h3>
-            <ul>
-                <li>Write better Javascript Functions</li>
-                <li>An introduction to no-sql</li>
-                <li>An introduction onApplication</li>
-                <li>Programming APIs</li>
-            </ul>
-        </div>
+        </div> -->
     </div>
 </div>

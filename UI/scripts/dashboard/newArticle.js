@@ -1,4 +1,3 @@
-import customLocalStorage from "./CustomLocalStorage.js";
 import { loadPage } from "../../dashboard/script.js";
 import { initiateEditor } from "./editor.js";
 

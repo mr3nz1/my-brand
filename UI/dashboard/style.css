@@ -668,12 +668,12 @@ body {
 
 .rich_text_editor > .header > select:hover,
 .rich_text_editor > .header > button:hover {
-  scale: 1.5;
+  scale: 1.2;
 }
 
 .rich_text_editor > .header > select:focus,
 .rich_text_editor > .header > button:focus {
-  scale: 1.5;
+  scale: 1.2;
   outline: none;
 }
 
@@ -742,10 +742,11 @@ body {
 
 .tasks_container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 4fr);
   gap: 2em;
-  justify-content: start;
+  justify-content: space-around;
   align-items: start;
+  width: 100% !important;
 }
 
 .tasks_container .task {
@@ -757,6 +758,7 @@ body {
   justify-content: start;
   align-items: start;
   gap: 0.5em;
+  width: 100% !important;
 }
 
 .tasks_container h3 {
@@ -1052,6 +1054,7 @@ body {
     flex-direction: column;
     justify-content: start;
     align-items: start;
+    width: 100% !important;
   }
 
   h1,
@@ -1066,4 +1069,8 @@ body {
 .active {
   background-color: white;
   box-shadow: none;
+}
+
+.bold {
+  font-weight: bold;
 }
