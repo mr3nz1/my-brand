@@ -43,6 +43,28 @@ function loadArticles() {
   articlesContainer.innerHTML = articlesContent;
 }
 
+let isModalOpen = false;
+
+function openModal() {
+  if (!isModalOpen) {
+    const modal = document.querySelector(".modal");
+
+    const h2 = document.createElement("h2");
+    h2.textContent = "Thanks for you're message.";
+
+    modal.children[0].appendChild(h2);
+
+    modal.classList.add("modal-open");
+
+    isModalOpen = true;
+
+    setTimeout(() => {
+      modal.classList.remove("modal-open");
+      isModalOpen = false;
+    }, 5000);
+  }
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   const messageForm = document.getElementById("message_form");
 
@@ -67,11 +89,11 @@ window.addEventListener("DOMContentLoaded", () => {
     ];
     localStorage.setItem("messages", JSON.stringify(newMessages));
 
-    alert("Thank you for your message");
-
     inputs.forEach((input) => {
       input.value = "";
     });
+
+    openModal();
   });
 
   loadArticles();

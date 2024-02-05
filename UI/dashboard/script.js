@@ -19,18 +19,56 @@ function isLoggedIn() {
 
 isLoggedIn();
 
+let modalIsOpen = false;
+
 function logout() {
-  const removed = localStorage.removeItem("loggedIn");
-  localStorage.removeItem("currentPage");
-  location.href = "../pages/login.html";
+  // localStorage.removeItem("loggedIn");
+  // localStorage.removeItem("currentPage");
+  // location.href = "../pages/login.html";
+
+  const modal = document.querySelector(".modal");
+  const div = document.createElement("div");
+  const message = document.createElement("p");
+
+  message.textContent = "Are you sure you want to log out?";
+  modal.children[0].appendChild(message);
+  const logoutBtn = document.createElement("button");
+  logoutBtn.textContent = "Confirm";
+  logoutBtn.classList.add("button");
+  modal.children[0].appendChild(logoutBtn);
+  modal.children[0].append(div);
+  modal.classList.add("modal-open");
+  modalIsOpen = true;
+
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("currentPage");
+    location.href = "../pages/login.html";
+  });
+
+  const cancelBtn = document.querySelector(".close-modal");
+
+  cancelBtn.addEventListener("click", () => {
+    modal.classList.remove("modal-open");
+    modalIsOpen = false
+    modal.children[0].removeChild(div)
+    modal.children[0].removeChild(logoutBtn)
+    modal.children[0].removeChild(message)
+  });
 }
 
 async function loadPage({ page, articleId }) {
   if (page === "logout") {
-    const wantToLogout = confirm("Are you sure you want to log out?", "");
-    if (wantToLogout) {
-      return logout();
+    // const wantToLogout = confirm("Are you sure you want to log out?", "");
+    // if (wantToLogout) {
+    //   return logout();
+    // } else {
+    //   return;
+    // }
+    if (modalIsOpen) {
+      return;
     }
+    return logout();
   }
 
   const mainContentContainerElement = document.getElementById(
@@ -63,7 +101,7 @@ async function loadPage({ page, articleId }) {
     if (page === "update_article") {
       event.articleId = articleId;
     }
-    
+
     dispatchEvent(event);
   } catch (err) {
     console.log(err);

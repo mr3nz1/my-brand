@@ -804,14 +804,14 @@ nav ul li a {
 }
 
 /* add message */
-.add_comment_container {
+/* .add_comment_container {
   display: flex;
   flex-direction: row;
   justify-content: start;
   align-items: center;
   width: 100%;
   gap: 1em;
-}
+} */
 
 .message_user_image {
   width: 40px;
@@ -823,13 +823,13 @@ nav ul li a {
   width: 100%;
 }
 
-.add_comment_container > form {
+/* .add_comment_container > form {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 1em;
-}
+} */
 
 .list_of_comments {
   display: flex;
@@ -969,9 +969,9 @@ nav ul li a {
   height: 100%;
 }
 
-.reply_comment {
+/* .reply_comment {
   margin-left: 4em;
-}
+} */
 
 @keyframes slideIn {
   from {
@@ -1290,3 +1290,104 @@ nav ul li a {
     margin: 0em;
   }
 }
+
+
+@keyframes slideIn {
+  from {
+    margin-top: -100%;
+  }
+  to {
+    margin-top: 0%;
+  }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px) rotate(0.5deg); }
+  50% { transform: translateX(5px) rotate(-0.5deg); }
+  75% { transform: translateX(-5px) rotate(0.5deg); }
+  100% { transform: translateX(0); }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  box-shadow: var(--shadow-normal);
+  margin: 1em;
+  /* background-color: #2121212f; */
+  border-radius: 2px;
+  transition: 0.2s ease-in;
+  background-color: white;
+  /* margin-top: -100%; */
+  display: none;
+}
+
+.modal:hover {
+  scale: 1.05;
+  /* translate: 0.5;
+  animation: shake 0.5s;
+  animation-iteration-count: 1; */
+}
+
+.modal-content {
+  padding: 1em 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 0.5em;
+  z-index: 30;
+  cursor: default;
+  position: relative;
+}
+
+.modal-content h2 {
+  font-size: medium;
+  font-weight: bold;
+}
+
+.modal-content  p,
+.modal-content  button {
+  font-size: x-small;
+}
+
+.modal-content > .close-modal {
+  position: absolute;
+  /* display: none; */
+  top: 0;
+  right: 0;
+  width: 10px;
+  border: 1px solid black;
+  border-radius: 100%;
+  padding: 4px;
+  margin: 5px;
+}
+
+.modal-content > .close-modal:hover {
+  background-color: var(--red-500);
+}
+
+.modal-open {
+  display: flex !important;
+  animation: slideIn 0.5s ease-in !important;
+}
+
+.add-comment-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 1em;
+}
+
+.add-comment-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 1em;
+}
+
