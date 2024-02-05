@@ -94,12 +94,27 @@ function checkForErrors() {
   if (errors.title !== "" || errors.content !== "") {
     return;
   }
-  
+
   return addTask(title, content);
 }
 
 function deleteTask(id) {
-  if (confirm("Are you sure you want to delete article with id: " + id)) {
+  const closeModal = document.querySelector(".close-modal");
+  const modal = document.querySelector(".modal");
+  const title = document.createElement("h2");
+  const message = document.createElement("p");
+  const deleteBtn = document.createElement("button");
+
+  title.textContent = "Delete";
+  message.textContent = "Want to delete the article with id: " + id;
+  deleteBtn.textContent = "Delete";
+  deleteBtn.classList.add("button");
+  modal.children[0].appendChild(title);
+  modal.children[0].appendChild(message);
+  modal.children[0].appendChild(deleteBtn);
+  modal.classList.add("modal-open");
+
+  deleteBtn.addEventListener("click", () => {
     const tasks = JSON.parse(localStorage.getItem("tasks"));
 
     const updatedTasks = tasks.filter((task) => id !== task.id);
@@ -108,9 +123,20 @@ function deleteTask(id) {
 
     const event = new Event("displayTasks");
 
+    modal.children[0].removeChild(title);
+    modal.children[0].removeChild(message);
+    modal.children[0].removeChild(deleteBtn);
+    modal.classList.remove("modal-open");
+
     return dispatchEvent(event);
-  }
-  return;
+  });
+
+  closeModal.addEventListener("click", () => {
+    modal.children[0].removeChild(title);
+    modal.children[0].removeChild(message);
+    modal.children[0].removeChild(deleteBtn);
+    modal.classList.remove("modal-open");
+  });
 }
 
 function configureDeleteFeature() {

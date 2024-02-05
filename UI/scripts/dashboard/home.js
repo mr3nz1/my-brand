@@ -2,6 +2,7 @@ import { loadPage } from "../../dashboard/script.js";
 
 let articles;
 let messages;
+let tasks;
 
 function loadStats() {
   const numberOfArticlesElement = document.getElementById(
@@ -9,6 +10,9 @@ function loadStats() {
   );
   const numberOfMessagesElement = document.getElementById(
     "number_of_messages_element"
+  );
+  const numberOfTasksElement = document.getElementById(
+    "number_of_tasks_element"
   );
 
   if (!articles) {
@@ -19,8 +23,13 @@ function loadStats() {
     messages = JSON.parse(localStorage.getItem("messages"));
   }
 
+  if (!tasks) {
+    tasks = JSON.parse(localStorage.getItem("tasks"));
+  }
+
   numberOfArticlesElement.textContent = articles.length;
   numberOfMessagesElement.textContent = messages.length;
+  numberOfTasksElement.textContent = tasks.length;
 }
 
 window.addEventListener("homeLoaded", () => {
@@ -94,5 +103,5 @@ window.addEventListener("homeLoaded", () => {
   });
 
   // load stats
-  loadStats()
+  loadStats();
 });

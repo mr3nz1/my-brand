@@ -4,16 +4,41 @@ const currentPage = localStorage.getItem("currentPage");
 let articles;
 
 function deleteArticle(articleId) {
-  if (
-    confirm("Are you sure you want to delete article with ID: " + articleId)
-  ) {
+  const closeModal = document.querySelector(".close-modal");
+  const modal = document.querySelector(".modal");
+  const title = document.createElement("h2");
+  const message = document.createElement("p");
+  const deleteBtn = document.createElement("button");
+
+  title.textContent = "Delete";
+  message.textContent = "Want to delete article with id: " + articleId;
+  deleteBtn.textContent = "Delete";
+  deleteBtn.classList.add("button");
+  modal.children[0].appendChild(title);
+  modal.children[0].appendChild(message);
+  modal.children[0].append(deleteBtn);
+  modal.classList.add("modal-open");
+
+  deleteBtn.addEventListener("click", () => {
     articles = JSON.parse(localStorage.getItem("articles"));
     let newArticles = articles.filter((article) => article.id !== articleId);
 
     localStorage.setItem("articles", JSON.stringify(newArticles));
+
+    modal.children[0].removeChild(title);
+    modal.children[0].removeChild(message);
+    modal.children[0].removeChild(deleteBtn);
+
     const event = new Event("deletedArticle");
     return dispatchEvent(event);
-  }
+  });
+
+  closeModal.addEventListener("click", () => {
+    modal.children[0].removeChild(title);
+    modal.children[0].removeChild(message);
+    modal.children[0].removeChild(deleteBtn);
+    modal.classList.remove("modal-open");
+  });
 }
 
 function loadArticles() {

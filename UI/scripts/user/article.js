@@ -39,26 +39,79 @@ function loadArticle(articleId) {
   image.setAttribute("src", targetArticle.image);
 
   articleImageContainerElement.appendChild(image);
+  loadComments();
 }
 
 function loadComments() {
   const comments = JSON.parse(localStorage.getItem("comments"));
   const commentsForThisArticle = comments.filter(
-    (comment) => comment.id === targetArticle.id
+    (comment) => comment.articleId === targetArticle.id
   );
 
-  // const listOfComments = document.querySelector(".list_of_comments")
 
-  // listOfComments.
+  const listOfComments = document.querySelector(".list_of_comments");
+  let commentsHtmlElements = "";
+
+  commentsForThisArticle.forEach((comment) => {
+    console.log(comment);
+    commentsHtmlElements += `<div class="comment">
+    <div class="comment_content_container">
+      <div class="message_user_image">
+        <img src="../assets/images/sandra.jpg" alt="">
+      </div>
+
+      <div class="single_comment_text_container">
+        <div class="single_comment_title_and_date">
+          <h4>${comment.fullName}</h4>
+          <p>${comment.created_at}</p>
+        </div>
+
+        <p>
+          ${comment.comment}
+        </p>
+
+        <div class="single_message_actions">
+          <div class="underline_on_hover">
+            <img src="../assets/icons/reply.png" alt="">
+            <span>Reply</span>
+          </div>
+
+          <span class="dot_separator"></span>
+
+          <div class="underline_on_hover">
+            <img src="../assets/icons/like.png" alt="">
+            <span>40 likes</span>
+          </div>
+
+          <span class="dot_separator"></span>
+
+          <div class="underline_on_hover">
+            <img src="../assets/icons/dislike.png" alt="">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>`;
+  });
+
+  listOfComments.innerHTML = commentsHtmlElements;
 }
 
 function addComment(comment) {
+  console.log(targetArticle.id)
   let comments = JSON.parse(localStorage.getItem("comments"));
   let updatedComments = [
     ...comments,
-    { ...comment, articleId: targetArticle.id, created_at: formatDate(new Date()) },
+    {
+      ...comment,
+      articleId: targetArticle.id,
+      created_at: formatDate(new Date()),
+    },
   ];
   localStorage.setItem("comments", JSON.stringify(updatedComments));
+  loadComments()
 }
 
 window.addEventListener("DOMContentLoaded", () => {

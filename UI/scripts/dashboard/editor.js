@@ -74,6 +74,7 @@ function initiateEditor() {
   const textTypeSelectElement = document.querySelector(
     ".rich_text_editor .header .text-type"
   );
+  const options = document.querySelectorAll(".rich_text_editor .header .text-type option")
 
   let fontList = [
     "Arial",

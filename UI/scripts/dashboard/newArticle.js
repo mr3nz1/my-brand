@@ -57,11 +57,25 @@ function saveContent(article) {
 
   localStorage.setItem("articles", JSON.stringify(articles));
 
+  const modal = document.querySelector(".modal");
+  const message = document.createElement("p");
+  const closeModalBtn = document.querySelector(".close-modal");
+
   if (article.published) {
-    alert("Successfully Published");
+    message.textContent = "Successfully Published";
+    modal.children[0].appendChild(message);
   } else {
-    alert("Successfully Saved");
+    message.textContent = "Successfully Saved";
+    modal.children[0].appendChild(message);
   }
+
+  modal.classList.add("modal-open");
+  closeModalBtn.style.display = "none";
+
+  setTimeout(() => {
+    modal.classList.remove("modal-open");
+    closeModalBtn.style.display = "flex";
+  }, 5000);
   loadPage({ page: "blog" });
 }
 

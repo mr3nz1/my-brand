@@ -741,11 +741,12 @@ body {
 }
 
 .tasks_container {
-  display: grid;
-  grid-template-columns: repeat(3, 4fr);
-  gap: 2em;
-  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
   align-items: start;
+  flex-wrap: wrap;
+  gap: 2em;
   width: 100% !important;
 }
 
@@ -758,7 +759,6 @@ body {
   justify-content: start;
   align-items: start;
   gap: 0.5em;
-  width: 100% !important;
 }
 
 .tasks_container h3 {

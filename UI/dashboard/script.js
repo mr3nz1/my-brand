@@ -27,16 +27,17 @@ function logout() {
   // location.href = "../pages/login.html";
 
   const modal = document.querySelector(".modal");
-  const div = document.createElement("div");
+  const title = document.createElement("h2");
   const message = document.createElement("p");
 
+  title.textContent = "Logout";
   message.textContent = "Are you sure you want to log out?";
+  modal.children[0].appendChild(title);
   modal.children[0].appendChild(message);
   const logoutBtn = document.createElement("button");
   logoutBtn.textContent = "Confirm";
   logoutBtn.classList.add("button");
   modal.children[0].appendChild(logoutBtn);
-  modal.children[0].append(div);
   modal.classList.add("modal-open");
   modalIsOpen = true;
 
@@ -49,11 +50,10 @@ function logout() {
   const cancelBtn = document.querySelector(".close-modal");
 
   cancelBtn.addEventListener("click", () => {
-    modal.classList.remove("modal-open");
     modalIsOpen = false
-    modal.children[0].removeChild(div)
     modal.children[0].removeChild(logoutBtn)
     modal.children[0].removeChild(message)
+    modal.classList.remove("modal-open");
   });
 }
 
