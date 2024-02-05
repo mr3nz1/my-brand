@@ -21,18 +21,18 @@ function getText() {
 }
 
 // apply styles to selected text
-function getSelectedTextRange() {
-  const selection = window.getSelection();
+// function getSelectedTextRange() {
+//   const selection = window.getSelection();
 
-  if (selection && !selection.isCollapsed) {
-    const range = selection.getRangeAt(0);
-    // const span = createElement("span");
-    // span.style.textDecoration = "underline";
+//   if (selection && !selection.isCollapsed) {
+//     const range = selection.getRangeAt(0);
+//     // const span = createElement("span");
+//     // span.style.textDecoration = "underline";
 
-    // range.surroundContents(span);
-    return range;
-  }
-}
+//     // range.surroundContents(span);
+//     return range;
+//   }
+// }
 
 // remove styles
 function removeElement() {
@@ -57,76 +57,105 @@ function selectText() {
 // clean the text editor for elements without text
 
 function initiateEditor() {
-  if (currentPage === "new_article") {
-    // check whether you're only editing the text area content
-    const editorTextArea = document.querySelector(
-      ".rich_text_editor .outputField"
-    );
+  // check whether you're only editing the text area content
+  const editorTextArea = document.querySelector(
+    ".rich_text_editor .outputField"
+  );
 
-    const justifyBtns = document.querySelectorAll(
-      ".rich_text_editor .header .justifyBtns"
-    );
-    const caseBtns = document.querySelectorAll(
-      ".rich_text_editor .header .caseBtns"
-    );
-    const otherEditorBtns = document.querySelectorAll(
-      ".rich_text_editor .header .otherBtns"
-    );
-    const textTypeSelectElement = document.querySelector(
-      ".rich_text_editor .header .text-type"
-    );
+  const justifyBtns = document.querySelectorAll(
+    ".rich_text_editor .header .justifyBtns"
+  );
+  const caseBtns = document.querySelectorAll(
+    ".rich_text_editor .header .caseBtns"
+  );
+  const otherEditorBtns = document.querySelectorAll(
+    ".rich_text_editor .header .otherBtns"
+  );
+  const textTypeSelectElement = document.querySelector(
+    ".rich_text_editor .header .text-type"
+  );
 
-    let fontList = [
-      "Arial",
-      "Verdana",
-      "Times New Roman",
-      "Garamond",
-      "Georgia",
-      "Courier New",
-      "Cursive",
-      "Comfortaa",
-    ];
+  let fontList = [
+    "Arial",
+    "Verdana",
+    "Times New Roman",
+    "Garamond",
+    "Georgia",
+    "Courier New",
+    "Cursive",
+    "Comfortaa",
+  ];
 
-    editorTextArea.addEventListener("cleanElementsWithoutText", () => {
-      const children = editorTextArea.children;
+  function cleanEmptyChildren(children) {
+    children.forEach((child) => {
+      while (child.children) {
+        cleanEmptyChildren(child.children);
+      }
+      if (child.textContent.trim() === "") {
+        editorTextArea.removeChild(child);
+      }
+    });
+  }
 
-      children.forEach((child) => {
-        if (child.textContent.trim() === "") {
-          editorTextArea.removeChild(child);
+  function getSelectedTextRange() {
+    let range;
+
+    if (window.getSelection) {
+      const selection = window.getSelection();
+
+      if (selection.rangeCount > 0) {
+        // Get the first range (assuming a single selection)
+        range = selection.getRangeAt(0);
+      }
+    } else if (document.selection) {
+      // For older versions
+      range = document.selection.createRange();
+    }
+
+    return range;
+  }
+
+  function bolden(selectedText) {
+    const span = document.createElement("span");
+    span.classList.toggle ("bold");
+    selectedText.surroundContents(span);
+  }
+
+  editorTextArea.addEventListener("cleanElementsWithoutText", () => {
+    cleanEmptyChildren(editorTextArea.children);
+  });
+
+  textTypeSelectElement.addEventListener("change", () => {
+    if (textTypeSelectElement.value !== " ") {
+      let element = createElement(textTypeSelectElement.value);
+      editorTextArea.appendChild(element);
+    }
+    const event = new Event("cleanElementsWithoutText");
+    dispatchEvent(event);
+  });
+
+  window.addEventListener("selectedText", () => {
+    otherEditorBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const command = btn.getAttribute("btn-command");
+        const selectedText = getSelectedTextRange();
+
+        console.log(selectedText);
+        if (command === "bold") {
+          bolden(selectedText);
+        } else if (command === "underline") {
+          getSelectedTextRange();
         }
       });
     });
+  });
 
-    textTypeSelectElement.addEventListener("change", () => {
-      if (textTypeSelectElement.value !== " ") {
-        let element = createElement(textTypeSelectElement.value);
-        editorTextArea.appendChild(element);
-      }
-      const event = new Event("cleanElementsWithoutText");
-      dispatchEvent(event);
-    });
-
-    window.addEventListener("selectedText", () => {
-      otherEditorBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const command = btn.getAttribute("btn-command");
-          if (command === "bold") {
-            console.log("clicked bold");
-            getSelectedTextRange();
-          } else if (command === "underline") {
-            getSelectedTextRange();
-          }
-        });
-      });
-    });
-
-    editorTextArea.addEventListener("mouseup", () => {
-      const selection = selectText();
-      const event = new Event("selectedText");
-      event.selection = selection;
-      window.dispatchEvent(event);
-    });
-  }
+  editorTextArea.addEventListener("mouseup", () => {
+    const selection = selectText();
+    const event = new Event("selectedText");
+    event.selection = selection;
+    window.dispatchEvent(event);
+  });
 }
 
 export { initiateEditor };
