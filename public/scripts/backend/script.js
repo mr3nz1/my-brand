@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import customLocalStorage from "./CustomLocalStorage";
+import customLocalStorage from "./CustomLocalStorage.js";
 // animating the mouse
 window.addEventListener("mousemove", (e) => {
     const animated_cursor = document.querySelector(".animated_cursor");

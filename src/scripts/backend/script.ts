@@ -1,7 +1,7 @@
 // Import customLocalStorage from "../scripts/dashboard/CustomLocalStorage.ts";
 // Assuming you have CustomLocalStorage defined in a TypeScript file.
 
-import customLocalStorage from "./CustomLocalStorage";
+import customLocalStorage from "./CustomLocalStorage.js";
 
 // animating the mouse
 window.addEventListener("mousemove", (e) => {
