@@ -122,6 +122,12 @@ function initiateEditor() {
     selectedText.surroundContents(span);
   }
 
+  function underline(selectedText) {
+    const span = document.createElement("span");
+    span.classList.toggle ("underline");
+    selectedText.surroundContents(span);
+  }
+
   editorTextArea.addEventListener("cleanElementsWithoutText", () => {
     cleanEmptyChildren(editorTextArea.children);
   });
@@ -141,12 +147,10 @@ function initiateEditor() {
         const command = btn.getAttribute("btn-command");
         const selectedText = getSelectedTextRange();
 
-        console.log(selectedText);
         if (command === "bold") {
           bolden(selectedText);
         } else if (command === "underline") {
-          getSelectedTextRange();
-        }
+          underline(selectedText)        }
       });
     });
   });

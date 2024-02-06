@@ -11,13 +11,14 @@ async function checkCredentials(email, password) {
 
   if (email === user.email && password === user.password) {
     return true;
-  } else {
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ email: "murenzi419@gmail.com", password: "123" })
-    );
-    return true;
   }
+  // else {
+  //   localStorage.setItem(
+  //     "user",
+  //     JSON.stringify({ email: "murenzi419@gmail.com", password: "123" })
+  //   );
+  //   return true;
+  // }
 
   return false;
 }

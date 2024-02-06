@@ -245,6 +245,11 @@ body {
   font-weight: bold;
 }
 
+
+.underline {
+  text-decoration: underline;
+}
+
 /* buttons */
 .button { 
   background-color: var(--gray-900);
