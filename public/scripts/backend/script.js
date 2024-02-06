@@ -19,7 +19,7 @@ window.addEventListener("mousemove", (e) => {
 function isLoggedIn() {
     const loggedIn = customLocalStorage.getItem("loggedIn");
     if (loggedIn !== "true") {
-        location.href = "../pages/login.html";
+        location.href = "../../userPages/login.html";
         return false;
     }
     return true;
@@ -28,7 +28,7 @@ isLoggedIn();
 function logout() {
     const removed = localStorage.removeItem("loggedIn");
     localStorage.removeItem("currentPage");
-    location.href = "../pages/login.html";
+    location.href = "../../userPageslogin.html";
 }
 function loadPage({ page, articleId, }) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -52,7 +52,7 @@ function loadPage({ page, articleId, }) {
             update_article: "update_article.html",
         };
         try {
-            const res = yield fetch("./pages/" + pages[page]);
+            const res = yield fetch("../dashboardPages/" + pages[page]);
             const htmlContent = yield res.text();
             mainContentContainerElement.innerHTML = htmlContent;
             customLocalStorage.setItem("currentPage", page);

@@ -16,7 +16,7 @@ function isLoggedIn(): boolean {
   const loggedIn = customLocalStorage.getItem("loggedIn");
 
   if (loggedIn !== "true") {
-    location.href = "../pages/login.html";
+    location.href = "../../userPages/login.html";
     return false;
   }
 
@@ -28,7 +28,7 @@ isLoggedIn();
 function logout(): void {
   const removed = localStorage.removeItem("loggedIn");
   localStorage.removeItem("currentPage");
-  location.href = "../pages/login.html";
+  location.href = "../../userPageslogin.html";
 }
 
 async function loadPage({
@@ -64,7 +64,7 @@ async function loadPage({
   };
 
   try {
-    const res = await fetch("./pages/" + pages[page]);
+    const res = await fetch("../dashboardPages/" + pages[page]);
     const htmlContent = await res.text();
     mainContentContainerElement.innerHTML = htmlContent;
     customLocalStorage.setItem("currentPage", page);
