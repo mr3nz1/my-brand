@@ -65,6 +65,7 @@ function saveContent(article) {
     }
     setTimeout(() => {
         if (modal) {
+            modal.children[0].removeChild(message);
             modal.classList.remove("modal-open");
         }
         if (closeModalBtn) {

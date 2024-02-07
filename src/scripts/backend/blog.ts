@@ -13,6 +13,8 @@ type Article = {
   created_at?: string;
 };
 
+let isModalOpen: boolean = false;
+
 function deleteArticle(articleId: string): void {
   const closeModal: HTMLElement | null = document.querySelector(".close-modal");
   const modal: HTMLElement | null = document.querySelector(".modal");
@@ -24,11 +26,13 @@ function deleteArticle(articleId: string): void {
   message.textContent = "Want to delete article with id: " + articleId;
   deleteBtn.textContent = "Delete";
   deleteBtn.classList.add("button");
+
   if (modal) {
     modal.children[0].appendChild(title);
     modal.children[0].appendChild(message);
     modal.children[0].appendChild(deleteBtn);
     modal.classList.add("modal-open");
+    isModalOpen = true;
   }
 
   deleteBtn.addEventListener("click", () => {
@@ -37,10 +41,12 @@ function deleteArticle(articleId: string): void {
 
     localStorage.setItem("articles", JSON.stringify(newArticles));
 
-    if (modal) {
+    if (modal && isModalOpen) {
       modal.children[0].removeChild(title);
       modal.children[0].removeChild(message);
       modal.children[0].removeChild(deleteBtn);
+      modal.classList.remove("modal-open");
+      isModalOpen = false;
     }
 
     const event = new Event("deletedArticle");
@@ -53,6 +59,7 @@ function deleteArticle(articleId: string): void {
       modal.children[0].removeChild(message);
       modal.children[0].removeChild(deleteBtn);
       modal.classList.remove("modal-open");
+      isModalOpen = false;
     }
   });
 }
@@ -140,7 +147,9 @@ function configureDeleteAndUpdateBtns(): void {
   deleteBtns.forEach((deleteBtn) => {
     deleteBtn.addEventListener("click", () => {
       const articleId = deleteBtn.getAttribute("id")!;
-      deleteArticle(articleId);
+      if (!isModalOpen) {
+        deleteArticle(articleId);
+      }
     });
   });
 
