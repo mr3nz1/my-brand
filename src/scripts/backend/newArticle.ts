@@ -14,7 +14,7 @@ type Article = {
   content: string;
   image: string;
   published: boolean;
-  created_at?: string; // Optional property
+  created_at?: string;
   id: string;
 };
 
@@ -95,6 +95,7 @@ function saveContent(article: Article): void {
 
   setTimeout(() => {
     if (modal) {
+      modal.children[0].removeChild(message);
       modal.classList.remove("modal-open");
     }
     if (closeModalBtn) {

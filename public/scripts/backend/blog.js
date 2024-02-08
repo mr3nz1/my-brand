@@ -1,6 +1,7 @@
 import { loadPage } from "./script.js";
 const currentPage = localStorage.getItem("currentPage");
 let articles;
+let isModalOpen = false;
 function deleteArticle(articleId) {
     const closeModal = document.querySelector(".close-modal");
     const modal = document.querySelector(".modal");
@@ -16,15 +17,18 @@ function deleteArticle(articleId) {
         modal.children[0].appendChild(message);
         modal.children[0].appendChild(deleteBtn);
         modal.classList.add("modal-open");
+        isModalOpen = true;
     }
     deleteBtn.addEventListener("click", () => {
         articles = JSON.parse(localStorage.getItem("articles") || "[]");
         let newArticles = articles.filter((article) => article.id !== articleId);
         localStorage.setItem("articles", JSON.stringify(newArticles));
-        if (modal) {
+        if (modal && isModalOpen) {
             modal.children[0].removeChild(title);
             modal.children[0].removeChild(message);
             modal.children[0].removeChild(deleteBtn);
+            modal.classList.remove("modal-open");
+            isModalOpen = false;
         }
         const event = new Event("deletedArticle");
         window.dispatchEvent(event);
@@ -35,6 +39,7 @@ function deleteArticle(articleId) {
             modal.children[0].removeChild(message);
             modal.children[0].removeChild(deleteBtn);
             modal.classList.remove("modal-open");
+            isModalOpen = false;
         }
     });
 }
@@ -107,7 +112,9 @@ function configureDeleteAndUpdateBtns() {
     deleteBtns.forEach((deleteBtn) => {
         deleteBtn.addEventListener("click", () => {
             const articleId = deleteBtn.getAttribute("id");
-            deleteArticle(articleId);
+            if (!isModalOpen) {
+                deleteArticle(articleId);
+            }
         });
     });
     updateBtns.forEach((updateBtn) => {

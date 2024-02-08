@@ -1,5 +1,12 @@
 import { initiateEditor } from "./editor.js";
 
+type Task = {
+  title: string;
+  content: string;
+  id: string;
+  created_at: string;
+};
+
 function generateUniqueId(): string {
   const timestamp: number = new Date().getTime();
   const randomPart: number = Math.floor(Math.random() * 1000);
@@ -17,12 +24,7 @@ function formatDate(date: string | number | Date): string {
 }
 
 function addTask(title: string, content: string): void {
-  let tasks: {
-    title: string;
-    content: string;
-    id: string;
-    created_at: string;
-  }[] = JSON.parse(localStorage.getItem("tasks") || "[]");
+  let tasks: Task[] = JSON.parse(localStorage.getItem("tasks") || "[]");
 
   const updatedTasks = [
     {
