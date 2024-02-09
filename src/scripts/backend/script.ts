@@ -53,7 +53,7 @@ function logout() {
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("loggedIn");
     localStorage.removeItem("currentPage");
-    location.href = "../pages/login.html";
+    location.href = "../userPages/login.html";
   });
 
   const cancelBtn = document.querySelector(".close-modal")!;
@@ -75,12 +75,10 @@ async function loadPage({
 }) {
   // console.log("called again");
   if (page === "logout") {
-    if (isModalOpen) {
-      return;
+    if (!isModalOpen) {
+      isModalOpen = true;
+      return logout();
     }
-    // console.log("called logout");
-    isModalOpen = true
-    return logout();
   }
 
   const mainContentContainerElement = document.getElementById(

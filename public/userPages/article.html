@@ -7,9 +7,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Introduction To React - Blog</title>
-    <link rel="stylesheet" href="../style.css" />
-    <script src="../script.js" defer></script>
-    <script src="../scripts/user/article.js" defer></script>
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="../scripts/script.js" defer></script>
+    <script type="module" src="../scripts/user/article.js" defer></script>
+    <script type="module" src="../scripts/types.js" defer></script>
+    <script type="module" src="../scripts/utilities.js" defer></script>
   </head>
 </head>
 
@@ -23,7 +25,7 @@
   <!-- nav -->
   <nav class="px-large my-small">
     <ul>
-      <li><a class="underline_on_hover" href="../index.html"> Home </a></li>
+      <li><a class="underline_on_hover" href="./index.html"> Home </a></li>
       <li><a class="underline_on_hover" href="#"> About </a></li>
       <li><a class="underline_on_hover" href="#"> Projects </a></li>
       <li><a class="underline_on_hover" href="#"> Contacts </a></li>
@@ -67,22 +69,29 @@
     </div>
 
     <div class="article_comments_container py-medium">
-      <div class="article_comments_title_div mx-large px-large">
+      <div class="article_comments_title_div mx-large">
         <h2 class="faster-one">COMMENTS</h2>
       </div>
 
-      <div class="article_comments py-small my-small px-medium py-medium">
-        <div class="list_of_comments my-small px-medium">
-          <div class="add_comment_container px-medium">
-            <div class="message_user_image">
-              <img src="../assets/images/my_picture.jpg" alt="">
-            </div>
-            <form action="">
-              <input class="default_input_field" type="text" name="fullName" placeholder="Your Full name" required />
-              <button class="button" type="submit">Message</button>
-            </form>
+      <div class="article_comments py-small my-small py-medium">
+        <div class="mx-medium add_comment_container">
+          <div class="message_user_image mx-medium">
+            <img src="../assets/images/my_picture.jpg" alt="">
           </div>
-          <div class="comment">
+
+          <form action="" class="mx-medium">
+            <input class="default_input_field" type="text" name="fullName" placeholder="Full name" required />
+
+            <input class="default_input_field" type="email" name="email" placeholder="Email" required />
+            <input class="default_input_field" type="text" name="comment" placeholder="Comment" required />
+
+            <button class="button" type="submit">Submit</button>
+          </form>
+        </div>
+
+        <div class="list_of_comments my-small">
+
+          <!-- <div class="comment">
             <div class="comment_content_container">
               <div class="message_user_image">
                 <img src="../assets/images/sandra.jpg" alt="">
@@ -124,7 +133,6 @@
             </div>
 
           </div>
-
           <div class="comment reply_comment">
             <div class="comment_content_container">
               <div class="message_user_image">
@@ -295,10 +303,13 @@
 
             </div>
 
-          </div>
+          </div> -->
 
         </div>
+
+
       </div>
+    </div>
     </div>
 
     <div class="articles_group px-large mx-large articles_page_more_articles">

@@ -1,12 +1,5 @@
-type Article = {
-  id: string;
-  title: string;
-  description: string;
-  content: string;
-  image: string;
-  published: boolean;
-  created_at?: string;
-};
+import { Article } from "../types.js";
+import { formatDate } from "../utilities.js";
 
 function generateUniqueId() {
   const timestamp = new Date().getTime();
@@ -14,30 +7,6 @@ function generateUniqueId() {
   const uniqueId = `id_${timestamp}_${randomPart}`;
 
   return uniqueId;
-}
-
-function formatDate(date: Date) {
-  interface DateTimeFormatOptions {
-    localeMatcher?: "best fit" | "lookup";
-    weekday?: "narrow" | "short" | "long";
-    era?: "narrow" | "short" | "long";
-    year?: "numeric" | "2-digit";
-    month?: "numeric" | "2-digit" | "narrow" | "short" | "long";
-    day?: "numeric" | "2-digit";
-    hour?: "numeric" | "2-digit";
-    minute?: "numeric" | "2-digit";
-    second?: "numeric" | "2-digit";
-    timeZoneName?: "short" | "long";
-    formatMatcher?: "basic" | "best fit";
-    hour12?: boolean;
-    timeZone?: string;
-  }
-  const options: DateTimeFormatOptions = {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  };
-  return new Date(date).toLocaleDateString("en-US", options);
 }
 
 function loadArticles() {
@@ -62,7 +31,7 @@ function loadArticles() {
           <p>14 min read</p>
           <span class="dot_separator"></span>
           <div class="likes_description">
-            <img src="./assets/icons/heart.png" alt="" />
+            <img src="../assets/icons/heart.png" alt="" />
             <p>83 likes</p>
           </div>
         </div>
@@ -74,24 +43,26 @@ function loadArticles() {
   articlesContainer.innerHTML = articlesContent;
 }
 
-// let isModalOpen = false;
+let isModalOpen = false;
 
 function openModal() {
   if (!isModalOpen) {
     const modal = document.querySelector(".modal")!;
+    const modalCancelBtn = document.querySelector<HTMLDivElement>(".close-modal")!;
 
     const h2 = document.createElement("h2");
     h2.textContent = "Thanks for you're message.";
-
     modal.children[0].appendChild(h2);
-
     modal.classList.add("modal-open");
+    modalCancelBtn.style.display = "none"
 
     isModalOpen = true;
 
     setTimeout(() => {
+      modal.children[0].removeChild(h2);
       modal.classList.remove("modal-open");
-      isModalOpen = false;
+    modalCancelBtn.style.display = "flex"
+    isModalOpen = false;
     }, 5000);
   }
 }

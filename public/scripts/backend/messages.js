@@ -1,4 +1,3 @@
-"use strict";
 let isModalOpen = false;
 function deleteMessage(messageId) {
     const closeModal = document.querySelector(".close-modal");
@@ -115,3 +114,4 @@ window.addEventListener("messagesLoaded", () => {
     configureDeleteBtns();
     configureReplyBtns();
 });
+export {};

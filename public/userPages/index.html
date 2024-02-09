@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Murenzi Paterne</title>
   <link rel="stylesheet" href="./style.css" />
+  <script type="module" src="../scripts/user/home.js" defer></script>
+  <script type="module" src="../scripts/types.js" defer></script>
+  <script type="module" src="../scripts/script.js" defer></script>
+  <script type="module" src="../scripts/utilities.js" defer></script>
 </head>
 
 <body>
@@ -22,7 +26,7 @@
       <li class="underline_on_hover"><a href="#"> About </a></li>
       <li class="underline_on_hover"><a href="#"> Projects </a></li>
       <li class="underline_on_hover"><a href="#"> Contacts </a></li>
-      <li class="underline_on_hover"><a href="./pages/blog.html"> Blog </a></li>
+      <li class="underline_on_hover"><a href="./blog.html"> Blog </a></li>
     </ul>
   </nav>
 
@@ -193,8 +197,8 @@
 
   <!--  most read articles -->
   <div class="articles_group px-large py-medium">
-    <div>
-      <h2 class="faster-one">MY MOST READ BLOG POSTS</h2>
+    <div class="header">
+      <h2 class="faster-one">MOST READ BLOG POSTS</h2>
     </div>
 
     <div id="articles_container" class="articles_container">
@@ -334,6 +338,14 @@
       </div>
     </div>
   </div>
+
+  <!-- modal -->
+  <div class="modal">
+    <div class="modal-content">
+      <img class="close-modal" src="../assets/icons/icon-menu-close.svg" alt="">
+    </div>
+  </div>
+
 </body>
 
 </html>

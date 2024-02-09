@@ -1,29 +1,6 @@
 import { loadPage } from "./script.js";
 
-type Message = {
-  content: string;
-  created_at: string;
-  email: string;
-  fullName: string;
-  id?: string;
-};
-
-type Article = {
-  id: string;
-  title: string;
-  description: string;
-  content: string;
-  image: string;
-  published: boolean;
-  created_at?: string;
-};
-
-type Task = {
-  title: string;
-  content: string;
-  id: string;
-  created_at: string;
-};
+import { Article, Message, Task } from "../types.js";
 
 let articles: Article[];
 let messages: Message[];

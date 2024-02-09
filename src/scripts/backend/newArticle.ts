@@ -1,5 +1,6 @@
 import { loadPage } from "./script.js";
 import { initiateEditor } from "./editor.js";
+import { Article } from "../types.js";
 
 const currentPage: string | null = localStorage.getItem("currentPage");
 let errors: { [key: string]: string } = {
@@ -7,15 +8,6 @@ let errors: { [key: string]: string } = {
   description: "",
   image: "",
   content: "",
-};
-type Article = {
-  title: string;
-  description: string;
-  content: string;
-  image: string;
-  published: boolean;
-  created_at?: string;
-  id: string;
 };
 
 function displayErrors(): void {

@@ -1075,6 +1075,10 @@ body {
   font-weight: bold;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .modal {
   position: fixed;
   top: 0;

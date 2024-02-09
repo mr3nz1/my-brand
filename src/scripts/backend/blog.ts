@@ -1,18 +1,8 @@
 import { loadPage } from "./script.js";
+import { Article } from "../types.js";
 
 const currentPage: string | null = localStorage.getItem("currentPage");
 let articles: Article[];
-
-type Article = {
-  id: string;
-  title: string;
-  description: string;
-  content: string;
-  image: string;
-  published: boolean;
-  created_at?: string;
-};
-
 let isModalOpen: boolean = false;
 
 function deleteArticle(articleId: string): void {

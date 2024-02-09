@@ -1,11 +1,5 @@
+import { Task } from "../types.js";
 import { initiateEditor } from "./editor.js";
-
-type Task = {
-  title: string;
-  content: string;
-  id: string;
-  created_at: string;
-};
 
 function generateUniqueId(): string {
   const timestamp: number = new Date().getTime();

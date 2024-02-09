@@ -1,17 +1,9 @@
-"use strict";
+import { formatDate } from "../utilities.js";
 function generateUniqueId() {
     const timestamp = new Date().getTime();
     const randomPart = Math.floor(Math.random() * 1000); // Example: generate a random number between 0 and 999
     const uniqueId = `id_${timestamp}_${randomPart}`;
     return uniqueId;
-}
-function formatDate(date) {
-    const options = {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-    };
-    return new Date(date).toLocaleDateString("en-US", options);
 }
 function loadArticles() {
     const articles = JSON.parse(localStorage.getItem("articles")).slice(0, 4);
@@ -31,7 +23,7 @@ function loadArticles() {
           <p>14 min read</p>
           <span class="dot_separator"></span>
           <div class="likes_description">
-            <img src="./assets/icons/heart.png" alt="" />
+            <img src="../assets/icons/heart.png" alt="" />
             <p>83 likes</p>
           </div>
         </div>
@@ -41,17 +33,21 @@ function loadArticles() {
     });
     articlesContainer.innerHTML = articlesContent;
 }
-// let isModalOpen = false;
+let isModalOpen = false;
 function openModal() {
     if (!isModalOpen) {
         const modal = document.querySelector(".modal");
+        const modalCancelBtn = document.querySelector(".close-modal");
         const h2 = document.createElement("h2");
         h2.textContent = "Thanks for you're message.";
         modal.children[0].appendChild(h2);
         modal.classList.add("modal-open");
+        modalCancelBtn.style.display = "none";
         isModalOpen = true;
         setTimeout(() => {
+            modal.children[0].removeChild(h2);
             modal.classList.remove("modal-open");
+            modalCancelBtn.style.display = "flex";
             isModalOpen = false;
         }, 5000);
     }

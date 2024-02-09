@@ -1,10 +1,5 @@
-type Message = {
-  content: string;
-  created_at: string;
-  email: string;
-  fullName: string;
-  id?: string;
-};
+import { Message } from "../types";
+
 let isModalOpen: boolean = false;
 
 function deleteMessage(messageId: string) {

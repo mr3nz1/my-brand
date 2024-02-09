@@ -1,22 +1,13 @@
 import { loadPage } from "./script.js";
 import { initiateEditor } from "./editor.js";
 import { displayErrors, errors, saveContent } from "./newArticle.js";
+import { Article } from "../types.js";
 
 const currentPage = localStorage.getItem("currentPage");
 
 interface CustomEvent extends Event {
   articleId: string;
 }
-
-type Article = {
-  title: string;
-  description: string;
-  content: string;
-  image: string;
-  published: boolean;
-  created_at?: string;
-  id: string;
-};
 
 window.addEventListener("update_articleLoaded" as any, (e: CustomEvent) => {
   // set up the editor

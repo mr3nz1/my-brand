@@ -40,7 +40,7 @@ function logout() {
     logoutBtn.addEventListener("click", () => {
         localStorage.removeItem("loggedIn");
         localStorage.removeItem("currentPage");
-        location.href = "../pages/login.html";
+        location.href = "../userPages/login.html";
     });
     const cancelBtn = document.querySelector(".close-modal");
     cancelBtn.addEventListener("click", () => {
@@ -54,12 +54,10 @@ function loadPage({ page, articleId, }) {
     return __awaiter(this, void 0, void 0, function* () {
         // console.log("called again");
         if (page === "logout") {
-            if (isModalOpen) {
-                return;
+            if (!isModalOpen) {
+                isModalOpen = true;
+                return logout();
             }
-            // console.log("called logout");
-            isModalOpen = true;
-            return logout();
         }
         const mainContentContainerElement = document.getElementById("main_content_container");
         if (!page) {
