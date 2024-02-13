@@ -1314,26 +1314,6 @@ nav ul li a {
   }
 }
 
-<<<<<<< HEAD:UI/style.css
-
-@keyframes slideIn {
-  from {
-    margin-top: -100%;
-  }
-  to {
-    margin-top: 0%;
-  }
-}
-
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px) rotate(0.5deg); }
-  50% { transform: translateX(5px) rotate(-0.5deg); }
-  75% { transform: translateX(-5px) rotate(0.5deg); }
-  100% { transform: translateX(0); }
-}
-
-=======
 .active {
   background-color: white;
   box-shadow: none;
@@ -1352,7 +1332,6 @@ nav ul li a {
 }
 
 
->>>>>>> ft-migrating-to-typescript:public/userPages/style.css
 .modal {
   position: fixed;
   top: 0;
@@ -1389,8 +1368,6 @@ nav ul li a {
   position: relative;
 }
 
-<<<<<<< HEAD:UI/style.css
-=======
 .modal-content div {
   display: flex;
   flex-direction: column;
@@ -1399,19 +1376,13 @@ nav ul li a {
   gap: 0.5em;
 }
 
->>>>>>> ft-migrating-to-typescript:public/userPages/style.css
 .modal-content h2 {
   font-size: medium;
   font-weight: bold;
 }
 
-<<<<<<< HEAD:UI/style.css
-.modal-content  p,
-.modal-content  button {
-=======
 .modal-content p,
 .modal-content button {
->>>>>>> ft-migrating-to-typescript:public/userPages/style.css
   font-size: x-small;
 }
 
@@ -1420,19 +1391,11 @@ nav ul li a {
   /* display: none; */
   top: 0;
   right: 0;
-<<<<<<< HEAD:UI/style.css
-  width: 10px;
-  border: 1px solid black;
-  border-radius: 100%;
-  padding: 4px;
-  margin: 5px;
-=======
   width: 20px;
   border: 1px solid black;
   border-radius: 100%;
   padding: 4px;
   margin: 10px;
->>>>>>> ft-migrating-to-typescript:public/userPages/style.css
 }
 
 .modal-content > .close-modal:hover {
@@ -1443,30 +1406,3 @@ nav ul li a {
   display: flex !important;
   animation: slideIn 0.5s ease-in !important;
 }
-<<<<<<< HEAD:UI/style.css
-
-.add-comment-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  gap: 1em;
-}
-
-.add-comment-container form {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  gap: 1em;
-}
-
-
-.bold {
-  font-weight: bold;
-}
-
-.underline {
-  text-decoration: underline;
-}
-=======
->>>>>>> ft-migrating-to-typescript:public/userPages/style.css
