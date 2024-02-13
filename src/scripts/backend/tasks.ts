@@ -45,11 +45,12 @@ function displayTasks(): void {
 
   tasks.forEach((task: { title: string; content: string; id: string }) => {
     tasksContent += `
-      <div class="task" id=${task.id}>
+      <div class="task">
         <h3>${task.title}</h3>
         <div>
           ${task.content}
         </div>
+        <span class="task-deleteBtn"  id="${task.id}" title="Delete task with id: ${task.id}"></span>
       </div>
     `;
   });
@@ -153,11 +154,11 @@ function deleteTask(id: string): void {
 }
 
 function configureDeleteFeature(): void {
-  const tasks = document.querySelectorAll<HTMLElement>(".task");
+  const tasksDeleteBtns = document.querySelectorAll<HTMLSpanElement>(".task-deleteBtn");
 
-  tasks.forEach((task) => {
-    task.addEventListener("dblclick", () => {
-      const id = task.getAttribute("id");
+  tasksDeleteBtns.forEach((taskDeleteBtn) => {
+    taskDeleteBtn.addEventListener("click", () => {
+      const id = taskDeleteBtn.getAttribute("id");
       if (id) deleteTask(id);
     });
   });

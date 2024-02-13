@@ -378,7 +378,7 @@ body {
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  gap: 1em;
+  gap: 0.3em;
 }
 
 .dashboard_title_container p {
@@ -650,15 +650,10 @@ body {
   border-bottom: 1px solid var(--gray-500);
 }
 
-.rich_text_editor > .header > button,
+.rich_text_editor > .header > span,
 .rich_text_editor > .header > select
 {
-  outline: none;
    font-weight: bold;
-  border: none;
-  background-color: #9e9e9e21;
-  padding: 0.2em;
-  box-shadow: var(--shadow-normal);
   transition: 0.2s ease;
 }
 
@@ -667,7 +662,7 @@ body {
 }
 
 .rich_text_editor > .header > select:hover,
-.rich_text_editor > .header > button:hover {
+.rich_text_editor > .header > span:hover {
   scale: 1.2;
 }
 
@@ -759,6 +754,7 @@ body {
   align-items: start;
   gap: 0.5em;
   width: 100% !important;
+  position: relative;
 }
 
 .tasks_container h3 {
@@ -1079,6 +1075,10 @@ body {
   text-decoration: underline;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -1152,4 +1152,22 @@ body {
 .modal-open {
   display: flex !important;
   animation: slideIn 0.5s ease-in !important;
+}
+
+.task-deleteBtn {
+  position: absolute;
+  content: " ";
+  top: 0;
+  right: 0;
+  width: 1em;
+  height: 3px;
+  background-color: var(--gray-500);
+  margin: 0.5em;
+  transition: 1em ease-in;
+}
+
+.task-deleteBtn:hover {
+  scale: 1.2;
+  background-color: var(--red-500);
+  cursor: pointer;
 }

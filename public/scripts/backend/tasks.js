@@ -34,11 +34,12 @@ function displayTasks() {
     let tasksContent = "";
     tasks.forEach((task) => {
         tasksContent += `
-      <div class="task" id=${task.id}>
+      <div class="task">
         <h3>${task.title}</h3>
         <div>
           ${task.content}
         </div>
+        <span class="task-deleteBtn"  id="${task.id}" title="Delete task with id: ${task.id}"></span>
       </div>
     `;
     });
@@ -119,10 +120,10 @@ function deleteTask(id) {
     });
 }
 function configureDeleteFeature() {
-    const tasks = document.querySelectorAll(".task");
-    tasks.forEach((task) => {
-        task.addEventListener("dblclick", () => {
-            const id = task.getAttribute("id");
+    const tasksDeleteBtns = document.querySelectorAll(".task-deleteBtn");
+    tasksDeleteBtns.forEach((taskDeleteBtn) => {
+        taskDeleteBtn.addEventListener("click", () => {
+            const id = taskDeleteBtn.getAttribute("id");
             if (id)
                 deleteTask(id);
         });

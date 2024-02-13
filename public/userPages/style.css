@@ -809,7 +809,7 @@ nav ul li a {
   padding-left: 20em;
   padding-right: 20em;
   background-color: var(--gray-100);
-  width: 100%;
+  /* width: 100%; */
 }
 
 /* add message */
@@ -818,7 +818,6 @@ nav ul li a {
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  width: 100%;
   gap: 1em;
 }
 
@@ -1037,7 +1036,6 @@ nav ul li a {
     margin: 1em;
   }
 
-
   .mx-large {
     margin: 2em;
   }
@@ -1094,10 +1092,12 @@ nav ul li a {
     /* width: 100%; */
   }
   .articles_container {
-    grid-template-columns: (1fr) !important;
-    /* justify-content: center;
-    align-items: center; */
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
   }
+
   .articles_group_col {
     display: flex;
     flex-direction: column;
@@ -1281,12 +1281,12 @@ nav ul li a {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    align-items: center;
-    padding: 0em !important;
+    align-items: start;
+    padding: 1em !important;
   }
 
-  .list_of_comments,
   .comment,
+  .list_of_comments,
   .comment_content_container {
     /* width: 100% !important; */
   }
@@ -1326,6 +1326,11 @@ nav ul li a {
 .underline {
   text-decoration: underline;
 }
+
+.italic {
+  font-style: italic;
+}
+
 
 .modal {
   position: fixed;
@@ -1376,8 +1381,8 @@ nav ul li a {
   font-weight: bold;
 }
 
-.modal-content  p,
-.modal-content  button {
+.modal-content p,
+.modal-content button {
   font-size: x-small;
 }
 
