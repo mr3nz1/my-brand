@@ -759,11 +759,8 @@ body {
   justify-content: start;
   align-items: start;
   gap: 0.5em;
-<<<<<<< HEAD:UI/dashboard/style.css
-=======
   width: 100% !important;
   position: relative;
->>>>>>> ft-migrating-to-typescript:public/dashboardPages/style.css
 }
 
 .tasks_container h3 {
@@ -1080,30 +1077,12 @@ body {
   font-weight: bold;
 }
 
-<<<<<<< HEAD:UI/dashboard/style.css
-@keyframes slideIn {
-  from {
-    margin-top: -100%;
-  }
-  to {
-    margin-top: 0%;
-  }
-}
-
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px) rotate(0.5deg); }
-  50% { transform: translateX(5px) rotate(-0.5deg); }
-  75% { transform: translateX(-5px) rotate(0.5deg); }
-  100% { transform: translateX(0); }
-=======
 .underline {
   text-decoration: underline;
 }
 
 .italic {
   font-style: italic;
->>>>>>> ft-migrating-to-typescript:public/dashboardPages/style.css
 }
 
 .modal {
@@ -1142,8 +1121,6 @@ body {
   position: relative;
 }
 
-<<<<<<< HEAD:UI/dashboard/style.css
-=======
 .modal-content div {
   display: flex;
   flex-direction: column;
@@ -1152,7 +1129,6 @@ body {
   gap: 0.5em;
 }
 
->>>>>>> ft-migrating-to-typescript:public/dashboardPages/style.css
 .modal-content h2 {
   font-size: medium;
   font-weight: bold;
@@ -1183,8 +1159,6 @@ body {
   display: flex !important;
   animation: slideIn 0.5s ease-in !important;
 }
-<<<<<<< HEAD:UI/dashboard/style.css
-=======
 
 .task-deleteBtn {
   position: absolute;
@@ -1203,4 +1177,3 @@ body {
   background-color: var(--red-500);
   cursor: pointer;
 }
->>>>>>> ft-migrating-to-typescript:public/dashboardPages/style.css
