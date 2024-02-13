@@ -83,8 +83,12 @@ window.addEventListener("DOMContentLoaded", () => {
       data[name] = value;
     });
 
-    let messages = [];
-    messages = JSON.parse(localStorage.getItem("messages")!);
+    let messages = JSON.parse(localStorage.getItem("messages")!);
+
+    if (!messages) {
+      messages = [];
+    }
+
     let newMessages = [
       ...messages,
       {
