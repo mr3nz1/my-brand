@@ -1,16 +1,10 @@
 import { loadPage } from "./script.js";
 
-<<<<<<< HEAD:UI/scripts/dashboard/home.js
-let articles;
-let messages;
-let tasks;
-=======
 import { Article, Message, Task } from "../types.js";
 
 let articles: Article[];
 let messages: Message[];
 let tasks: Task[];
->>>>>>> ft-migrating-to-typescript:src/scripts/backend/home.ts
 
 function loadStats() {
   const numberOfArticlesElement = document.getElementById(
@@ -18,17 +12,10 @@ function loadStats() {
   )!;
   const numberOfMessagesElement = document.getElementById(
     "number_of_messages_element"
-<<<<<<< HEAD:UI/scripts/dashboard/home.js
-  );
-  const numberOfTasksElement = document.getElementById(
-    "number_of_tasks_element"
-  );
-=======
   )!;
   const numberOfTasksElement = document.getElementById(
     "number_of_tasks_element"
   )!;
->>>>>>> ft-migrating-to-typescript:src/scripts/backend/home.ts
 
   if (!articles) {
     articles = JSON.parse(localStorage.getItem("articles")!);
@@ -39,21 +26,12 @@ function loadStats() {
   }
 
   if (!tasks) {
-<<<<<<< HEAD:UI/scripts/dashboard/home.js
-    tasks = JSON.parse(localStorage.getItem("tasks"));
-  }
-
-  numberOfArticlesElement.textContent = articles.length;
-  numberOfMessagesElement.textContent = messages.length;
-  numberOfTasksElement.textContent = tasks.length;
-=======
     tasks = JSON.parse(localStorage.getItem("tasks")!);
   }
 
   numberOfArticlesElement.textContent = String(articles.length);
   numberOfMessagesElement.textContent = String(messages.length);
   numberOfTasksElement.textContent = String(tasks.length);
->>>>>>> ft-migrating-to-typescript:src/scripts/backend/home.ts
 }
 
 window.addEventListener("homeLoaded", () => {
