@@ -48,21 +48,22 @@ let isModalOpen = false;
 function openModal() {
   if (!isModalOpen) {
     const modal = document.querySelector(".modal")!;
-    const modalCancelBtn = document.querySelector<HTMLDivElement>(".close-modal")!;
+    const modalCancelBtn =
+      document.querySelector<HTMLDivElement>(".close-modal")!;
 
     const h2 = document.createElement("h2");
     h2.textContent = "Thanks for you're message.";
     modal.children[0].appendChild(h2);
     modal.classList.add("modal-open");
-    modalCancelBtn.style.display = "none"
+    modalCancelBtn.style.display = "none";
 
     isModalOpen = true;
 
     setTimeout(() => {
       modal.children[0].removeChild(h2);
       modal.classList.remove("modal-open");
-    modalCancelBtn.style.display = "flex"
-    isModalOpen = false;
+      modalCancelBtn.style.display = "flex";
+      isModalOpen = false;
     }, 5000);
   }
 }
@@ -82,7 +83,8 @@ window.addEventListener("DOMContentLoaded", () => {
       data[name] = value;
     });
 
-    let messages = JSON.parse(localStorage.getItem("messages")!);
+    let messages = [];
+    messages = JSON.parse(localStorage.getItem("messages")!);
     let newMessages = [
       ...messages,
       {
