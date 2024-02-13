@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="../scripts/script.js" defer></script>
+    <script type="module" src="../scripts/user/login.js" defer></script>
+    <script type="module" src="../scripts/classes/Form.js" defer></script>
+</head>
+
+<body>
+    <!-- cursor -->
+    <div class="animated_cursor"></div>
+
+
+    <!-- nav_icon -->
+    <img class="menu_icon" src="../assets/icons/icon-menu.svg" alt="">
+
+    <!-- nav -->
+    <!-- <nav class="px-large my-small bg-gray-100">
+        <ul>
+            <li class="underline_on_hover"><a href="#"> Home </a></li>
+            <li class="underline_on_hover"><a href="#"> About </a></li>
+            <li class="underline_on_hover"><a href="#"> Projects </a></li>
+            <li class="underline_on_hover"><a href="#"> Contacts </a></li>
+            <li class="underline_on_hover"><a href="./pages/blog.html"> Blog </a></li>
+        </ul>
+    </nav> -->
+
+
+
+    <div class="main_login_container">
+        <div class="login_container">
+            <div class="login_form">
+                <div>
+                    <p>Welcome Back!</p>
+                    <h1 class="faster-one">SIGN IN</h1>
+                </div>
+                <form id="login_form">
+                    <p id="form_error_text" class="red_btn form_error_text"></p>
+                    <input id="user_email_input" class="default_input_field" type="email" name="email"
+                        placeholder="Enter Email" required />
+                    <input id="user_password_input" class="default_input_field" type="password" name="password"
+                        placeholder="Enter password" required />
+                    <button type="submit" href="../dashboard/" id="login_button" class="button-outline">Log In</button>
+                </form>
+            </div>
+
+            <div class="login_img_container">
+                <img src="../assets/images/login.png" alt="">
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
