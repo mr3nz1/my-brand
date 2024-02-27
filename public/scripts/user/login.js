@@ -25,7 +25,7 @@ function checkCredentials(email, password) {
             }
         }
         else {
-            localStorage.setItem("user", JSON.stringify({ email: "murenzi419@gmail.com", password: "123" }));
+            localStorage.setItem("user", JSON.stringify({ email: "test@test.com", password: "Password@123" }));
         }
         return false;
     });
