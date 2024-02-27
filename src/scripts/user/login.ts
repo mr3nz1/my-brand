@@ -19,7 +19,7 @@ async function checkCredentials(
   email: string,
   password: string
 ): Promise<boolean> {
-  const userJson = localStorage.getItem("user");
+  let userJson = localStorage.getItem("user");
 
   if (userJson) {
     const user = JSON.parse(userJson);

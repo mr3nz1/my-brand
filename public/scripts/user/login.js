@@ -17,7 +17,7 @@ const loginFormErrorElement = document.getElementById("form_error_text");
 // login
 function checkCredentials(email, password) {
     return __awaiter(this, void 0, void 0, function* () {
-        const userJson = localStorage.getItem("user");
+        let userJson = localStorage.getItem("user");
         if (userJson) {
             const user = JSON.parse(userJson);
             if (email === user.email && password === user.password) {
