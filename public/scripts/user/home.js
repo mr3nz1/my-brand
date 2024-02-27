@@ -64,6 +64,9 @@ window.addEventListener("DOMContentLoaded", () => {
             data[name] = value;
         });
         let messages = JSON.parse(localStorage.getItem("messages"));
+        if (!messages) {
+            messages = [];
+        }
         let newMessages = [
             ...messages,
             Object.assign(Object.assign({}, data), { id: generateUniqueId(), created_at: formatDate(new Date()) }),
