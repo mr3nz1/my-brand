@@ -1,7 +1,12 @@
 import { Article } from "../types.js";
 
 function loadRecentArticles() {
-  const articles: Article[] = JSON.parse(localStorage.getItem("articles")!);
+  let articlesJson = localStorage.getItem("articles");
+  let articles: Article[] = [];
+
+  if (articlesJson) {
+    articles = JSON.parse(articlesJson);
+  }
   const recentArticleContainer = document.getElementById(
     "recent_articles_container"
   )!;

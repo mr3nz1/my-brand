@@ -1,5 +1,9 @@
 function loadRecentArticles() {
-    const articles = JSON.parse(localStorage.getItem("articles"));
+    let articlesJson = localStorage.getItem("articles");
+    let articles = [];
+    if (articlesJson) {
+        articles = JSON.parse(articlesJson);
+    }
     const recentArticleContainer = document.getElementById("recent_articles_container");
     const moreArticlesContentContainer = document.getElementById("more_articles_container");
     let recentArticlesContent = "";

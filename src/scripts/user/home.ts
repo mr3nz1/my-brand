@@ -10,9 +10,15 @@ function generateUniqueId() {
 }
 
 function loadArticles() {
-  const articles: Article[] = JSON.parse(
-    localStorage.getItem("articles")!
-  ).slice(0, 4);
+  let articles: Article[];
+  let articlesJson = localStorage.getItem("articles");
+
+  if (articlesJson) {
+    articles = JSON.parse(articlesJson).slice(0, 4);
+  } else {
+    articles = [];
+  }
+
   const articlesContainer = document.getElementById("articles_container")!;
 
   let articlesContent = "";
