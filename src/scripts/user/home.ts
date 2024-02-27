@@ -10,9 +10,15 @@ function generateUniqueId() {
 }
 
 function loadArticles() {
-  const articles: Article[] = JSON.parse(
-    localStorage.getItem("articles")!
-  ).slice(0, 4);
+  let articles: Article[];
+  let articlesJson = localStorage.getItem("articles");
+
+  if (articlesJson) {
+    articles = JSON.parse(articlesJson).slice(0, 4);
+  } else {
+    articles = [];
+  }
+
   const articlesContainer = document.getElementById("articles_container")!;
 
   let articlesContent = "";
@@ -48,21 +54,22 @@ let isModalOpen = false;
 function openModal() {
   if (!isModalOpen) {
     const modal = document.querySelector(".modal")!;
-    const modalCancelBtn = document.querySelector<HTMLDivElement>(".close-modal")!;
+    const modalCancelBtn =
+      document.querySelector<HTMLDivElement>(".close-modal")!;
 
     const h2 = document.createElement("h2");
     h2.textContent = "Thanks for you're message.";
     modal.children[0].appendChild(h2);
     modal.classList.add("modal-open");
-    modalCancelBtn.style.display = "none"
+    modalCancelBtn.style.display = "none";
 
     isModalOpen = true;
 
     setTimeout(() => {
       modal.children[0].removeChild(h2);
       modal.classList.remove("modal-open");
-    modalCancelBtn.style.display = "flex"
-    isModalOpen = false;
+      modalCancelBtn.style.display = "flex";
+      isModalOpen = false;
     }, 5000);
   }
 }
@@ -83,6 +90,11 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     let messages = JSON.parse(localStorage.getItem("messages")!);
+
+    if (!messages) {
+      messages = [];
+    }
+
     let newMessages = [
       ...messages,
       {

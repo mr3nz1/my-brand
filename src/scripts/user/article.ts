@@ -27,7 +27,13 @@ function loadArticle(articleId: string) {
     "bannerImageContainer"
   )!;
 
-  articles = JSON.parse(localStorage.getItem("articles")!);
+  let articlesJson = localStorage.getItem("articles");
+  if (articlesJson) {
+    articles = JSON.parse(articlesJson);
+  } else {
+    articles = [];
+  }
+
   targetArticle = articles.filter((article) => article.id === articleId)[0];
 
   articleTitleElement.textContent = targetArticle.title;
@@ -45,7 +51,15 @@ function loadArticle(articleId: string) {
 }
 
 function loadComments() {
-  const comments = JSON.parse(localStorage.getItem("comments")!);
+  const commentsJson = localStorage.getItem("comments");
+  let comments;
+
+  if (commentsJson) {
+    comments = JSON.parse(commentsJson);
+  } else {
+    comments = [];
+  }
+
   const commentsForThisArticle: Comment[] = comments.filter(
     (comment: Comment) => comment.articleId === targetArticle.id
   );
@@ -100,7 +114,15 @@ function loadComments() {
 }
 
 function addComment(comment: Comment) {
-  let comments = JSON.parse(localStorage.getItem("comments")!);
+  let commentsJson = localStorage.getItem("comments");
+  let comments = [];
+
+  if (commentsJson) {
+    comments = JSON.parse(commentsJson);
+  } else {
+    comments = [];
+  }
+
   let updatedComments = [
     ...comments,
     {

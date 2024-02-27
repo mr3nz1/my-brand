@@ -6,7 +6,14 @@ function generateUniqueId() {
     return uniqueId;
 }
 function loadArticles() {
-    const articles = JSON.parse(localStorage.getItem("articles")).slice(0, 4);
+    let articles;
+    let articlesJson = localStorage.getItem("articles");
+    if (articlesJson) {
+        articles = JSON.parse(articlesJson).slice(0, 4);
+    }
+    else {
+        articles = [];
+    }
     const articlesContainer = document.getElementById("articles_container");
     let articlesContent = "";
     articles.forEach((article) => {
@@ -64,6 +71,9 @@ window.addEventListener("DOMContentLoaded", () => {
             data[name] = value;
         });
         let messages = JSON.parse(localStorage.getItem("messages"));
+        if (!messages) {
+            messages = [];
+        }
         let newMessages = [
             ...messages,
             Object.assign(Object.assign({}, data), { id: generateUniqueId(), created_at: formatDate(new Date()) }),

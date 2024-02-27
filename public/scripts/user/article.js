@@ -14,7 +14,13 @@ function loadArticle(articleId) {
     const articleCreatedDateElement = document.getElementById("created_at");
     const articleContentElement = document.getElementById("article_text_content");
     const articleImageContainerElement = document.getElementById("bannerImageContainer");
-    articles = JSON.parse(localStorage.getItem("articles"));
+    let articlesJson = localStorage.getItem("articles");
+    if (articlesJson) {
+        articles = JSON.parse(articlesJson);
+    }
+    else {
+        articles = [];
+    }
     targetArticle = articles.filter((article) => article.id === articleId)[0];
     articleTitleElement.textContent = targetArticle.title;
     articleDescriptionElement.textContent = targetArticle.description;
@@ -28,7 +34,14 @@ function loadArticle(articleId) {
     loadComments();
 }
 function loadComments() {
-    const comments = JSON.parse(localStorage.getItem("comments"));
+    const commentsJson = localStorage.getItem("comments");
+    let comments;
+    if (commentsJson) {
+        comments = JSON.parse(commentsJson);
+    }
+    else {
+        comments = [];
+    }
     const commentsForThisArticle = comments.filter((comment) => comment.articleId === targetArticle.id);
     const listOfComments = document.querySelector(".list_of_comments");
     let commentsHtmlElements = "";
@@ -77,7 +90,14 @@ function loadComments() {
     listOfComments.innerHTML = commentsHtmlElements;
 }
 function addComment(comment) {
-    let comments = JSON.parse(localStorage.getItem("comments"));
+    let commentsJson = localStorage.getItem("comments");
+    let comments = [];
+    if (commentsJson) {
+        comments = JSON.parse(commentsJson);
+    }
+    else {
+        comments = [];
+    }
     let updatedComments = [
         ...comments,
         Object.assign(Object.assign({}, comment), { articleId: targetArticle.id, created_at: formatDate(new Date()) }),
