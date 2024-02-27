@@ -29,7 +29,7 @@ async function checkCredentials(
   } else {
     localStorage.setItem(
       "user",
-      JSON.stringify({ email: "murenzi419@gmail.com", password: "123" })
+      JSON.stringify({ email: "test@test.com", password: "Password@123" })
     );
   }
 
