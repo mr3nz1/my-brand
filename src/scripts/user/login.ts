@@ -1,6 +1,8 @@
 // Import customLocalStorage from "../dashboard/CustomLocalStorage.ts";
 // Assuming you have CustomLocalStorage defined in a TypeScript file.
 
+import { url } from "../utilities.js";
+
 const userEmailInput = document.getElementById(
   "user_email_input"
 ) as HTMLInputElement;
@@ -14,26 +16,33 @@ const loginFormErrorElement = document.getElementById(
   "form_error_text"
 ) as HTMLDivElement;
 
-// login
-async function checkCredentials(
-  email: string,
-  password: string
-): Promise<boolean> {
-  let userJson = localStorage.getItem("user");
+async function login(credentials: object) {
+  try {
+    const res = await fetch(url + "/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    });
 
-  if (userJson) {
-    const user = JSON.parse(userJson);
-    if (email === user.email && password === user.password) {
+    let dataString = await res.text();
+    let data: {
+      status: string;
+      data: {
+        token: string;
+      };
+    } = JSON.parse(dataString);
+
+    if (res.status === 200) {
+      localStorage.setItem("userToken", data?.data?.token);
       return true;
+    } else {
+      return false;
     }
-  } else {
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ email: "test@test.com", password: "Password@123" })
-    );
+  } catch (err) {
+    console.log(err);
   }
-
-  return false;
 }
 
 loginForm.addEventListener("submit", async (e) => {
@@ -41,11 +50,9 @@ loginForm.addEventListener("submit", async (e) => {
   const userEmail = userEmailInput.value;
   const userPassword = userPasswordInput.value;
 
-  const credentialsMatch = await checkCredentials(userEmail, userPassword);
+  const status = await login({ email: userEmail, password: userPassword });
 
-  if (credentialsMatch) {
-    // Assuming customLocalStorage is an instance of CustomLocalStorage
-    localStorage.setItem("loggedIn", "true");
+  if (status) {
     window.location.href = "../dashboardPages";
   } else {
     loginFormErrorElement.style.display = "block";

@@ -1,20 +1,19 @@
+import { getArticleRequest } from "../requests/articleRequests.js";
 import { Article, Message, Comment } from "../types.js";
 import { formatDate } from "../utilities.js";
 
-let articles: Article[] = [];
 let targetArticle: Article;
 
-function getArticleIdFromURL() {
+async function getArticleIdFromURL() {
   const hash = window.location.hash.substring(1); // Get the hash part excluding the '#'
   const params = new URLSearchParams(hash);
 
   // Assuming 'articleId' is the parameter you want to extract
   const articleId = params.get("articleId");
-
   return articleId;
 }
 
-function loadArticle(articleId: string) {
+async function loadArticle(articleId: string) {
   const articleTitleElement = document.getElementById("articleTitle")!;
   const articleDescriptionElement = document.getElementById(
     "articleDescriptionElement"
@@ -27,24 +26,19 @@ function loadArticle(articleId: string) {
     "bannerImageContainer"
   )!;
 
-  let articlesJson = localStorage.getItem("articles");
-  if (articlesJson) {
-    articles = JSON.parse(articlesJson);
-  } else {
-    articles = [];
-  }
+  targetArticle = await getArticleRequest(articleId);
 
-  targetArticle = articles.filter((article) => article.id === articleId)[0];
+  console.log(targetArticle);
 
   articleTitleElement.textContent = targetArticle.title;
   articleDescriptionElement.textContent = targetArticle.description;
-  if (articleId !== undefined) {
-    targetArticle = articles.filter((article) => article.id === articleId)[0];
-  }
   articleContentElement.innerHTML = targetArticle.content;
 
   const image = document.createElement("img");
-  image.setAttribute("src", targetArticle.image);
+  image.setAttribute(
+    "src",
+    `http://13.60.34.0:3000/photos/${targetArticle.bannerImageUrl}`
+  );
 
   articleImageContainerElement.appendChild(image);
   loadComments();
@@ -135,14 +129,14 @@ function addComment(comment: Comment) {
   loadComments();
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  const articleId = getArticleIdFromURL()!;
+window.addEventListener("DOMContentLoaded", async () => {
+  const articleId = await getArticleIdFromURL()!;
 
   if (!articleId) {
     location.href = "../";
   }
 
-  loadArticle(articleId);
+  loadArticle(articleId!);
 });
 
 const form = document.querySelector(".article_comments form")!;

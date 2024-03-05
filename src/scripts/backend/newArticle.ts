@@ -1,6 +1,8 @@
 import { loadPage } from "./script.js";
 import { initiateEditor } from "./editor.js";
 import { Article } from "../types.js";
+import { url } from "../utilities.js";
+import { newArticleRequest } from "../requests/articleRequests.js";
 
 const currentPage: string | null = localStorage.getItem("currentPage");
 let errors: { [key: string]: string } = {
@@ -23,61 +25,15 @@ function displayErrors(): void {
   });
 }
 
-function generateUniqueId(): string {
-  const timestamp: number = new Date().getTime();
-  const randomPart: number = Math.floor(Math.random() * 1000);
-  const uniqueId: string = `id_${timestamp}_${randomPart}`;
-  return uniqueId;
-}
-
-function formatDate(date: string | number | Date): string {
-  const options: Intl.DateTimeFormatOptions = {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  };
-  return new Date(date).toLocaleDateString("en-US", options);
-}
-
-function saveContent(article: Article): void {
-  let existingArticles: Article[] = JSON.parse(
-    localStorage.getItem("articles") || "[]"
-  );
-  if (article.published) {
-    article = {
-      ...article,
-      created_at: formatDate(new Date()),
-    };
-  }
-  let articles: Article[];
-
-  if (article.id) {
-    existingArticles = existingArticles.filter((item) => {
-      return item.id !== article.id;
-    });
-  }
-
-  articles = [
-    ...existingArticles,
-    { ...article, id: article.id ? article.id : generateUniqueId() },
-  ];
-
-  localStorage.setItem("articles", JSON.stringify(articles));
-
+async function alert(content: string) {
   const modal: HTMLElement | null = document.querySelector(".modal");
   const message: HTMLParagraphElement = document.createElement("p");
   const closeModalBtn: HTMLElement | null =
     document.querySelector(".close-modal");
 
   if (modal) {
-    if (article.published) {
-      message.textContent = "Successfully Published";
-      modal.children[0].appendChild(message);
-    } else {
-      message.textContent = "Successfully Saved";
-      modal.children[0].appendChild(message);
-    }
-
+    message.textContent = content;
+    modal.children[0].appendChild(message);
     modal.classList.add("modal-open");
   }
 
@@ -94,8 +50,38 @@ function saveContent(article: Article): void {
       closeModalBtn.style.display = "flex";
     }
   }, 5000);
-  loadPage({ page: "blog" });
 }
+
+async function saveContent(article: Article) {
+  let articleDataForm = new FormData();
+
+  Object.keys(article).forEach(async (key) => {
+    let value = article[key];
+
+    if (value instanceof File) {
+      articleDataForm.append(key, value);
+    } else {
+      articleDataForm.set(key, value);
+    }
+  });
+
+  for (let pair of articleDataForm.entries()) {
+    console.log(pair[0] + " " + pair[1]);
+  }
+  const status = await newArticleRequest(articleDataForm);
+
+  if (status) {
+    if (article.isPublished) {
+      alert("Article successfully published");
+    } else {
+      alert("Article successfully saved");
+    }
+    loadPage({ page: "blog" });
+  } else {
+    alert("Error creating article");
+  }
+}
+
 window.addEventListener("new_articleLoaded", (e: Event) => {
   initiateEditor();
 
@@ -111,7 +97,7 @@ window.addEventListener("new_articleLoaded", (e: Event) => {
   );
   const imageField: HTMLInputElement | null = document.querySelector(
     ".banner_image_input_field"
-  );
+  )!;
   const contentField: HTMLElement | null =
     document.querySelector(".outputField");
 
@@ -129,10 +115,8 @@ window.addEventListener("new_articleLoaded", (e: Event) => {
         errors.description = "";
       }
 
-      if (imageField && imageField.value === "") {
+      if (!imageField) {
         errors.image = "Banner image is required";
-      } else {
-        errors.image = "";
       }
 
       if (contentField && contentField.children.length === 0) {
@@ -149,32 +133,35 @@ window.addEventListener("new_articleLoaded", (e: Event) => {
       ) {
         displayErrors();
       } else {
-        saveContent({
-          title: titleField!.value,
-          description: descriptionField!.value,
-          content: contentField!.innerHTML,
-          image: imageField!.value,
-          published: true,
-          id: "",
-        });
+        if (
+          titleField &&
+          descriptionField &&
+          imageField.files?.[0] &&
+          contentField
+        ) {
+          saveContent({
+            title: titleField!.value,
+            description: descriptionField!.value,
+            content: contentField!.innerHTML,
+            bannerImage: imageField.files?.[0],
+            isPublished: true,
+          });
+        }
       }
     });
   }
 
   if (saveBtn) {
     saveBtn.addEventListener("click", () => {
-      if (titleField && descriptionField && imageField && contentField) {
-        saveContent({
-          title: titleField.value,
-          description: descriptionField.value,
-          content: contentField.innerHTML,
-          image: imageField.value,
-          published: false,
-          id: "",
-        });
-      }
+      saveContent({
+        title: titleField!.value,
+        description: descriptionField!.value,
+        content: contentField!.innerHTML,
+        bannerImage: imageField.files?.[0],
+        isPublished: false,
+      });
     });
   }
 });
 
-export { errors, generateUniqueId, formatDate, saveContent, displayErrors };
+export { errors, saveContent, displayErrors };

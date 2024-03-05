@@ -1,5 +1,15 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import { loadPage } from "./script.js";
 import { initiateEditor } from "./editor.js";
+import { newArticleRequest } from "../requests/articleRequests.js";
 const currentPage = localStorage.getItem("currentPage");
 let errors = {
     title: "",
@@ -16,63 +26,59 @@ function displayErrors() {
         }
     });
 }
-function generateUniqueId() {
-    const timestamp = new Date().getTime();
-    const randomPart = Math.floor(Math.random() * 1000);
-    const uniqueId = `id_${timestamp}_${randomPart}`;
-    return uniqueId;
-}
-function formatDate(date) {
-    const options = {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-    };
-    return new Date(date).toLocaleDateString("en-US", options);
-}
-function saveContent(article) {
-    let existingArticles = JSON.parse(localStorage.getItem("articles") || "[]");
-    if (article.published) {
-        article = Object.assign(Object.assign({}, article), { created_at: formatDate(new Date()) });
-    }
-    let articles;
-    if (article.id) {
-        existingArticles = existingArticles.filter((item) => {
-            return item.id !== article.id;
-        });
-    }
-    articles = [
-        ...existingArticles,
-        Object.assign(Object.assign({}, article), { id: article.id ? article.id : generateUniqueId() }),
-    ];
-    localStorage.setItem("articles", JSON.stringify(articles));
-    const modal = document.querySelector(".modal");
-    const message = document.createElement("p");
-    const closeModalBtn = document.querySelector(".close-modal");
-    if (modal) {
-        if (article.published) {
-            message.textContent = "Successfully Published";
-            modal.children[0].appendChild(message);
-        }
-        else {
-            message.textContent = "Successfully Saved";
-            modal.children[0].appendChild(message);
-        }
-        modal.classList.add("modal-open");
-    }
-    if (closeModalBtn) {
-        closeModalBtn.style.display = "none";
-    }
-    setTimeout(() => {
+function alert(content) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const modal = document.querySelector(".modal");
+        const message = document.createElement("p");
+        const closeModalBtn = document.querySelector(".close-modal");
         if (modal) {
-            modal.children[0].removeChild(message);
-            modal.classList.remove("modal-open");
+            message.textContent = content;
+            modal.children[0].appendChild(message);
+            modal.classList.add("modal-open");
         }
         if (closeModalBtn) {
-            closeModalBtn.style.display = "flex";
+            closeModalBtn.style.display = "none";
         }
-    }, 5000);
-    loadPage({ page: "blog" });
+        setTimeout(() => {
+            if (modal) {
+                modal.children[0].removeChild(message);
+                modal.classList.remove("modal-open");
+            }
+            if (closeModalBtn) {
+                closeModalBtn.style.display = "flex";
+            }
+        }, 5000);
+    });
+}
+function saveContent(article) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let articleDataForm = new FormData();
+        Object.keys(article).forEach((key) => __awaiter(this, void 0, void 0, function* () {
+            let value = article[key];
+            if (value instanceof File) {
+                articleDataForm.append(key, value);
+            }
+            else {
+                articleDataForm.set(key, value);
+            }
+        }));
+        for (let pair of articleDataForm.entries()) {
+            console.log(pair[0] + " " + pair[1]);
+        }
+        const status = yield newArticleRequest(articleDataForm);
+        if (status) {
+            if (article.isPublished) {
+                alert("Article successfully published");
+            }
+            else {
+                alert("Article successfully saved");
+            }
+            loadPage({ page: "blog" });
+        }
+        else {
+            alert("Error creating article");
+        }
+    });
 }
 window.addEventListener("new_articleLoaded", (e) => {
     initiateEditor();
@@ -84,6 +90,7 @@ window.addEventListener("new_articleLoaded", (e) => {
     const contentField = document.querySelector(".outputField");
     if (publishBtn) {
         publishBtn.addEventListener("click", () => {
+            var _a, _b;
             if (titleField && titleField.value === "") {
                 errors.title = "Title is required";
             }
@@ -96,11 +103,8 @@ window.addEventListener("new_articleLoaded", (e) => {
             else {
                 errors.description = "";
             }
-            if (imageField && imageField.value === "") {
+            if (!imageField) {
                 errors.image = "Banner image is required";
-            }
-            else {
-                errors.image = "";
             }
             if (contentField && contentField.children.length === 0) {
                 errors.content = "Content is not supposed to be empty";
@@ -115,30 +119,32 @@ window.addEventListener("new_articleLoaded", (e) => {
                 displayErrors();
             }
             else {
-                saveContent({
-                    title: titleField.value,
-                    description: descriptionField.value,
-                    content: contentField.innerHTML,
-                    image: imageField.value,
-                    published: true,
-                    id: "",
-                });
+                if (titleField &&
+                    descriptionField &&
+                    ((_a = imageField.files) === null || _a === void 0 ? void 0 : _a[0]) &&
+                    contentField) {
+                    saveContent({
+                        title: titleField.value,
+                        description: descriptionField.value,
+                        content: contentField.innerHTML,
+                        bannerImage: (_b = imageField.files) === null || _b === void 0 ? void 0 : _b[0],
+                        isPublished: true,
+                    });
+                }
             }
         });
     }
     if (saveBtn) {
         saveBtn.addEventListener("click", () => {
-            if (titleField && descriptionField && imageField && contentField) {
-                saveContent({
-                    title: titleField.value,
-                    description: descriptionField.value,
-                    content: contentField.innerHTML,
-                    image: imageField.value,
-                    published: false,
-                    id: "",
-                });
-            }
+            var _a;
+            saveContent({
+                title: titleField.value,
+                description: descriptionField.value,
+                content: contentField.innerHTML,
+                bannerImage: (_a = imageField.files) === null || _a === void 0 ? void 0 : _a[0],
+                isPublished: false,
+            });
         });
     }
 });
-export { errors, generateUniqueId, formatDate, saveContent, displayErrors };
+export { errors, saveContent, displayErrors };

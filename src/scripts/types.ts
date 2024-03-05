@@ -1,20 +1,19 @@
 export type Message = {
-  content: string;
-  created_at: string;
+  message: string;
+  createdAt: string;
   email: string;
-  fullName: string;
+  name: string;
   id?: string;
   articleId?: string;
 };
 
 export type Article = {
-  id: string;
+  [key: string]: any;
   title: string;
   description: string;
   content: string;
-  image: string;
-  published: boolean;
-  created_at?: string;
+  bannerImage: File | undefined;
+  isPublished: boolean;
 };
 
 export type Task = {

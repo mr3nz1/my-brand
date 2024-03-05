@@ -1,37 +1,41 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import { getArticleRequest } from "../requests/articleRequests.js";
 import { formatDate } from "../utilities.js";
-let articles = [];
 let targetArticle;
 function getArticleIdFromURL() {
-    const hash = window.location.hash.substring(1); // Get the hash part excluding the '#'
-    const params = new URLSearchParams(hash);
-    // Assuming 'articleId' is the parameter you want to extract
-    const articleId = params.get("articleId");
-    return articleId;
+    return __awaiter(this, void 0, void 0, function* () {
+        const hash = window.location.hash.substring(1); // Get the hash part excluding the '#'
+        const params = new URLSearchParams(hash);
+        // Assuming 'articleId' is the parameter you want to extract
+        const articleId = params.get("articleId");
+        return articleId;
+    });
 }
 function loadArticle(articleId) {
-    const articleTitleElement = document.getElementById("articleTitle");
-    const articleDescriptionElement = document.getElementById("articleDescriptionElement");
-    const articleCreatedDateElement = document.getElementById("created_at");
-    const articleContentElement = document.getElementById("article_text_content");
-    const articleImageContainerElement = document.getElementById("bannerImageContainer");
-    let articlesJson = localStorage.getItem("articles");
-    if (articlesJson) {
-        articles = JSON.parse(articlesJson);
-    }
-    else {
-        articles = [];
-    }
-    targetArticle = articles.filter((article) => article.id === articleId)[0];
-    articleTitleElement.textContent = targetArticle.title;
-    articleDescriptionElement.textContent = targetArticle.description;
-    if (articleId !== undefined) {
-        targetArticle = articles.filter((article) => article.id === articleId)[0];
-    }
-    articleContentElement.innerHTML = targetArticle.content;
-    const image = document.createElement("img");
-    image.setAttribute("src", targetArticle.image);
-    articleImageContainerElement.appendChild(image);
-    loadComments();
+    return __awaiter(this, void 0, void 0, function* () {
+        const articleTitleElement = document.getElementById("articleTitle");
+        const articleDescriptionElement = document.getElementById("articleDescriptionElement");
+        const articleCreatedDateElement = document.getElementById("created_at");
+        const articleContentElement = document.getElementById("article_text_content");
+        const articleImageContainerElement = document.getElementById("bannerImageContainer");
+        targetArticle = yield getArticleRequest(articleId);
+        console.log(targetArticle);
+        articleTitleElement.textContent = targetArticle.title;
+        articleDescriptionElement.textContent = targetArticle.description;
+        articleContentElement.innerHTML = targetArticle.content;
+        const image = document.createElement("img");
+        image.setAttribute("src", `http://13.60.34.0:3000/photos/${targetArticle.bannerImageUrl}`);
+        articleImageContainerElement.appendChild(image);
+        loadComments();
+    });
 }
 function loadComments() {
     const commentsJson = localStorage.getItem("comments");
@@ -105,13 +109,13 @@ function addComment(comment) {
     localStorage.setItem("comments", JSON.stringify(updatedComments));
     loadComments();
 }
-window.addEventListener("DOMContentLoaded", () => {
-    const articleId = getArticleIdFromURL();
+window.addEventListener("DOMContentLoaded", () => __awaiter(void 0, void 0, void 0, function* () {
+    const articleId = yield getArticleIdFromURL();
     if (!articleId) {
         location.href = "../";
     }
     loadArticle(articleId);
-});
+}));
 const form = document.querySelector(".article_comments form");
 form.addEventListener("submit", (e) => {
     e.preventDefault();

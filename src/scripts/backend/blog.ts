@@ -1,5 +1,7 @@
 import { loadPage } from "./script.js";
 import { Article } from "../types.js";
+import { url } from "../utilities.js";
+import { deleteArticleRequest } from "../requests/articleRequests.js";
 
 const currentPage: string | null = localStorage.getItem("currentPage");
 let articles: Article[];
@@ -25,13 +27,10 @@ function deleteArticle(articleId: string): void {
     isModalOpen = true;
   }
 
-  deleteBtn.addEventListener("click", () => {
-    articles = JSON.parse(localStorage.getItem("articles") || "[]");
-    let newArticles = articles.filter((article) => article.id !== articleId);
+  deleteBtn.addEventListener("click", async () => {
+    const status = await deleteArticleRequest(articleId);
 
-    localStorage.setItem("articles", JSON.stringify(newArticles));
-
-    if (modal && isModalOpen) {
+    if (modal && isModalOpen && status) {
       modal.children[0].removeChild(title);
       modal.children[0].removeChild(message);
       modal.children[0].removeChild(deleteBtn);
@@ -54,14 +53,29 @@ function deleteArticle(articleId: string): void {
   });
 }
 
-function loadArticles(): void {
-  articles = JSON.parse(localStorage.getItem("articles") || "[]");
+async function getArticles() {
+  const res = await fetch(url + "/articles/", {
+    method: "GET",
+  });
+
+  if (res.status !== 200) {
+    return false;
+  }
+
+  const dataJson = await res.text();
+  const data = JSON.parse(dataJson);
+
+  return data.data.articles;
+}
+
+async function loadArticles() {
+  articles = await getArticles();
+  const unPublishedArticles = articles.filter(
+    (article) => article.isPublished !== true
+  );
 
   const publishedArticles = articles.filter(
-    (article) => article.published === true
-  );
-  const unPublishedArticles = articles.filter(
-    (article) => article.published !== true
+    (article) => article.isPublished === true
   );
 
   const publishedArticlesContainer: HTMLElement | null =
@@ -93,7 +107,7 @@ function loadArticles(): void {
           <span class="underline_on_hover article_delete_btn" id="${article.id}">Delete</span>
         </div>
       </div>
-      <img class="article_img" src="${article.image}" alt="" />
+      <img class="article_img" src="http://13.60.34.0:3000/photos/${article.bannerImageUrl}" alt="" />
     </div>`;
   });
 
@@ -118,7 +132,7 @@ function loadArticles(): void {
           <span class="underline_on_hover article_delete_btn" id="${article.id}">Delete</span>
         </div>
       </div>
-      <img class="article_img" src="${article.image}" alt="" />
+      <img class="article_img" src="http://13.60.34.0:3000/photos/${article.bannerImageUrl}" alt="" />
     </div>`;
   });
 
@@ -128,7 +142,13 @@ function loadArticles(): void {
   if (unPublishedArticlesContainer) {
     unPublishedArticlesContainer.innerHTML = unPublishedArticlesContent;
   }
+
+  const event = new Event("configureBtns");
+  dispatchEvent(event);
 }
+
+const event = new Event("blogLoaded");
+dispatchEvent(event);
 
 function configureDeleteAndUpdateBtns(): void {
   const deleteBtns = document.querySelectorAll(".article_delete_btn");
@@ -151,13 +171,15 @@ function configureDeleteAndUpdateBtns(): void {
   });
 }
 
-window.addEventListener("blogLoaded", () => {
-  loadArticles();
-  configureDeleteAndUpdateBtns();
+window.addEventListener("blogLoaded", async () => {
+  await loadArticles();
 });
 
-window.addEventListener("deletedArticle", () => {
-  loadArticles();
+window.addEventListener("deletedArticle", async () => {
+  await loadArticles();
+});
+
+window.addEventListener("configureBtns", () => {
   configureDeleteAndUpdateBtns();
 });
 
