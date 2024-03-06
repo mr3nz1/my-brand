@@ -73,14 +73,15 @@ window.addEventListener("DOMContentLoaded", () => {
             const value = input.value;
             data[name] = value;
         });
+
         let newMessage = Object.assign({}, data);
         const status = yield createMessageRequest(newMessage);
         if (status) {
             openModal("Thanks for you're message.", false);
-        }
-        else {
+        } else {
             openModal("Error sending message.", true);
         }
+
         inputs.forEach((input) => {
             input.value = "";
         });
