@@ -8,6 +8,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { url } from "../utilities.js";
+function createMessageRequest(message) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const res = yield fetch(url + "/messages/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(message),
+            });
+            if (res.status === 201) {
+                let data = yield res.text();
+                data = JSON.parse(data);
+                return true;
+            }
+            else {
+                false;
+            }
+        }
+        catch (err) {
+            console.log(err);
+            return false;
+        }
+    });
+}
 function getMessagesRequest() {
     return __awaiter(this, void 0, void 0, function* () {
         const token = localStorage.getItem("userToken");
@@ -42,4 +67,4 @@ function deleteMessageRequest(messageId) {
         return true;
     });
 }
-export { getMessagesRequest, deleteMessageRequest };
+export { getMessagesRequest, deleteMessageRequest, createMessageRequest };

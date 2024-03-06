@@ -1,4 +1,11 @@
-import { getArticleRequest } from "../requests/articleRequests.js";
+import {
+  getArticleRequest,
+  getArticlesRequest,
+} from "../requests/articleRequests.js";
+import {
+  createCommentRequest,
+  getCommentRequest,
+} from "../requests/commentRequests.js";
 import { Article, Message, Comment } from "../types.js";
 import { formatDate } from "../utilities.js";
 
@@ -28,8 +35,6 @@ async function loadArticle(articleId: string) {
 
   targetArticle = await getArticleRequest(articleId);
 
-  console.log(targetArticle);
-
   articleTitleElement.textContent = targetArticle.title;
   articleDescriptionElement.textContent = targetArticle.description;
   articleContentElement.innerHTML = targetArticle.content;
@@ -44,34 +49,25 @@ async function loadArticle(articleId: string) {
   loadComments();
 }
 
-function loadComments() {
-  const commentsJson = localStorage.getItem("comments");
-  let comments;
-
-  if (commentsJson) {
-    comments = JSON.parse(commentsJson);
-  } else {
-    comments = [];
-  }
-
-  const commentsForThisArticle: Comment[] = comments.filter(
-    (comment: Comment) => comment.articleId === targetArticle.id
-  );
+async function loadComments() {
+  const commentsForThisArticle = await getCommentRequest(targetArticle.id);
 
   const listOfComments = document.querySelector(".list_of_comments")!;
   let commentsHtmlElements = "";
 
-  commentsForThisArticle.forEach((comment) => {
+  commentsForThisArticle.forEach((comment: Comment) => {
     commentsHtmlElements += `<div class="comment">
     <div class="comment_content_container">
       <div class="message_user_image">
-        <img src="../assets/images/sandra.jpg" alt="">
+        <img src="https://dummyimage.com/500x500/e67e22/ffffff&text=${
+          comment.name[0]
+        }" alt="">
       </div>
 
       <div class="single_comment_text_container">
         <div class="single_comment_title_and_date">
-          <h4>${comment.fullName}</h4>
-          <p>${comment.created_at}</p>
+          <h4>${comment.name}</h4>
+          <p>${formatDate(comment.createdAt)}</p>
         </div>
 
         <p>
@@ -107,26 +103,49 @@ function loadComments() {
   listOfComments.innerHTML = commentsHtmlElements;
 }
 
-function addComment(comment: Comment) {
-  let commentsJson = localStorage.getItem("comments");
-  let comments = [];
+async function loadArticles() {
+  let articles: Article[] = await getArticlesRequest();
 
-  if (commentsJson) {
-    comments = JSON.parse(commentsJson);
-  } else {
-    comments = [];
+  const articlesContainer = document.getElementById("articles_container")!;
+
+  let articlesContent: string = "";
+
+  articles.forEach((article) => {
+    articlesContent += `
+      <div class="article_container">
+      <div class="article_info_container">
+      <h3 class=""><a class="underline_on_hover" href="./article.html#articleId=${
+        article.id
+      }">${article.title}</a></h3>
+      <p>
+          ${article.description}
+        </p>
+        <div class="article_meta_data">
+          <p>${formatDate(article.createdAt)}</p>
+          <span class="dot_separator"></span>
+          <p>14 min read</p>
+          <span class="dot_separator"></span>
+          <div class="likes_description">
+            <img src="../assets/icons/heart.png" alt="" />
+            <p>83 likes</p>
+          </div>
+        </div>
+      </div>
+      <img class="article_img" src="http://13.60.34.0:3000/photos/${
+        article.bannerImageUrl
+      }" alt="" />
+    </div>`;
+  });
+
+  articlesContainer.innerHTML = articlesContent;
+}
+
+async function addComment(comment: Comment) {
+  const status = await createCommentRequest(comment);
+
+  if (status) {
+    loadComments();
   }
-
-  let updatedComments = [
-    ...comments,
-    {
-      ...comment,
-      articleId: targetArticle.id,
-      created_at: formatDate(new Date()),
-    },
-  ];
-  localStorage.setItem("comments", JSON.stringify(updatedComments));
-  loadComments();
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
@@ -137,6 +156,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 
   loadArticle(articleId!);
+  loadArticles();
 });
 
 const form = document.querySelector(".article_comments form")!;
@@ -149,11 +169,10 @@ form.addEventListener("submit", (e) => {
   );
 
   let comment: Comment = {
-    articleId: "", // Initialize all properties
+    articleId: targetArticle.id,
     comment: "",
-    created_at: "",
     email: "",
-    fullName: "",
+    name: "",
   };
 
   inputs.forEach((input) => {

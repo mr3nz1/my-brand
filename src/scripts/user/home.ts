@@ -1,4 +1,5 @@
 import { getArticlesRequest } from "../requests/articleRequests.js";
+import { createMessageRequest } from "../requests/messageRequests.js";
 import { Article } from "../types.js";
 import { formatDate, url } from "../utilities.js";
 
@@ -13,8 +14,10 @@ async function loadArticles() {
     articlesContent += `
       <div class="article_container">
       <div class="article_info_container">
-        <h3 class="">${article.title}</h3>
-        <p>
+      <h3 class=""><a class="underline_on_hover" href="./article.html#articleId=${
+        article.id
+      }">${article.title}</a></h3>
+      <p>
           ${article.description}
         </p>
         <div class="article_meta_data">
@@ -35,29 +38,6 @@ async function loadArticles() {
   });
 
   articlesContainer.innerHTML = articlesContent;
-}
-
-async function comment(message: object) {
-  try {
-    const res = await fetch(url + "/messages/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(message),
-    });
-
-    if (res.status === 201) {
-      let data = await res.text();
-      data = JSON.parse(data);
-      return true;
-    } else {
-      false;
-    }
-  } catch (err) {
-    console.log(err);
-    return false;
-  }
 }
 
 let isModalOpen = false;
@@ -108,7 +88,7 @@ window.addEventListener("DOMContentLoaded", () => {
       ...data,
     };
 
-    const status = await comment(newMessage);
+    const status = await createMessageRequest(newMessage);
 
     if (status) {
       openModal("Thanks for you're message.", false);

@@ -1,5 +1,28 @@
 import { url } from "../utilities.js";
 
+async function createMessageRequest(message: object) {
+  try {
+    const res = await fetch(url + "/messages/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(message),
+    });
+
+    if (res.status === 201) {
+      let data = await res.text();
+      data = JSON.parse(data);
+      return true;
+    } else {
+      false;
+    }
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+}
+
 async function getMessagesRequest() {
   const token = localStorage.getItem("userToken");
 
@@ -39,4 +62,4 @@ async function deleteMessageRequest(messageId: string) {
   return true;
 }
 
-export { getMessagesRequest, deleteMessageRequest };
+export { getMessagesRequest, deleteMessageRequest, createMessageRequest };

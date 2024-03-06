@@ -8,7 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { getArticlesRequest } from "../requests/articleRequests.js";
-import { formatDate, url } from "../utilities.js";
+import { createMessageRequest } from "../requests/messageRequests.js";
+import { formatDate } from "../utilities.js";
 function loadArticles() {
     return __awaiter(this, void 0, void 0, function* () {
         let articles = yield getArticlesRequest();
@@ -18,8 +19,8 @@ function loadArticles() {
             articlesContent += `
       <div class="article_container">
       <div class="article_info_container">
-        <h3 class="">${article.title}</h3>
-        <p>
+      <h3 class=""><a class="underline_on_hover" href="./article.html#articleId=${article.id}">${article.title}</a></h3>
+      <p>
           ${article.description}
         </p>
         <div class="article_meta_data">
@@ -37,31 +38,6 @@ function loadArticles() {
     </div>`;
         });
         articlesContainer.innerHTML = articlesContent;
-    });
-}
-function comment(message) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const res = yield fetch(url + "/messages/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(message),
-            });
-            if (res.status === 201) {
-                let data = yield res.text();
-                data = JSON.parse(data);
-                return true;
-            }
-            else {
-                false;
-            }
-        }
-        catch (err) {
-            console.log(err);
-            return false;
-        }
     });
 }
 let isModalOpen = false;
@@ -98,7 +74,7 @@ window.addEventListener("DOMContentLoaded", () => {
             data[name] = value;
         });
         let newMessage = Object.assign({}, data);
-        const status = yield comment(newMessage);
+        const status = yield createMessageRequest(newMessage);
         if (status) {
             openModal("Thanks for you're message.", false);
         }
