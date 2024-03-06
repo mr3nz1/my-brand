@@ -738,6 +738,7 @@ body {
   justify-content: start;
   align-items: start;
   gap: 2em;
+  width: 100% !important;
 }
 
 .tasks_container {
@@ -747,7 +748,6 @@ body {
   align-items: start;
   flex-wrap: wrap;
   gap: 2em;
-  width: 100% !important;
 }
 
 .tasks_container .task {
@@ -759,7 +759,6 @@ body {
   justify-content: start;
   align-items: start;
   gap: 0.5em;
-  width: 100% !important;
   position: relative;
 }
 

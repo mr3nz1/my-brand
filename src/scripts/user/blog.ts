@@ -1,12 +1,10 @@
+import { getArticlesRequest } from "../requests/articleRequests.js";
 import { Article } from "../types.js";
 
-function loadRecentArticles() {
+async function loadRecentArticles() {
   let articlesJson = localStorage.getItem("articles");
-  let articles: Article[] = [];
+  let articles: Article[] = await getArticlesRequest();
 
-  if (articlesJson) {
-    articles = JSON.parse(articlesJson);
-  }
   const recentArticleContainer = document.getElementById(
     "recent_articles_container"
   )!;
@@ -36,7 +34,7 @@ function loadRecentArticles() {
           </div>
         </div>
       </div>
-      <img class="article_img" src="${article.image}" alt="" />
+      <img class="article_img" src="http://13.60.34.0:3000/photos/${article.bannerImageUrl}" alt="" />
     </div>
       `;
   });
@@ -59,8 +57,8 @@ function loadRecentArticles() {
               </div>
             </div>
           </div>
-          <img class="article_img" src="${article.image}" alt="" />
-        </div>
+          <img class="article_img" src="http://13.60.34.0:3000/photos/${article.bannerImageUrl}" alt="" />
+            </div>
   `;
   });
 

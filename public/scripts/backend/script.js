@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { url } from "../utilities.js";
 import customLocalStorage from "./CustomLocalStorage.js";
 // animating the mouse
 window.addEventListener("mousemove", (e) => {
@@ -14,49 +15,84 @@ window.addEventListener("mousemove", (e) => {
     animated_cursor.style.left = e.pageX + "px";
     animated_cursor.style.top = e.pageY + "px";
 });
+function getUserInfo(token) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const res = yield fetch(url + "/users/getUserInfo", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token,
+                },
+            });
+            if (res.status !== 200) {
+                return false;
+            }
+            const dataString = yield res.text();
+            const data = JSON.parse(dataString);
+            localStorage.setItem("adminInfo", JSON.stringify(data === null || data === void 0 ? void 0 : data.data));
+            return true;
+        }
+        catch (err) {
+            console.log(err);
+            return false;
+        }
+    });
+}
 function isLoggedIn() {
-    const loggedIn = customLocalStorage.getItem("loggedIn");
-    if (loggedIn !== "true") {
-        return (location.href = "../userPages/login.html");
-    }
-    return true;
+    return __awaiter(this, void 0, void 0, function* () {
+        const userToken = customLocalStorage.getItem("userToken");
+        if (!userToken) {
+            return (location.href = "../userPages/login.html");
+        }
+        const status = yield getUserInfo(userToken);
+        if (!status) {
+            return (location.href = "../userPages/login.html");
+        }
+    });
 }
 isLoggedIn();
 let isModalOpen = false;
 function logout() {
-    const modal = document.querySelector(".modal");
-    const title = document.createElement("h2");
-    const message = document.createElement("p");
-    const logoutBtn = document.createElement("button");
-    title.textContent = "Logout";
-    message.textContent = "Are you sure you want to log out?";
-    logoutBtn.textContent = "Confirm";
-    logoutBtn.classList.add("button");
-    modal.children[0].appendChild(title);
-    modal.children[0].appendChild(message);
-    modal.children[0].appendChild(logoutBtn);
-    modal.classList.add("modal-open");
-    isModalOpen = true;
-    logoutBtn.addEventListener("click", () => {
-        localStorage.removeItem("loggedIn");
-        localStorage.removeItem("currentPage");
-        location.href = "../userPages/login.html";
-    });
-    const cancelBtn = document.querySelector(".close-modal");
-    cancelBtn.addEventListener("click", () => {
-        isModalOpen = false;
-        modal.children[0].removeChild(logoutBtn);
-        modal.children[0].removeChild(message);
-        modal.classList.remove("modal-open");
-    });
+    if (!isModalOpen) {
+        console.log("Twice");
+        const modal = document.querySelector(".modal");
+        const title = document.createElement("h2");
+        const message = document.createElement("p");
+        const logoutBtn = document.createElement("button");
+        title.textContent = "Logout";
+        message.textContent = "Are you sure you want to log out?";
+        logoutBtn.textContent = "Confirm";
+        logoutBtn.classList.add("button");
+        modal.children[0].appendChild(title);
+        modal.children[0].appendChild(message);
+        modal.children[0].appendChild(logoutBtn);
+        modal.classList.add("modal-open");
+        isModalOpen = true;
+        logoutBtn.addEventListener("click", () => {
+            localStorage.removeItem("userToken");
+            localStorage.removeItem("adminInfo");
+            localStorage.removeItem("currentPage");
+            location.href = "../userPages/login.html";
+        });
+        const cancelBtn = document.querySelector(".close-modal");
+        cancelBtn.addEventListener("click", () => {
+            isModalOpen = false;
+            modal.children[0].removeChild(logoutBtn);
+            modal.children[0].removeChild(message);
+            modal.children[0].removeChild(title);
+            modal.classList.remove("modal-open");
+        });
+    }
 }
 function loadPage({ page, articleId, }) {
     return __awaiter(this, void 0, void 0, function* () {
-        // console.log("called again");
         if (page === "logout") {
             if (!isModalOpen) {
-                isModalOpen = true;
                 return logout();
+            }
+            else {
+                return;
             }
         }
         const mainContentContainerElement = document.getElementById("main_content_container");
@@ -96,13 +132,12 @@ window.addEventListener("DOMContentLoaded", () => {
     loadPage({ page });
 });
 // load currentPage if the user just uses the hash
-const currentPage = window.location.hash.split("#")[1];
-loadPage({ page: currentPage });
+// const currentPage = window.location.hash.split("#")[1];
+// loadPage({ page: currentPage });
 const linksToPages = document.querySelectorAll(".sidebar > ul li");
 linksToPages.forEach((link) => {
     // console.log()
     link.addEventListener("click", (e) => {
-        console.log(link);
         const pageName = link.getAttribute("link-to-page");
         return loadPage({ page: pageName });
     });

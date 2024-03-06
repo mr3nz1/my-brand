@@ -1,20 +1,20 @@
 export type Message = {
-  content: string;
-  created_at: string;
+  message: string;
+  createdAt: string;
   email: string;
-  fullName: string;
+  name: string;
   id?: string;
   articleId?: string;
 };
 
 export type Article = {
+  [key: string]: any;
   id: string;
   title: string;
   description: string;
   content: string;
-  image: string;
-  published: boolean;
-  created_at?: string;
+  bannerImage: File | undefined;
+  isPublished: boolean;
 };
 
 export type Task = {
@@ -28,7 +28,6 @@ export type Comment = {
   [key: string]: string;
   articleId: string;
   comment: string;
-  created_at: string;
   email: string;
-  fullName: string;
+  name: string;
 };

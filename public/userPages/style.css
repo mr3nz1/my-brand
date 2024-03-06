@@ -470,7 +470,7 @@ nav ul li a {
   display: flex;
   flex-direction: column;
   gap: 2em;
-  width: 100%;
+  /* width: 100%; */
 }
 
 /* IF ON BLOG */
@@ -956,9 +956,6 @@ nav ul li a {
   padding: 2em;
 }
 
-.login_form div {
-}
-
 .login_form form {
   display: flex;
   flex-direction: column;
@@ -1090,6 +1087,7 @@ nav ul li a {
     justify-content: start;
     align-items: start;
     /* width: 100%; */
+    padding: 0em;
   }
   .articles_container {
     display: flex;
@@ -1259,13 +1257,15 @@ nav ul li a {
     width: 100%;
   }
 
+  .image_banner_and_content_container {
+    margin: 0em !important;
+  }
+
   .article_comments_title_div,
   .articles_page_more_articles,
-  .image_banner_and_content_container,
   .article_title_container,
   .articles_page_more_articles {
     /* width: 100%; */
-    /* margin: 0em !important; */
   }
 
   .article_comments_title_div,
@@ -1273,7 +1273,8 @@ nav ul li a {
     padding: 0em 0em !important;
   }
 
-  .articles_page_more_articles {
+  .article_comments_container > .article_comments {
+    width: 100%;
   }
 
   .article_comments,
@@ -1330,7 +1331,6 @@ nav ul li a {
 .italic {
   font-style: italic;
 }
-
 
 .modal {
   position: fixed;
@@ -1405,4 +1405,15 @@ nav ul li a {
 .modal-open {
   display: flex !important;
   animation: slideIn 0.5s ease-in !important;
+}
+
+.add-comment-container > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  justify-content: start;
+  align-items: start;
+}
+
+.article_comments_title_div {
 }

@@ -1,4 +1,3 @@
-"use strict";
 // Import customLocalStorage from "../dashboard/CustomLocalStorage.ts";
 // Assuming you have CustomLocalStorage defined in a TypeScript file.
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -10,34 +9,43 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { url } from "../utilities.js";
 const userEmailInput = document.getElementById("user_email_input");
 const userPasswordInput = document.getElementById("user_password_input");
 const loginForm = document.getElementById("login_form");
 const loginFormErrorElement = document.getElementById("form_error_text");
-// login
-function checkCredentials(email, password) {
+function login(credentials) {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        let userJson = localStorage.getItem("user");
-        if (userJson) {
-            const user = JSON.parse(userJson);
-            if (email === user.email && password === user.password) {
+        try {
+            const res = yield fetch(url + "/users/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(credentials),
+            });
+            let dataString = yield res.text();
+            let data = JSON.parse(dataString);
+            if (res.status === 200) {
+                localStorage.setItem("userToken", (_a = data === null || data === void 0 ? void 0 : data.data) === null || _a === void 0 ? void 0 : _a.token);
                 return true;
             }
+            else {
+                return false;
+            }
         }
-        else {
-            localStorage.setItem("user", JSON.stringify({ email: "test@test.com", password: "Password@123" }));
+        catch (err) {
+            console.log(err);
         }
-        return false;
     });
 }
 loginForm.addEventListener("submit", (e) => __awaiter(void 0, void 0, void 0, function* () {
     e.preventDefault();
     const userEmail = userEmailInput.value;
     const userPassword = userPasswordInput.value;
-    const credentialsMatch = yield checkCredentials(userEmail, userPassword);
-    if (credentialsMatch) {
-        // Assuming customLocalStorage is an instance of CustomLocalStorage
-        localStorage.setItem("loggedIn", "true");
+    const status = yield login({ email: userEmail, password: userPassword });
+    if (status) {
         window.location.href = "../dashboardPages";
     }
     else {
