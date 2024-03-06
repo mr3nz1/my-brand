@@ -1,11 +1,23 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import { getArticlesRequest } from "../requests/articleRequests.js";
 function loadRecentArticles() {
-    const articles = JSON.parse(localStorage.getItem("articles"));
-    const recentArticleContainer = document.getElementById("recent_articles_container");
-    const moreArticlesContentContainer = document.getElementById("more_articles_container");
-    let recentArticlesContent = "";
-    let moreArticlesContent = "";
-    [...articles.slice(0, 4)].forEach((article) => {
-        recentArticlesContent += `
+    return __awaiter(this, void 0, void 0, function* () {
+        let articlesJson = localStorage.getItem("articles");
+        let articles = yield getArticlesRequest();
+        const recentArticleContainer = document.getElementById("recent_articles_container");
+        const moreArticlesContentContainer = document.getElementById("more_articles_container");
+        let recentArticlesContent = "";
+        let moreArticlesContent = "";
+        [...articles.slice(0, 4)].forEach((article) => {
+            recentArticlesContent += `
       <div class="article_container" class="article_meta_data">
       <div class="article_info_container">
         <h3 class=""><a class="underline_on_hover" href="./article.html#articleId=${article.id}">${article.title}</a></h3>
@@ -23,12 +35,12 @@ function loadRecentArticles() {
           </div>
         </div>
       </div>
-      <img class="article_img" src="${article.image}" alt="" />
+      <img class="article_img" src="http://13.60.34.0:3000/photos/${article.bannerImageUrl}" alt="" />
     </div>
       `;
-    });
-    articles.forEach((article) => {
-        moreArticlesContent += `        <div class="article_container" class="article_meta_data">
+        });
+        articles.forEach((article) => {
+            moreArticlesContent += `        <div class="article_container" class="article_meta_data">
           <div class="article_info_container">
             <h3 class=""><a class="underline_on_hover" href="./article.html#articleId=${article.id}">${article.title}</a></h3>
             <p>
@@ -45,14 +57,14 @@ function loadRecentArticles() {
               </div>
             </div>
           </div>
-          <img class="article_img" src="${article.image}" alt="" />
-        </div>
+          <img class="article_img" src="http://13.60.34.0:3000/photos/${article.bannerImageUrl}" alt="" />
+            </div>
   `;
+        });
+        recentArticleContainer.innerHTML = recentArticlesContent;
+        moreArticlesContentContainer.innerHTML = moreArticlesContent;
     });
-    recentArticleContainer.innerHTML = recentArticlesContent;
-    moreArticlesContentContainer.innerHTML = moreArticlesContent;
 }
 window.addEventListener("DOMContentLoaded", () => {
     loadRecentArticles();
 });
-export {};

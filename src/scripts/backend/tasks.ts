@@ -1,43 +1,13 @@
-import { Task } from "../types.js";
+import {
+  createTaskRequest,
+  deleteTaskRequest,
+  getTasksRequest,
+} from "../requests/taskRequests.js";
 import { initiateEditor } from "./editor.js";
 
-function generateUniqueId(): string {
-  const timestamp: number = new Date().getTime();
-  const randomPart: number = Math.floor(Math.random() * 1000);
-  const uniqueId: string = `id_${timestamp}_${randomPart}`;
-  return uniqueId;
-}
+async function displayTasks() {
+  const tasks = await getTasksRequest();
 
-function formatDate(date: string | number | Date): string {
-  const options: Intl.DateTimeFormatOptions = {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  };
-  return new Date(date).toLocaleDateString("en-US", options);
-}
-
-function addTask(title: string, content: string): void {
-  let tasks: Task[] = JSON.parse(localStorage.getItem("tasks") || "[]");
-
-  const updatedTasks = [
-    {
-      title: title,
-      content: content,
-      id: generateUniqueId(),
-      created_at: formatDate(new Date()),
-    },
-    ...tasks,
-  ];
-
-  localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-
-  const event = new Event("displayTasks");
-  window.dispatchEvent(event);
-}
-
-function displayTasks(): void {
-  let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
   const tasksContainerElement =
     document.querySelector<HTMLElement>(".tasks_container")!;
 
@@ -58,7 +28,7 @@ function displayTasks(): void {
   tasksContainerElement.innerHTML = tasksContent;
 }
 
-function checkForErrors(): void {
+async function checkForErrors() {
   const errorElements = document.querySelectorAll(".error");
 
   const titleField = document.getElementById("task_title") as HTMLInputElement;
@@ -94,16 +64,22 @@ function checkForErrors(): void {
   const content = contentField ? contentField.innerHTML : "";
 
   // clean the input fields
-  titleField.value = "";
-  if (contentField) {
-    contentField.innerHTML = "";
-  }
 
   if (errors.title !== "" || errors.content !== "") {
     return;
   }
 
-  addTask(title, content);
+  const status = await createTaskRequest({ title, content });
+
+  if (status) {
+    const event = new Event("displayTasks");
+    window.dispatchEvent(event);
+
+    titleField.value = "";
+    if (contentField) {
+      contentField.innerHTML = "";
+    }
+  }
 }
 
 function deleteTask(id: string): void {
@@ -124,23 +100,21 @@ function deleteTask(id: string): void {
     modal.classList.add("modal-open");
   }
 
-  deleteBtn.addEventListener("click", () => {
-    const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+  deleteBtn.addEventListener("click", async () => {
+    const status = await deleteTaskRequest(id);
 
-    const updatedTasks = tasks.filter((task: { id: string }) => id !== task.id);
+    if (status) {
+      const event = new Event("displayTasks");
 
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      if (modal) {
+        modal.children[0].removeChild(title);
+        modal.children[0].removeChild(message);
+        modal.children[0].removeChild(deleteBtn);
+        modal.classList.remove("modal-open");
+      }
 
-    const event = new Event("displayTasks");
-
-    if (modal) {
-      modal.children[0].removeChild(title);
-      modal.children[0].removeChild(message);
-      modal.children[0].removeChild(deleteBtn);
-      modal.classList.remove("modal-open");
+      window.dispatchEvent(event);
     }
-
-    window.dispatchEvent(event);
   });
 
   closeModal?.addEventListener("click", () => {
@@ -154,7 +128,8 @@ function deleteTask(id: string): void {
 }
 
 function configureDeleteFeature(): void {
-  const tasksDeleteBtns = document.querySelectorAll<HTMLSpanElement>(".task-deleteBtn");
+  const tasksDeleteBtns =
+    document.querySelectorAll<HTMLSpanElement>(".task-deleteBtn");
 
   tasksDeleteBtns.forEach((taskDeleteBtn) => {
     taskDeleteBtn.addEventListener("click", () => {
@@ -164,8 +139,8 @@ function configureDeleteFeature(): void {
   });
 }
 
-window.addEventListener("displayTasks", () => {
-  displayTasks();
+window.addEventListener("displayTasks", async () => {
+  await displayTasks();
   configureDeleteFeature();
 });
 

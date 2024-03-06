@@ -1,18 +1,11 @@
+import { getArticlesRequest } from "../requests/articleRequests.js";
+import { createMessageRequest } from "../requests/messageRequests.js";
 import { Article } from "../types.js";
-import { formatDate } from "../utilities.js";
+import { formatDate, url } from "../utilities.js";
 
-function generateUniqueId() {
-  const timestamp = new Date().getTime();
-  const randomPart = Math.floor(Math.random() * 1000); // Example: generate a random number between 0 and 999
-  const uniqueId = `id_${timestamp}_${randomPart}`;
+async function loadArticles() {
+  let articles: Article[] = await getArticlesRequest();
 
-  return uniqueId;
-}
-
-function loadArticles() {
-  const articles: Article[] = JSON.parse(
-    localStorage.getItem("articles")!
-  ).slice(0, 4);
   const articlesContainer = document.getElementById("articles_container")!;
 
   let articlesContent = "";
@@ -21,12 +14,14 @@ function loadArticles() {
     articlesContent += `
       <div class="article_container">
       <div class="article_info_container">
-        <h3 class="">${article.title}</h3>
-        <p>
+      <h3 class=""><a class="underline_on_hover" href="./article.html#articleId=${
+        article.id
+      }">${article.title}</a></h3>
+      <p>
           ${article.description}
         </p>
         <div class="article_meta_data">
-          <p>${article.created_at}</p>
+          <p>${formatDate(article.createdAt)}</p>
           <span class="dot_separator"></span>
           <p>14 min read</p>
           <span class="dot_separator"></span>
@@ -36,7 +31,9 @@ function loadArticles() {
           </div>
         </div>
       </div>
-      <img class="article_img" src="${article.image}" alt="" />
+      <img class="article_img" src="http://13.60.34.0:3000/photos/${
+        article.bannerImageUrl
+      }" alt="" />
     </div>`;
   });
 
@@ -45,17 +42,21 @@ function loadArticles() {
 
 let isModalOpen = false;
 
-function openModal() {
+function openModal(text: string, error: boolean) {
   if (!isModalOpen) {
     const modal = document.querySelector(".modal")!;
     const modalCancelBtn =
       document.querySelector<HTMLDivElement>(".close-modal")!;
 
     const h2 = document.createElement("h2");
-    h2.textContent = "Thanks for you're message.";
+    h2.textContent = text;
     modal.children[0].appendChild(h2);
     modal.classList.add("modal-open");
     modalCancelBtn.style.display = "none";
+
+    if (error) {
+      h2.style.color = "#f44336";
+    }
 
     isModalOpen = true;
 
@@ -71,7 +72,7 @@ function openModal() {
 window.addEventListener("DOMContentLoaded", () => {
   const messageForm = document.getElementById("message_form")!;
 
-  messageForm.addEventListener("submit", (e) => {
+  messageForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const inputs: HTMLInputElement[] = Array.from(
       document.querySelectorAll(".default_input_field")
@@ -83,27 +84,21 @@ window.addEventListener("DOMContentLoaded", () => {
       data[name] = value;
     });
 
-    let messages = JSON.parse(localStorage.getItem("messages")!);
+    let newMessage = {
+      ...data,
+    };
 
-    if (!messages) {
-      messages = [];
+    const status = await createMessageRequest(newMessage);
+
+    if (status) {
+      openModal("Thanks for you're message.", false);
+    } else {
+      openModal("Error sending message.", true);
     }
-
-    let newMessages = [
-      ...messages,
-      {
-        ...data,
-        id: generateUniqueId(),
-        created_at: formatDate(new Date()),
-      },
-    ];
-    localStorage.setItem("messages", JSON.stringify(newMessages));
 
     inputs.forEach((input) => {
       input.value = "";
     });
-
-    openModal();
   });
 
   loadArticles();
