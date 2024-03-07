@@ -112,6 +112,7 @@ async function loadArticles() {
   });
 
   unPublishedArticles.forEach((article) => {
+    console.log(article)
     unPublishedArticlesContent += `
     <div class="article_container">
       <div class="article_info_container">
