@@ -42,7 +42,7 @@ async function loadArticle(articleId: string) {
   const image = document.createElement("img");
   image.setAttribute(
     "src",
-    `http://13.60.34.0:3000/photos/${targetArticle.bannerImageUrl}`
+    `${targetArticle.bannerImageUrl}`
   );
 
   articleImageContainerElement.appendChild(image);
@@ -131,7 +131,7 @@ async function loadArticles() {
           </div>
         </div>
       </div>
-      <img class="article_img" src="http://13.60.34.0:3000/photos/${
+      <img class="article_img" src="${
         article.bannerImageUrl
       }" alt="" />
     </div>`;
