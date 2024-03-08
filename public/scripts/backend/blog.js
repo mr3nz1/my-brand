@@ -95,7 +95,7 @@ function loadArticles() {
           <span class="underline_on_hover article_delete_btn" id="${article.id}">Delete</span>
         </div>
       </div>
-      <img class="article_img" src="http://13.60.34.0:3000/photos/${article.bannerImageUrl}" alt="" />
+      <img class="article_img" src="${article.bannerImageUrl}" alt="" />
     </div>`;
         });
         unPublishedArticles.forEach((article) => {
@@ -120,7 +120,7 @@ function loadArticles() {
           <span class="underline_on_hover article_delete_btn" id="${article.id}">Delete</span>
         </div>
       </div>
-      <img class="article_img" src="http://13.60.34.0:3000/photos/${article.bannerImageUrl}" alt="" />
+      <img class="article_img" src="${article.bannerImageUrl}" alt="" />
     </div>`;
         });
         if (publishedArticlesContainer) {
