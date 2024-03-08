@@ -31,7 +31,7 @@ async function loadArticles() {
           </div>
         </div>
       </div>
-      <img class="article_img" src="http://13.60.34.0:3000/photos/${
+      <img class="article_img" src="${
         article.bannerImageUrl
       }" alt="" />
     </div>`;

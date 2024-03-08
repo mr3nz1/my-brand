@@ -9,7 +9,6 @@ export type Message = {
 
 export type Article = {
   [key: string]: any;
-  id: string;
   title: string;
   description: string;
   content: string;
